@@ -1,0 +1,32 @@
+<?php
+
+// use App\Livewire\Dashboard\Home\Index as Home;
+// use App\Livewire\Dashboard\Screens\Index as Screens;
+use Illuminate\Support\Facades\Route;
+
+Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'verified']], function () {
+    //dashboard home
+    // Route::view('/', 'dashboard')->name('dashboard');
+    Route::livewire('/', 'dashboard::home.index')->name('dashboard');
+
+    //users
+    Route::group(['prefix' => 'users', 'middleware' => ['can:manage users']], function () {
+        Route::livewire('/', 'dashboard::users.index')->name('dashboard.users');
+    });
+    //screens
+    Route::group(['prefix' => 'screens', 'middleware' => ['can:manage screens']], function () {
+        Route::livewire('/', 'dashboard::screens.index')->name('dashboard.screens');
+        Route::livewire('/edit/{screen}', 'dashboard::screens.edit')->name('dashboard.screens.edit');
+        Route::livewire('/images', 'dashboard::screens.images')->name('dashboard.screens.images');
+    });
+
+    //media
+    Route::group(['prefix' => 'media', 'middleware' => ['can:manage media']], function () {
+        Route::livewire('/', 'dashboard::media.index')->name('dashboard.media');
+    });
+
+    //test
+    Route::group(['prefix' => 'test'], function () {
+        Route::livewire('/', 'dashboard::test.index')->name('dashboard.test');
+    });
+});
