@@ -15,7 +15,12 @@ export default defineConfig({
     server: {
         cors: true,
         watch: {
-            ignored: ['**/storage/framework/views/**'],
+        	interval: 1000,
+        	usePolling: true,
+            ignored: [
+            	'**/storage/framework/views/**',
+            	'**/vendor/**',
+            ],
         },
     },
 });
