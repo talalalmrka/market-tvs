@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\WithActive;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,6 +24,10 @@ class TimeSlot extends Model
     protected $with = [
         'slides'
     ];
+    
+    protected $appends = [
+    	'file'
+    ];
     public function screen()
     {
         return $this->belongsTo(Screen::class);
@@ -32,5 +37,10 @@ class TimeSlot extends Model
     public function slides()
     {
         return $this->hasMany(Slide::class)->orderBy('order');
+    }
+    
+    public function file(): Attribute
+    {
+        return Attribute::get(fn() => null);
     }
 }

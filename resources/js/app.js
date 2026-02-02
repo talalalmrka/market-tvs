@@ -1,10 +1,10 @@
 import './time-slot-collapse';
 import './alpine-back-top';
-// import { initFadgramUI } from "fadgram-ui";
+import { initFadgramUI } from "fadgram-ui";
 import Toast from "./toast";
 window.Toast = Toast;
 document.addEventListener("livewire:navigated", () => {
-    // initFadgramUI();
+    initFadgramUI();
     // NavbarTransparentTop.init();
 
 });

@@ -17,6 +17,7 @@ new #[Title('Edit screen')] class extends DashboardPage
     public string $title = '';
     public bool $showSlideModal = false;
     public ?Slide $slideToEdit = null;
+    public $file = null;
     public function mount(Screen $screen)
     {
         $this->screen = $screen;
@@ -37,12 +38,34 @@ new #[Title('Edit screen')] class extends DashboardPage
             $this->toastSuccess(__('Time slot added successfully'));
         }
     }
-    public function updated($prop, $val)
+    public function updatedd($prop, $val)
     {
         if ($val instanceof TemporaryUploadedFile) {
             $key = str_ireplace(".file", '', $prop);
             $slotId = data_get($this, "{$key}.id");
-            dd($prop, $slotId, $val);
+            $slot = TimeSlot::find($slotId);
+            dd($key, $slotId, $slot, $val);
+            if (!$slot) {
+            	$this->toastError(__("Slot with id: :id not found!",['id' => $slotId]));
+            	return;
+            }
+            $order = $slot->slides()->count();
+            $slide = Slide::create([
+            	'time_slot_id' => $slotId,
+            	'order' => $order,
+            ]);
+            if ($slide) {
+            	$this->toastError("Creating slide failed!");
+            	return;
+            }
+            $slide = Slide::find($slide->id);
+            dd($slide->toArray());
+            $slide->addMedia($val)
+            ->toMediaCollection('file');
+            $slotIndex = $this->getSlotIndex($slot->id);
+            $this->form['time_slots'][$slotIndex]['slides'][] = $slide->toArray();
+            $this->toastSuccess(__('Slide added successfully'));
+            // dd($prop, $slotId, $val);
         }
     }
     public function reorderSlides(array $slides): array
@@ -84,6 +107,10 @@ new #[Title('Edit screen')] class extends DashboardPage
         $slotIndex = collect($this->form['time_slots'])->search(fn($slot, $key) => $slot['id'] == $slotId);
         $slides = $this->form['time_slots'][$slotIndex]['slides'];
         $slideIndex = collect($slides)->search(fn($slide, $key) => $slide['id'] == $slideId);
+        $delete = $slide->delete();
+        if(!$delete){
+        	$this->toastError(__('Delete slide id: :id failed!', ['id'=>$slideId]));
+        }
         unset($slides[$slideIndex]);
         $this->form['time_slots'][$slotIndex]['slides'] = $this->reorderSlides($slides);
         $this->toastSuccess(__("Slide removed slotIndex: :slot_index, slotId: :slot_id, slideIndex: :slide_index, slideId: :slide_id", [

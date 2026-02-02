@@ -26,7 +26,8 @@ class Slide extends Model implements HasMedia
     ];
 
     protected $appends = [
-        'url'
+        'url',
+        'file',
     ];
 
     /* protected $with = [
@@ -47,5 +48,15 @@ class Slide extends Model implements HasMedia
     public function url(): Attribute
     {
         return Attribute::get(fn() => $this->getFirstMediaUrl('file'));
+    }
+    
+    public function type(): Attribute
+    {
+        return Attribute::get(fn() => $this->getFirstMedia('file')?->type);
+    }
+    
+    public function file(): Attribute
+    {
+        return Attribute::get(fn() => null);
     }
 }
