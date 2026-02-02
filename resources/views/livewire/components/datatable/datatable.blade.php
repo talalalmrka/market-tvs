@@ -28,7 +28,8 @@
         </div>
     </div>
     <div class="table-container">
-        <table class="table table-striped table-divide table-rounded xs {{ $this->tableClass }}">
+        <table
+            class="table table-striped table-divide table-rounded table-border table-auto xs {{ $this->tableClass }}">
             <thead class="{{ $this->headClass }}">
                 @include('livewire.components.datatable.head-row')
             </thead>

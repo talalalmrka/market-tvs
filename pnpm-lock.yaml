@@ -31,8 +31,8 @@ importers:
         version: 7.3.1(jiti@2.6.1)(lightningcss@1.30.2)
     devDependencies:
       fadgram-ui:
-        specifier: ^0.9.6
-        version: 0.9.6(tailwindcss@4.1.18)
+        specifier: ^0.9.8
+        version: 0.9.8(tailwindcss@4.1.18)
     optionalDependencies:
       '@rollup/rollup-linux-x64-gnu':
         specifier: 4.9.5
@@ -623,8 +623,8 @@ packages:
     resolution: {integrity: sha512-WUj2qlxaQtO4g6Pq5c29GTcWGDyd8itL8zTlipgECz3JesAiiOKotd8JU6otB3PACgG6xkJUyVhboMS+bje/jA==}
     engines: {node: '>=6'}
 
-  fadgram-ui@0.9.6:
-    resolution: {integrity: sha512-lz2SBlyGuSrcFUDSoSWRzKkFaUc98q/mV7csn1kCAn2JKx3aA6XAGxuTH0Z6ALG7zuqTsX+8pP3Zffrq7MJsCg==}
+  fadgram-ui@0.9.8:
+    resolution: {integrity: sha512-kKC4QQPXJjpLklkOJSZBM89tjfxMhMcNpmJPmD9NkZayY7yShEo8p88yLhJf+LiqPzWs8OsZPThS9PVZmUPEWg==}
     peerDependencies:
       tailwindcss: '>=4.0.0'
 
@@ -1468,7 +1468,7 @@ snapshots:
 
   escalade@3.2.0: {}
 
-  fadgram-ui@0.9.6(tailwindcss@4.1.18):
+  fadgram-ui@0.9.8(tailwindcss@4.1.18):
     dependencies:
       '@iconify-json/bi': 1.2.7
       '@iconify/tailwind4': 1.2.1(tailwindcss@4.1.18)

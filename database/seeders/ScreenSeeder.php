@@ -32,6 +32,26 @@ use Illuminate\Support\Facades\File;
 
 class ScreenSeeder extends Seeder
 {
+    public static function defaultTimeSlots(): array
+    {
+        return [
+            [
+                'name' => 'Breakfast',
+                'start_time' => sprintf('%02d:00:00', 6),
+                'end_time' => sprintf('%02d:00:00', 11),
+            ],
+            [
+                'name' => 'Launch',
+                'start_time' => sprintf('%02d:00:00', 11),
+                'end_time' => sprintf('%02d:00:00', 13),
+            ],
+            [
+                'name' => 'Dinner',
+                'start_time' => sprintf('%02d:00:00', 13),
+                'end_time' => sprintf('%02d:00:00', 6),
+            ],
+        ];
+    }
     public function run(): void
     {
         Screen::factory()
@@ -39,15 +59,14 @@ class ScreenSeeder extends Seeder
             ->user(1)
             ->create()
             ->each(function ($screen) {
-
-                // 3 TimeSlots
-                for ($t = 1; $t <= 3; $t++) {
-
+                foreach (self::defaultTimeSlots() as $slotIndex => $slotData) {
                     $timeSlot = TimeSlot::factory()->create([
-                        'screen_id' => $screen->id,
+                        ...[
+                            'screen_id' => $screen->id,
+                        ],
+                        ...$slotData,
                     ]);
-
-                    // 5 Slides لكل TimeSlot
+                    $t = $slotIndex + 1;
                     for ($s = 1; $s <= 5; $s++) {
 
                         $slide = Slide::factory()->create([

@@ -6,7 +6,9 @@ use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
+use Livewire\Livewire;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
+        // $this->configureLayouts();
     }
 
     protected function configureDefaults(): void
@@ -34,14 +37,30 @@ class AppServiceProvider extends ServiceProvider
             app()->isProduction(),
         );
 
-        Password::defaults(fn (): ?Password => app()->isProduction()
-            ? Password::min(12)
+        Password::defaults(
+            fn(): ?Password => app()->isProduction()
+                ? Password::min(12)
                 ->mixedCase()
                 ->letters()
                 ->numbers()
                 ->symbols()
                 ->uncompromised()
-            : null
+                : null
         );
+    }
+
+    protected function configureLayouts(): void
+    {
+        Livewire::listen('component.boot', function ($component) {
+
+            // اسم الـ page component (مثلاً: dashboard.users)
+            $name = $component->getName();
+
+            if (Str::startsWith($name, 'dashboard.')) {
+                return 'layouts.dashboard';
+            }
+
+            return 'layouts.app';
+        });
     }
 }

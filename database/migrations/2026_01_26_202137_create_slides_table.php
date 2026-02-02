@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('time_slot_id')->constrained()->cascadeOnDelete();
             $table->string('name')->nullable();
             $table->integer('duration')->nullable();
-            $table->string('transition')->default('fade');
+            $table->string('transition')->default('random');
             $table->integer('order')->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();

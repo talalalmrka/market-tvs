@@ -1,33 +1,20 @@
-@props([
-    'title' => null,
-    'actions' => null,
-    'showTitle' => true,
-    'containerClass' => null,
-])
-<x-layouts::app :title="$title ?? ''">
-    <slot name="style">
-        @vite(['resources/css/dashboard.css'])
-    </slot>
+<x-layouts::layout :title="isset($title) ? $title : null">
     <div class="min-h-screen bg-primary/3 dark:bg-gray-900">
         <div class="offcanvas offcanvas-start offcanvas-primary expand-lg dashboard-sidebar" id="dashboard-sidebar">
             <div class="offcanvas-header flex-space-2 items-center h-14">
-                <x-app-logo :showLabel="true" theme="light" label-class="font-semibold" />
                 <button class="btn offcanvas-close lg:hidden">
                     <i class="icon bi-x"></i>
                 </button>
             </div>
             <div class="offcanvas-body pb-6">
-                <nav class="nav vertical space-y-3">
+                <nav class="sidebar-nav">
                     <x-nav-link wire:navigate :href="route('dashboard')" wire:current.exact="active" icon="bi-speedometer"
                         :label="__('Dashboard')" />
-                    <x-nav-link wire:navigate :href="route('profile.edit')" wire:current="active" icon="bi-person-gear"
-                        :label="__('Profile')" />
-                    @can('manage_users')
-                        <x-nav-link wire:navigate :href="route('dashboard.users')" wire:current="active" icon="bi-people-fill"
-                            :label="__('Users')" />
-                    @endcan
-                    <!-- Roles & Permissions -->
-                    {{-- @can('manage_roles')
+                    <x-nav-link wire:navigate :href="route('dashboard.old')" wire:current.exact="active" icon="bi-speedometer"
+                        :label="__('Dashboard old')" />
+                    <x-nav-link wire:navigate :href="route('dashboard.users')" wire:current.exact="active" icon="bi-people"
+                        :label="__('Users')" />
+                    @can('manage_roles')
                         <x-nav-link-collapse icon="bi-person-fill-lock" :label="__('Roles & Permissions')" :open="request()->routeIs([
                             'dashboard.roles',
                             'dashboard.roles.*',
@@ -35,42 +22,24 @@
                             'dashboard.permissions.*',
                         ])">
                             @can('manage_roles')
-                                <x-nav-link wire:navigate :href="" wire:current="active" icon="bi-person-gear"
+                                <x-nav-link wire:navigate :href="route('dashboard.roles')" wire:current="active" icon="bi-person-gear"
                                     :label="__('Roles')" />
                             @endcan
                             @can('manage_permissions')
-                                <x-nav-link wire:navigate :href="" wire:current="active" icon="bi-key-fill"
+                                <x-nav-link wire:navigate :href="route('dashboard.permissions')" wire:current="active" icon="bi-key-fill"
                                     :label="__('Permissions')" />
                             @endcan
                         </x-nav-link-collapse>
-                    @endcan --}}
+                    @endcan
                     @can('manage_screens')
                         <x-nav-link wire:navigate :href="route('dashboard.screens')" wire:current="active" icon="bi-tv"
-                            :label="__('Media')" />
-                    @endcan
-                    @can('manage_media')
-                        <x-nav-link wire:navigate :href="route('dashboard.media')" wire:current="active" icon="bi-image"
-                            :label="__('Media')" />
+                            :label="__('Screens')" />
                     @endcan
 
-                    <!-- Settings -->
-                    {{-- @can('manage_settings')
-                        <x-nav-link-collapse icon="bi-gear-wide-connected" :label="__('Settings')" :open="true">
-                            :open="request()->routeIs(['dashboard.settings', 'dashboard.settings.*'])">
-                            <x-nav-link wire:navigate :href="" wire:current.exact="active"
-                                icon="bi-gear-wide-connected" :label="__('Manage settings')" />
-                            <x-nav-link wire:navigate :href="" wire:current="active" icon="bi-globe"
-                                :label="__('General settings')" />
-                            <x-nav-link wire:navigate :href="" wire:current="active" icon="bi-person-gear"
-                                :label="__('Membership settings')" />
-                            <x-nav-link wire:navigate :href="" wire:current="active" icon="bi-book"
-                                :label="__('Reading settings')" />
-                            <x-nav-link wire:navigate :href="" wire:current="active" icon="bi-link"
-                                :label="__('Permalink settings')" />
-
-
-                        </x-nav-link-collapse>
-                    @endcan --}}
+                    <x-nav-link wire:navigate :href="route('dashboard.media')" wire:current.exact="active" icon="bi-image"
+                        :label="__('Media')" />
+                    <x-nav-link wire:navigate :href="route('dashboard.test')" wire:current.exact="active" icon="bi-bug"
+                        :label="__('Test components')" />
                 </nav>
             </div>
         </div>
@@ -138,7 +107,7 @@
             <div class="container px-2 lg:px-4 p-4 pb-20 {{ $containerClass ?? '' }}">
                 @if (isset($title) || isset($actions))
                     <div class="md:flex-space-2 justify-between">
-                        @if (isset($title) && isset($showTitle) && $showTitle === true)
+                        @if (isset($title))
                             <h3 class="text-gray-500 dark:text-white text-2xl">{{ $title }}</h3>
                         @endif
                         @if (isset($actions))
@@ -153,4 +122,4 @@
         </main>
     </div>
     <x-button-back-top class="bottom-4 end-4" />
-</x-layouts::app>
+</x-layouts::layout>

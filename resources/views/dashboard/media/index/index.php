@@ -1,22 +1,32 @@
 <?php
 
-use Livewire\Attributes\Computed;
-use Livewire\Component;
-use Livewire\WithPagination;
+use App\Livewire\Components\DashboardDatatable;
+use Livewire\Attributes\Title;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-new class extends Component
+new #[Title('Media')] class extends DashboardDatatable
 {
-    use WithPagination;
-
-    #[Computed()]
-    public function items()
+    public function builder()
     {
-        return Media::paginate();
+        return Media::query();
     }
 
-    public function delete(Media $media)
+    public function getColumns()
     {
-        $media->delete();
+        return [
+            column('preview')
+                ->label(__('Preview'))
+                ->content(function (Media $media) {
+                    return view('dashboard::media.preview', ['media' => $media]);
+                }),
+            column('name')
+                ->label(__('Details'))
+                ->sortable()
+                ->searchable()
+                ->filterable()
+                ->content(function (Media $media) {
+                    return view('dashboard::media.details', ['media' => $media]);
+                }),
+        ];
     }
 };

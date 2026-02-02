@@ -2,38 +2,66 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RolesAndPermissionsSeeder extends Seeder
 {
+    public function permissions()
+    {
+        return [
+            'web' => [
+                'manage_users',
+                'manage_roles',
+                'manage_permissions',
+                'manage_screens',
+                'manage_timeSlots',
+                'manage_slides',
+                'manage_media',
+                'manage_settings',
+            ],
+        ];
+    }
+    public function roles()
+    {
+        return [
+            'web' => [
+                'admin' => 'all',
+                'customer' => [
+                    'manage_screens',
+                    'manage_timeSlots',
+                    'manage_slides',
+                ],
+            ],
+        ];
+    }
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        // Reset cached roles and permissions
+
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
-
-        // create permissions
-        Permission::create(['name' => 'manage users']);
-        Permission::create(['name' => 'manage screens']);
-        Permission::create(['name' => 'manage timeSlots']);
-        Permission::create(['name' => 'manage slides']);
-        Permission::create(['name' => 'manage media']);
-
-        // update cache to know about the newly created permissions (required if using WithoutModelEvents in seeders)
-        // app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
-
-
-        // create roles and assign created permissions
-        $role = Role::create(['name' => 'admin']);
-        $role->givePermissionTo(Permission::all());
-
-        // or may be done by chaining
-        $role = Role::create(['name' => 'customer'])
-            ->givePermissionTo(['manage screens', 'manage timeSlots', 'manage slides']);
+        foreach ($this->permissions() as $guard_name => $permissions) {
+            foreach ($permissions as $permission) {
+                Permission::create([
+                    'name' => $permission,
+                    'guard_name' => $guard_name,
+                ]);
+            }
+        }
+        foreach ($this->roles() as $guard_name => $roles) {
+            foreach ($roles as $role_name => $permissions) {
+                $role = Role::create([
+                    'name' => $role_name,
+                    'guard_name' => $guard_name,
+                ]);
+                if ($role) {
+                    $permissions = $permissions === 'all' ? Permission::where('guard_name', $guard_name)->pluck('name')->toArray() : $permissions;
+                    $role->syncPermissions($permissions);
+                }
+            }
+        }
     }
 }

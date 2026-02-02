@@ -41,7 +41,7 @@ abstract class Datatable extends Component
     public $selectAll = false;
     public $checkbox = true;
     public $created_at_column = true;
-    public $updated_at_column = true;
+    public $updated_at_column = false;
     public $updated_at_column_type = 'human';
     public $id_column = true;
     public $date_format = null;
@@ -53,7 +53,7 @@ abstract class Datatable extends Component
     abstract public function builder();
 
     abstract public function getColumns();
-    abstract public function render();
+    // abstract public function render();
     public function updatedPerPage()
     {
         $this->resetPage();

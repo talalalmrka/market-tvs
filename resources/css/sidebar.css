@@ -1,12 +1,14 @@
 @layer base {
-    .sidebar-nav {
-        @apply nav nav-vertical;
-        .nav-link {
-            @apply pill;
+    .dashboard-sidebar {
+        .sidebar-nav {
+            @apply nav nav-vertical;
+            .nav-link {
+                @apply pill;
 
-            &.active,
-            &:hover {
-                @apply bg-primary/20 text-white transition-colors;
+                &.active,
+                &:hover {
+                    @apply bg-black/20 text-white transition-colors;
+                }
             }
         }
     }

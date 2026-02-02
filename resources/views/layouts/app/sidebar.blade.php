@@ -21,7 +21,24 @@
                     :label="__('Dashboard old')" />
                 <x-nav-link wire:navigate :href="route('dashboard.users')" wire:current.exact="active" icon="bi-people"
                     :label="__('Users')" />
-                <x-nav-link wire:navigate :href="route('dashboard.screens')" wire:current.exact="active" icon="bi-tv"
+                @can('manage_roles')
+                    <x-nav-link-collapse icon="bi-person-fill-lock" :label="__('Roles & Permissions')" :open="request()->routeIs([
+                        'dashboard.roles',
+                        'dashboard.roles.*',
+                        'dashboard.permissions',
+                        'dashboard.permissions.*',
+                    ])">
+                        @can('manage_roles')
+                            <x-nav-link wire:navigate :href="route('dashboard.roles')" wire:current="active" icon="bi-person-gear"
+                                :label="__('Roles')" />
+                        @endcan
+                        @can('manage_permissions')
+                            <x-nav-link wire:navigate :href="route('dashboard.permissions')" wire:current="active" icon="bi-key-fill"
+                                :label="__('Permissions')" />
+                        @endcan
+                    </x-nav-link-collapse>
+                @endcan
+                <x-nav-link wire:navigate :href="route('dashboard.screens')" wire:current="active" icon="bi-tv"
                     :label="__('Screens')" />
                 <x-nav-link wire:navigate :href="route('dashboard.media')" wire:current.exact="active" icon="bi-image"
                     :label="__('Media')" />

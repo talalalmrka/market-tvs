@@ -21,7 +21,7 @@ class SlideFactory extends Factory
             'time_slot_id' => TimeSlot::factory(),
             'name' => $this->faker->sentence(3),
             'duration' => 5000,
-            'transition' => $this->faker->randomElement(['fade', 'slide', 'zoom']),
+            'transition' => $this->faker->randomElement(slide_transition_values()),
             'order' => 0,
             'is_active' => true,
         ];

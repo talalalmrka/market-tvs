@@ -1,11 +1,10 @@
 <?php
 
+use App\Livewire\Components\DashboardPage;
 use App\Models\Screen;
-use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
-use Livewire\Component;
 
-new #[Title('Test')] class extends Component
+new #[Title('Test')] class extends DashboardPage
 {
     public $items = [];
 

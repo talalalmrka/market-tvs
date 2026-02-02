@@ -1,10 +1,10 @@
 <?php
 
-use App\Livewire\Components\Datatable\Datatable;
+use App\Livewire\Components\DashboardDatatable;
 use App\Models\User;
-use Livewire\Component;
+use Livewire\Attributes\Title;
 
-new class extends Datatable
+new #[Title('Users')] class extends DashboardDatatable
 {
     public function builder()
     {
