@@ -1,4 +1,6 @@
-<div class="card">
+<div {{ $attributes->merge([
+    'class' => 'card',
+]) }}>
     <div class="card-header">
         <h5 class="card-title">Buttons</h5>
     </div>

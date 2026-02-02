@@ -3,7 +3,7 @@
 @import "./theme.css";
 @import "./icons.css";
 @import "./sidebar.css";
-@import "./toast.css";
+/* @import "./toast.css"; */
 @import "../../vendor/livewire/flux/dist/flux.css";
 
 @source '../views';

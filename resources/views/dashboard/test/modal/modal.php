@@ -2,6 +2,4 @@
 
 use Livewire\Component;
 
-new class extends Component {
-    public string $class = '';
-};
+new class extends Component {};

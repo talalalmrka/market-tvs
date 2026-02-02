@@ -1,15 +1,11 @@
 import './time-slot-collapse';
 import './alpine-back-top';
+import './upload-slide';
 import { initFadgramUI } from "fadgram-ui";
-import Toast from "./toast";
-window.Toast = Toast;
 document.addEventListener("livewire:navigated", () => {
     initFadgramUI();
     // NavbarTransparentTop.init();
 
-});
-document.addEventListener('DOMContentLoaded', () => {
-    // initFadgramUI();
 });
 let toastListener = null;
 document.addEventListener("livewire:init", () => {
@@ -23,5 +19,4 @@ document.addEventListener("livewire:init", () => {
         });
     }
 });
-// console.log('Toast', Toast);
 

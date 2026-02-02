@@ -1,8 +1,21 @@
-<div class="{{ css_classes(['card', $class]) }}">
+<div {{ $attributes->merge([
+    'class' => 'card',
+]) }}
+    x-data="{
+        showToast() {
+            this.$wire.dispatch('toast', [{
+                'message': 'this is dispatched toast',
+            }]);
+        }
+    }">
     <div class="card-header">
         <h5 class="card-title">Toast</h5>
     </div>
     <div class="card-body">
+        <h5>Basic usage</h5>
+        <button x-on:click="showToast" type="button" class="btn btn-primary">
+            Show toast
+        </button>
         <h5>Type</h5>
         <div class="flex flex-wrap gap-2">
             @foreach ($this->types as $type)

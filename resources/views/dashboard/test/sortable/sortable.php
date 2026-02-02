@@ -11,7 +11,7 @@ new class extends Component
 {
     use WithToast;
     public $slides = [];
-    public string $class = '';
+
 
     public function mount()
     {

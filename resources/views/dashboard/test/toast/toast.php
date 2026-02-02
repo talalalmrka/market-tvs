@@ -7,7 +7,12 @@ use Livewire\Component;
 new class extends Component
 {
     use WithToast;
-    public string $class = '';
+    public $basicToast = [
+        'message' => 'This is dispatched toast',
+        'options' => [
+            'type' => 'info',
+        ],
+    ];
     #[Computed()]
     public function types(): array
     {

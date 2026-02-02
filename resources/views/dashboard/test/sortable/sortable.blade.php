@@ -1,4 +1,6 @@
-<div class="{{ css_classes(['card', $class]) }}">
+<div {{ $attributes->merge([
+    'class' => 'card',
+]) }}>
     <div class="card-header">
         <h5 class="card-title">Sortable</h5>
     </div>

@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  fadgram-ui: link:../../../Library/pnpm/global/5/node_modules/fadgram-ui
+
 importers:
 
   .:
@@ -30,9 +33,12 @@ importers:
         specifier: ^7.0.4
         version: 7.3.1(jiti@2.6.1)(lightningcss@1.30.2)
     devDependencies:
+      '@iconify/tailwind4':
+        specifier: ^1.2.1
+        version: 1.2.1(tailwindcss@4.1.18)
       fadgram-ui:
-        specifier: ^0.9.8
-        version: 0.9.8(tailwindcss@4.1.18)
+        specifier: ^0.9.9
+        version: 0.9.9(tailwindcss@4.1.18)
     optionalDependencies:
       '@rollup/rollup-linux-x64-gnu':
         specifier: 4.9.5
@@ -49,8 +55,8 @@ packages:
   '@antfu/install-pkg@1.1.0':
     resolution: {integrity: sha512-MGQsmw10ZyI+EJo45CdSER4zEb+p31LpDAFp2Z3gkSd1yqVZGi0Ebx++YTEMonJy4oChEMLsxZ64j8FH6sSqtQ==}
 
-  '@cyberalien/svg-utils@1.0.11':
-    resolution: {integrity: sha512-qEE9mnyI+avfGT3emKuRs3ucYkITeaV0Xi7VlYN41f+uGnZBecQP3jwz/AF437H9J4Q7qPClHKm4NiTYpNE6hA==}
+  '@cyberalien/svg-utils@1.1.1':
+    resolution: {integrity: sha512-i05Cnpzeezf3eJAXLx7aFirTYYoq5D1XUItp1XsjqkerNJh//6BG9sOYHbiO7v0KYMvJAx3kosrZaRcNlQPdsA==}
 
   '@esbuild/aix-ppc64@0.27.2':
     resolution: {integrity: sha512-GZMB+a0mOMZs4MpDbj8RJp4cw+w1WV5NYD6xzgvzUJ5Ek2jerwfO2eADyI6ExDSUED+1X8aMbegahsJi+8mgpw==}
@@ -216,8 +222,8 @@ packages:
     peerDependencies:
       tailwindcss: '>= 4.0.0'
 
-  '@iconify/tools@5.0.2':
-    resolution: {integrity: sha512-esoFiH0LYpiqqVAO+RTenh6qqGKf0V8T0T6IG7dFLCw26cjcYGG34UMHjkbuq+MMl23U39FtkzhWZsCDDtOhew==}
+  '@iconify/tools@5.0.3':
+    resolution: {integrity: sha512-W5nbH5fNv20TvU49Al19Foos/ViAnmppbCNV9ieGl6/dRMDRzxeFol6peXX/NAgaOytQwZZxTTJRq/Kxd4eWsA==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -623,8 +629,8 @@ packages:
     resolution: {integrity: sha512-WUj2qlxaQtO4g6Pq5c29GTcWGDyd8itL8zTlipgECz3JesAiiOKotd8JU6otB3PACgG6xkJUyVhboMS+bje/jA==}
     engines: {node: '>=6'}
 
-  fadgram-ui@0.9.8:
-    resolution: {integrity: sha512-kKC4QQPXJjpLklkOJSZBM89tjfxMhMcNpmJPmD9NkZayY7yShEo8p88yLhJf+LiqPzWs8OsZPThS9PVZmUPEWg==}
+  fadgram-ui@0.9.9:
+    resolution: {integrity: sha512-8dLKe/NC/QXSh0nsD+Qn5w7J6EcokTTdDveeIKv9eJZC6OsQXhtXsZekEdkgOnOIYVAHM3I9nyFmHL/1dvGFCw==}
     peerDependencies:
       tailwindcss: '>=4.0.0'
 
@@ -1001,7 +1007,7 @@ snapshots:
       package-manager-detector: 1.6.0
       tinyexec: 1.0.2
 
-  '@cyberalien/svg-utils@1.0.11':
+  '@cyberalien/svg-utils@1.1.1':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -1089,14 +1095,14 @@ snapshots:
 
   '@iconify/tailwind4@1.2.1(tailwindcss@4.1.18)':
     dependencies:
-      '@iconify/tools': 5.0.2
+      '@iconify/tools': 5.0.3
       '@iconify/types': 2.0.0
       '@iconify/utils': 3.1.0
       tailwindcss: 4.1.18
 
-  '@iconify/tools@5.0.2':
+  '@iconify/tools@5.0.3':
     dependencies:
-      '@cyberalien/svg-utils': 1.0.11
+      '@cyberalien/svg-utils': 1.1.1
       '@iconify/types': 2.0.0
       '@iconify/utils': 3.1.0
       fflate: 0.8.2
@@ -1468,10 +1474,9 @@ snapshots:
 
   escalade@3.2.0: {}
 
-  fadgram-ui@0.9.8(tailwindcss@4.1.18):
+  fadgram-ui@0.9.9(tailwindcss@4.1.18):
     dependencies:
       '@iconify-json/bi': 1.2.7
-      '@iconify/tailwind4': 1.2.1(tailwindcss@4.1.18)
       tailwindcss: 4.1.18
 
   fdir@6.5.0(picomatch@4.0.3):
