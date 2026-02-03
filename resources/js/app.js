@@ -1,7 +1,9 @@
 import './time-slot-collapse';
 import './alpine-back-top';
 import './upload-slide';
+import './fg-toast';
 import { initFadgramUI } from "fadgram-ui";
+// import FgToast from "./fg-toast";
 document.addEventListener("livewire:navigated", () => {
     initFadgramUI();
     // NavbarTransparentTop.init();
@@ -12,10 +14,10 @@ document.addEventListener("livewire:init", () => {
     if (!toastListener) {
         toastListener = Livewire.on("toast", (event) => {
             const data = event[0];
-            if (!Toast) {
+            if (!FgToast) {
                 console.log("Window toast not inited!");
             }
-            Toast.make(data.message, data.options);
+            FgToast.make(data.message, data.options);
         });
     }
 });
