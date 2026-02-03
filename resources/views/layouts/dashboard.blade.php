@@ -1,9 +1,10 @@
 <x-layouts::layout :title="isset($title) ? $title : null">
     <div class="min-h-screen bg-primary/3 dark:bg-gray-900">
         <div class="offcanvas offcanvas-start offcanvas-primary expand-lg dashboard-sidebar" id="dashboard-sidebar">
-            <div class="offcanvas-header flex-space-2 items-center h-14">
-                <button class="btn offcanvas-close lg:hidden">
-                    <i class="icon bi-x"></i>
+            <div class="offcanvas-header flex items-center gap-2 justify-between h-14">
+                <x-app-logo :sidebar="true" />
+                <button class="offcanvas-close text-white lg:hidden">
+                    <i class="icon bi-x-lg"></i>
                 </button>
             </div>
             <div class="offcanvas-body pb-6">
@@ -36,10 +37,24 @@
                             :label="__('Screens')" />
                     @endcan
 
-                    <x-nav-link wire:navigate :href="route('dashboard.media')" wire:current.exact="active" icon="bi-image"
-                        :label="__('Media')" />
-                    <x-nav-link wire:navigate :href="route('dashboard.test')" wire:current.exact="active" icon="bi-bug"
-                        :label="__('Test components')" />
+                    @can('manage_media')
+                        <x-nav-link wire:navigate :href="route('dashboard.media')" wire:current.exact="active" icon="bi-image"
+                            :label="__('Media')" />
+                    @endcan
+                    <x-nav-link-collapse icon="bi-grid" :label="__('Ui Components')" :open="request()->routeIs(['dashboard.ui', 'dashboard.ui.*'])">
+                        <x-nav-link wire:navigate :href="route('dashboard.ui.colors')" wire:current.exact="active" icon="bi-palette"
+                            :label="__('Colors')" />
+                        <x-nav-link wire:navigate :href="route('dashboard.ui.backgrounds')" wire:current.exact="active" icon="bi-palette"
+                            :label="__('Backgrounds')" />
+                        <x-nav-link wire:navigate :href="route('dashboard.ui.buttons')" wire:current.exact="active" icon="bi-square"
+                            :label="__('Buttons')" />
+                        <x-nav-link wire:navigate :href="route('dashboard.ui.modal')" wire:current.exact="active" icon="bi-window"
+                            :label="__('Modal')" />
+                        <x-nav-link wire:navigate :href="route('dashboard.ui.sortable')" wire:current.exact="active" icon="bi-sort-down"
+                            :label="__('Sortable')" />
+                        <x-nav-link wire:navigate :href="route('dashboard.ui.toast')" wire:current.exact="active" icon="bi-bell"
+                            :label="__('Toast')" />
+                    </x-nav-link-collapse>
                 </nav>
             </div>
         </div>
@@ -48,7 +63,7 @@
                 <div class="nav">
                     <button class="navbar-brand nav-link md:hidden offcanvas-toggle" data-fg-toggle="offcanvas"
                         data-fg-target="#dashboard-sidebar">
-                        <i class="icon bi-list"></i>
+                        <i class="icon bi-list text-2xl"></i>
                     </button>
                     @if (isset($navbar))
                         {!! $navbar !!}
@@ -65,10 +80,11 @@
                             @endguest
                             @auth
                                 <span>{{ auth()->user()->name }}</span>
+
                             @endauth
                             <i class="icon bi-chevron-down w-3 h-3"></i>
                         </button>
-                        <div class="dropdown-menu dropdown-end w-40">
+                        <div class="dropdown-menu dropdown-end w-auto max-w-auto">
                             @guest
                                 <a href="{{ route('login') }}" class="dropdown-link">
                                     <i class="icon bi-box-arrow-in-right"></i>
@@ -80,6 +96,23 @@
                                 </a>
                             @endguest
                             @auth
+                                <a href="{{ route('profile.edit') }}"
+                                    class="dropdown-link border-b pt-0 border-gray-200 dark:border-gray-700">
+                                    <div class="text-sm flex items-center gap-2">
+                                        <img src="{{ auth()->user()->avatar }}" class="w-8 h-8 rounded-full"
+                                            alt="{{ auth()->user()->name }}">
+                                        <div class="flex-1">
+                                            <div>
+                                                {{ auth()->user()->name }}
+                                            </div>
+                                            <div class="text-muted text-xs overflow-hidden text-ellipsis">
+                                                {{ auth()->user()->email }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </a>
+
                                 <a href="{{ route('dashboard') }}" class="dropdown-link">
                                     <i class="icon bi-speedometer"></i>
                                     <span>{{ __('Dashboard') }}</span>

@@ -5,6 +5,7 @@ use App\Models\Screen;
 use App\Models\Slide;
 use App\Models\TimeSlot;
 use App\Traits\WithToast;
+use Illuminate\Validation\Rule;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
@@ -24,6 +25,31 @@ new #[Title('Edit screen')] class extends DashboardPage
         $this->screen = $screen;
         $this->form = $this->screen->toArray();
         $this->title = __('Edit screen :name', ['name' => $this->screen->name]);
+    }
+    protected function rules()
+    {
+        return [
+            'form.name' => ['required', 'string', 'max:255'],
+            'form.slug' => ['required', 'string', Rule::unique('screens', 'user_id'), 'max:255'],
+            'form.is_active' => ['boolean'],
+            'form.time_slots.*.screen_id' => ['required', 'integer', Rule::exists('screens')],
+            'form.time_slots.*.name' => ['required', 'string', 'max:255'],
+            'form.time_slots.*.start_time' => ['required', 'date_format:H:i:s'],
+            'form.time_slots.*.end_time' => ['required', 'date_format:H:i:s'],
+            'form.time_slots.*.slide_duration' => ['required', 'integer', 'max:100000'],
+            'form.time_slots.*.priority' => ['required', 'integer'],
+            'form.time_slots.*.is_active' => ['boolean'],
+            'form.time_slots.*.slides.*.time_slots_id' => ['required', 'integer', Rule::exists('time_slots')],
+            'form.time_slots.*.slides.*.name' => ['nullable', 'string', 'max:255'],
+            'form.time_slots.*.slides.*.duration' => ['required', 'integer', 'max:100000'],
+            'form.time_slots.*.slides.*.transition' => ['required', 'string', Rule::in(slide_transition_values())],
+            'form.time_slots.*.slides.*.order' => ['required', 'integer', 'max:100000'],
+            'form.time_slots.*.slides.*.is_active' => ['boolean'],
+        ];
+    }
+    public function updated($property, $value)
+    {
+        $this->validateOnly($property);
     }
     public function addSlot()
     {
@@ -188,6 +214,7 @@ new #[Title('Edit screen')] class extends DashboardPage
     }
     public function save()
     {
+        dd($this->validate());
         $this->addSuccess("save", "Saved successfully");
     }
 };

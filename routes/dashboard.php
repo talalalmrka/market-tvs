@@ -36,8 +36,13 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'verified']], fu
         Route::livewire('/', 'dashboard::media.index')->name('dashboard.media');
     });
 
-    //test
-    Route::group(['prefix' => 'test'], function () {
-        Route::livewire('/', 'dashboard::test.index')->name('dashboard.test');
+    //ui
+    Route::group(['prefix' => 'ui'], function () {
+        Route::livewire('colors', 'dashboard::ui.colors')->name('dashboard.ui.colors');
+        Route::livewire('backgrounds', 'dashboard::ui.backgrounds')->name('dashboard.ui.backgrounds');
+        Route::livewire('buttons', 'dashboard::ui.buttons')->name('dashboard.ui.buttons');
+        Route::livewire('modal', 'dashboard::ui.modal')->name('dashboard.ui.modal');
+        Route::livewire('sortable', 'dashboard::ui.sortable')->name('dashboard.ui.sortable');
+        Route::livewire('toast', 'dashboard::ui.toast')->name('dashboard.ui.toast');
     });
 });

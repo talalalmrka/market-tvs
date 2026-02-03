@@ -1,14 +1,14 @@
 <?php
 
+use App\Livewire\Components\DashboardPage;
 use App\Models\Screen;
 use App\Models\Slide;
 use App\Models\TimeSlot;
 use App\Models\User;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
-use Livewire\Component;
 
-new #[Title('Dashboard')] class extends Component
+new #[Title('Dashboard')] class extends DashboardPage
 {
 
     public function stats()

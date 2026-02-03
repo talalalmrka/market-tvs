@@ -42,19 +42,19 @@ class Slide extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('file');
+        $this->addMediaCollection('file')->singleFile();
     }
 
     public function url(): Attribute
     {
         return Attribute::get(fn() => $this->getFirstMediaUrl('file'));
     }
-    
+
     public function type(): Attribute
     {
         return Attribute::get(fn() => $this->getFirstMedia('file')?->type);
     }
-    
+
     public function file(): Attribute
     {
         return Attribute::get(fn() => null);

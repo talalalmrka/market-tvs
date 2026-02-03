@@ -14,64 +14,45 @@
         </flux:sidebar.header>
 
         <flux:sidebar.nav>
-            <nav class="sidebar-nav nav vertical space-y-3">
-                <x-nav-link wire:navigate :href="route('dashboard')" wire:current.exact="active" icon="bi-speedometer"
-                    :label="__('Dashboard')" />
-                <x-nav-link wire:navigate :href="route('dashboard.old')" wire:current.exact="active" icon="bi-speedometer"
-                    :label="__('Dashboard old')" />
-                <x-nav-link wire:navigate :href="route('dashboard.users')" wire:current.exact="active" icon="bi-people"
-                    :label="__('Users')" />
-                @can('manage_roles')
-                    <x-nav-link-collapse icon="bi-person-fill-lock" :label="__('Roles & Permissions')" :open="request()->routeIs([
-                        'dashboard.roles',
-                        'dashboard.roles.*',
-                        'dashboard.permissions',
-                        'dashboard.permissions.*',
-                    ])">
-                        @can('manage_roles')
-                            <x-nav-link wire:navigate :href="route('dashboard.roles')" wire:current="active" icon="bi-person-gear"
-                                :label="__('Roles')" />
-                        @endcan
-                        @can('manage_permissions')
-                            <x-nav-link wire:navigate :href="route('dashboard.permissions')" wire:current="active" icon="bi-key-fill"
-                                :label="__('Permissions')" />
-                        @endcan
-                    </x-nav-link-collapse>
-                @endcan
-                <x-nav-link wire:navigate :href="route('dashboard.screens')" wire:current="active" icon="bi-tv"
-                    :label="__('Screens')" />
-                <x-nav-link wire:navigate :href="route('dashboard.media')" wire:current.exact="active" icon="bi-image"
-                    :label="__('Media')" />
-                <x-nav-link wire:navigate :href="route('dashboard.test')" wire:current.exact="active" icon="bi-bug"
-                    :label="__('Test components')" />
-            </nav>
-            <flux:sidebar.group :heading="__('Platform')" class="grid">
-                <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
-                    wire:navigate>
-                    {{ __('Dashboard') }}
-                </flux:sidebar.item>
-                <flux:sidebar.item icon="home" :href="route('dashboard.old')"
-                    :current="request()->routeIs('dashboard.old')"
-                    wire:navigate>
-                    {{ __('Dashboard old') }}
-                </flux:sidebar.item>
+            <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
+                wire:navigate>
+                {{ __('Dashboard') }}
+            </flux:sidebar.item>
+            <flux:sidebar.item icon="home" :href="route('dashboard.old')"
+                :current="request()->routeIs('dashboard.old')"
+                wire:navigate>
+                {{ __('Dashboard old') }}
+            </flux:sidebar.item>
+            @can('manage_users')
                 <flux:sidebar.item icon="home" :href="route('dashboard.users')"
                     :current="request()->routeIs('dashboard.users')" wire:navigate>
                     {{ __('Users') }}
                 </flux:sidebar.item>
-                <flux:sidebar.item icon="home" :href="route('dashboard.screens')"
-                    :current="request()->routeIs('dashboard.screens')" wire:navigate>
-                    {{ __('Screens') }}
-                </flux:sidebar.item>
-                <flux:sidebar.item icon="" :href="route('dashboard.media')"
-                    :current="request()->routeIs('dashboard.media')" wire:navigate>
-                    {{ __('Media') }}
-                </flux:sidebar.item>
-                <flux:sidebar.item icon="" :href="route('dashboard.test')"
-                    :current="request()->routeIs('dashboard.test')" wire:navigate>
-                    {{ __('Test') }}
-                </flux:sidebar.item>
-            </flux:sidebar.group>
+            @endcan
+            @can('manage_roles')
+                <flux:sidebar.group expandable heading="Roles & permissions" class="grid">
+                    @can('manage_roles')
+                        <flux:sidebar.item :href="route('dashboard.roles')">
+                            {{ __('Roles') }}
+                        </flux:sidebar.item>
+                    @endcan
+                    @can('manage_permissions')
+                        <flux:sidebar.item :href="route('dashboard.permissions')">
+                            {{ __('Permissions') }}
+                        </flux:sidebar.item>
+                    @endcan
+
+                </flux:sidebar.group>
+            @endcan
+            <flux:sidebar.item icon="home" :href="route('dashboard.screens')"
+                :current="request()->routeIs('dashboard.screens')" wire:navigate>
+                {{ __('Screens') }}
+            </flux:sidebar.item>
+            <flux:sidebar.item icon="" :href="route('dashboard.media')"
+                :current="request()->routeIs('dashboard.media')" wire:navigate>
+                {{ __('Media') }}
+            </flux:sidebar.item>
+
         </flux:sidebar.nav>
 
         <flux:spacer />

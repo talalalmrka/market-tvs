@@ -59,7 +59,7 @@
                         @endforeach
                         <label wire:cloak for="file-{{ $slot['id'] }}"
                             x-data="UploadSlide({ slotId: @js($slot['id']) })"
-                            class="col aspect-video relative flex flex-col items-center justify-center border hover:shadow rounded-lg overflow-hidden cursor-pointer bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600">
+                            class="col aspect-video relative flex flex-col items-center justify-center border rounded-lg overflow-hidden cursor-pointer bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600">
                             <i class="icon bi-cloud-upload text-5xl"></i>
                             <div class="text-xs text-muted">
                                 {{ __('Upload image or video') }}

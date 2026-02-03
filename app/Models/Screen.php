@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasSlug;
 use App\Traits\HasUser;
 use App\Traits\WithActive;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,11 +14,14 @@ class Screen extends Model
     /** @use HasFactory<\Database\Factories\ScreenFactory> */
     use HasFactory,
         WithActive,
-        HasUser;
+        HasUser,
+        HasSlug;
+
     protected $fillable = [
         'user_id',
         'name',
         'uuid',
+        'slug',
         'is_active'
     ];
 
@@ -25,10 +29,19 @@ class Screen extends Model
         'timeSlots'
     ];
 
-
     protected static function booted()
     {
-        static::creating(fn($screen) => $screen->uuid = Str::uuid());
+        static::creating(function ($screen) {
+            $screen->uuid = Str::uuid();
+            if (empty($screen->slug)) {
+                $screen->slug = self::generateSlug($screen->name);
+            }
+        });
+        static::updating(function ($screen) {
+            if (empty($screen->slug)) {
+                $screen->slug = self::generateSlug($screen->name);
+            }
+        });
     }
     public function timeSlots()
     {

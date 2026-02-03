@@ -22,6 +22,6 @@
     },
     "devDependencies": {
         "@iconify/tailwind4": "^1.2.1",
-        "fadgram-ui": "^0.9.9"
+        "fadgram-ui": "^1.0.3"
     }
 }

@@ -3,6 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Traits\HasSlug;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -19,7 +22,8 @@ class User extends Authenticatable implements HasMedia
         Notifiable,
         TwoFactorAuthenticatable,
         HasRoles,
-        InteractsWithMedia;
+        InteractsWithMedia,
+        HasSlug;
 
     /**
      * The attributes that are mass assignable.
@@ -42,6 +46,10 @@ class User extends Authenticatable implements HasMedia
         'two_factor_secret',
         'two_factor_recovery_codes',
         'remember_token',
+    ];
+
+    protected $appends = [
+        'avatar'
     ];
 
     /**
@@ -68,8 +76,33 @@ class User extends Authenticatable implements HasMedia
             ->map(fn($word) => Str::substr($word, 0, 1))
             ->implode('');
     }
+    protected static function booted()
+    {
+        static::creating(function ($user) {
+            if (empty($user->slug)) {
+                $user->slug = self::generateSlug($user->name);
+            }
+        });
+        static::updating(function ($user) {
+            if (empty($user->slug)) {
+                $user->slug = self::generateSlug($user->name);
+            }
+        });
+    }
     public function screens()
     {
         return $this->hasMany(Screen::class);
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('avatar')
+            ->singleFile()
+            ->useFallbackUrl('/assets/images/user.svg')
+            ->useFallbackPath(public_path('/assets/images/user.svg'));
+    }
+    public function avatar(): Attribute
+    {
+        return Attribute::get(fn() => $this->getFirstMediaUrl('avatar'));
     }
 }
