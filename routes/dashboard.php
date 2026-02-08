@@ -23,12 +23,12 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'verified']], fu
     Route::group(['prefix' => 'permissions', 'middleware' => ['can:manage_permissions']], function () {
         Route::livewire('/', 'dashboard::permissions.index')->name('dashboard.permissions');
     });
-
     //screens
     Route::group(['prefix' => 'screens', 'middleware' => ['can:manage_screens']], function () {
         Route::livewire('/', 'dashboard::screens.index')->name('dashboard.screens');
+        // Route::livewire('/scrs', 'dashboard::scrs.index')->name('dashboard.scrs');
         Route::livewire('/edit/{screen}', 'dashboard::screens.edit')->name('dashboard.screens.edit');
-        Route::livewire('/images', 'dashboard::screens.images')->name('dashboard.screens.images');
+        // Route::livewire('/images', 'dashboard::screens.images')->name('dashboard.screens.images');
     });
 
     //media
@@ -44,5 +44,6 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'verified']], fu
         Route::livewire('modal', 'dashboard::ui.modal')->name('dashboard.ui.modal');
         Route::livewire('sortable', 'dashboard::ui.sortable')->name('dashboard.ui.sortable');
         Route::livewire('toast', 'dashboard::ui.toast')->name('dashboard.ui.toast');
+        Route::livewire('progress', 'dashboard::ui.progress')->name('dashboard.ui.progress');
     });
 });

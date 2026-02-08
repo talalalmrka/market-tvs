@@ -17,8 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->time('start_time');
             $table->time('end_time');
-            $table->integer('slide_duration')->default(5000);
-            $table->integer('priority')->default(1);
+            $table->integer('duration')->default(5000);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

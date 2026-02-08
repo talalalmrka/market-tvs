@@ -4,15 +4,14 @@ use App\Livewire\Components\DashboardPage;
 use App\Models\Screen;
 use App\Models\Slide;
 use App\Models\TimeSlot;
-use App\Traits\WithToast;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\Title;
-use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
-use Livewire\WithFileUploads;
 
 new #[Title('Edit screen')] class extends DashboardPage
 {
+    #[Locked]
     public Screen $screen;
     public array $form = [];
     public string $title = '';
@@ -30,16 +29,32 @@ new #[Title('Edit screen')] class extends DashboardPage
     {
         return [
             'form.name' => ['required', 'string', 'max:255'],
-            'form.slug' => ['required', 'string', Rule::unique('screens', 'user_id'), 'max:255'],
+            'form.slug' => [
+                'nullable',
+                'string',
+                'max:255',
+                Rule::unique('screens', 'slug')
+                    ->where(fn($q) => $q->where('user_id', $this->screen->user_id))
+                    ->ignore($this->screen->id),
+            ],
             'form.is_active' => ['boolean'],
-            'form.time_slots.*.screen_id' => ['required', 'integer', Rule::exists('screens')],
+            'form.time_slots.*.id' => [
+                'required',
+                Rule::exists('time_slots', 'id')
+                    ->where(fn($q) => $q->where('screen_id', $this->screen->id))
+            ],
+            'form.time_slots.*.screen_id' => [
+                'required',
+                Rule::exists('screens', 'id')
+                    ->where(fn($q) => $q->where('user_id', $this->screen->user_id))
+            ],
             'form.time_slots.*.name' => ['required', 'string', 'max:255'],
-            'form.time_slots.*.start_time' => ['required', 'date_format:H:i:s'],
-            'form.time_slots.*.end_time' => ['required', 'date_format:H:i:s'],
-            'form.time_slots.*.slide_duration' => ['required', 'integer', 'max:100000'],
-            'form.time_slots.*.priority' => ['required', 'integer'],
+            'form.time_slots.*.start_time' => ['required', 'date_format:H:i'],
+            'form.time_slots.*.end_time' => ['required', 'date_format:H:i', 'after:start_time'],
+            'form.time_slots.*.duration' => ['required', 'integer', 'max:100000'],
             'form.time_slots.*.is_active' => ['boolean'],
-            'form.time_slots.*.slides.*.time_slots_id' => ['required', 'integer', Rule::exists('time_slots')],
+            'form.time_slots.*.slides.*.id' => ['required', 'integer', Rule::exists('slides', 'id')],
+            'form.time_slots.*.slides.*.time_slot_id' => ['required', 'integer', Rule::exists('time_slots', 'id')],
             'form.time_slots.*.slides.*.name' => ['nullable', 'string', 'max:255'],
             'form.time_slots.*.slides.*.duration' => ['required', 'integer', 'max:100000'],
             'form.time_slots.*.slides.*.transition' => ['required', 'string', Rule::in(slide_transition_values())],
@@ -56,8 +71,8 @@ new #[Title('Edit screen')] class extends DashboardPage
         $slot = TimeSlot::create([
             'screen_id' => $this->screen->id,
             'name' => __('Time slot :number', ['number' => $this->screen->timeSlots()->count() + 1]),
-            'start_time' => '00:00:00',
-            'end_time' => '00:00:00',
+            'start_time' => '00:00',
+            'end_time' => '00:00',
         ]);
         if ($slot) {
             $slot = TimeSlot::find($slot->id);
@@ -67,6 +82,14 @@ new #[Title('Edit screen')] class extends DashboardPage
     }
     public function updatedFile()
     {
+        $this->validate([
+            'file' => [
+                'nullable',
+                'file',
+                'max:200000',
+                'mimetypes:image/jpeg,image/png,image/bmp,image/gif,image/svg+xml,video/mp4,video/mpeg,video/ogg,video/webm,video/quicktime'
+            ]
+        ]);
         if ($this->file) {
             $slot = TimeSlot::find($this->fileSlot);
             if (!$slot) {
@@ -116,7 +139,9 @@ new #[Title('Edit screen')] class extends DashboardPage
             array_splice($slides, $newPosition, 0, $removedItem);
         }
         $this->form['time_slots'][$slotPosition]['slides'] = $this->reorderSlides($slides);
-        $this->addSuccess("slot-{$slotId}", "Slide order updated item: $slideId, position: $newPosition");
+        $this->toastSuccess("Slide order updated slotIndex: $slotPosition, slide from position: $oldPosition to: $newPosition", [
+            'duration' => 15000
+        ]);
     }
 
     public function removeSlide(int $slideId)
@@ -212,9 +237,60 @@ new #[Title('Edit screen')] class extends DashboardPage
         $slideIndex = collect($slides)->search(fn($slide, $key) => $slide['id'] == $this->slideToEdit->id);
         return "form.time_slots.{$slotIndex}.slides.{$slideIndex}.{$input}";
     }
+
+    #[Computed()]
+    public function slideControlKey(int $slotIndex, int $slideIndex, string $input): string
+    {
+        if (empty($this->slideToEdit)) {
+            return '';
+        }
+        return "form.time_slots.{$slotIndex}.slides.{$slideIndex}.{$input}";
+    }
     public function save()
     {
-        dd($this->validate());
-        $this->addSuccess("save", "Saved successfully");
+        if (empty($this->form['slug'])) {
+            $this->form['slug'] = Screen::generateSlug($this->form['name']);
+        }
+        // 1. Validate the entire form
+        $validatedData = $this->validate();
+        $formData = $validatedData['form'];
+
+        // dd($formData);
+        // 2. Update the Screen properties
+        $this->screen->update([
+            'name' => $formData['name'],
+            'slug' => $formData['slug'],
+            'is_active' => $formData['is_active'],
+        ]);
+
+        // 3. Update nested TimeSlots and Slides
+        foreach ($formData['time_slots'] as $slotData) {
+            $slot = TimeSlot::find($slotData['id']);
+
+            if ($slot) {
+                $slot->update([
+                    'name' => $slotData['name'],
+                    'start_time' => $slotData['start_time'],
+                    'end_time' => $slotData['end_time'],
+                    'duration' => $slotData['duration'] ?? 5000, // Matching your migration default
+                    'is_active' => $slotData['is_active'],
+                ]);
+
+                // 4. Update Slides within this slot
+                if (isset($slotData['slides'])) {
+                    foreach ($slotData['slides'] as $slideData) {
+                        Slide::where('id', $slideData['id'])->update([
+                            'name' => $slideData['name'],
+                            'duration' => $slideData['duration'],
+                            'transition' => $slideData['transition'],
+                            'order' => $slideData['order'],
+                            'is_active' => $slideData['is_active'],
+                        ]);
+                    }
+                }
+            }
+        }
+
+        $this->toastSuccess(__('Screen and all slots saved successfully'));
     }
 };

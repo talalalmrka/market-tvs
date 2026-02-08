@@ -1,7 +1,8 @@
-<div x-data="TimeSlotCollapse({ slotId: @js($slot['id']) })" wire:key="{{ $slot['id'] }}" class="card mb-4 shadow-none">
-    <div class="card-header flex items-center gap-2" :class="{ 'border-b-0': !open }">
+<div x-data="TimeSlotCollapse({{ $slot['id'] }})" wire:key="{{ $slot['id'] }}" class="border mb-4 rounded-lg shadow-sm"
+    :class="{ 'ring-2 ring-primary/50': open }">
+    <div class="flex items-center gap-2 p-2" :class="{ 'border-b': open }">
         <h5 x-on:click="toggle"
-            class="card-title flex items-center gap-2 flex-1 cursor-pointer">
+            class="mb-0 flex items-center gap-2 flex-1 cursor-pointer">
             <i class="icon bi-chevron-down transition-transform"
                 :class="{ 'rotate-180': open }"></i>
             <span>{{ data_get($slot, 'name') }}</span>
@@ -12,7 +13,7 @@
             <fgx:loader wire:loading wire:target="removeSlot({{ $slot['id'] }})" />
         </button>
     </div>
-    <div x-collapse x-show="open" class="card-body">
+    <div x-show="open" class="p-2">
         <div class="grid grid-cols-1 gap-3">
             <div class="col">
                 <fgx:input wire:model.live="form.time_slots.{{ $slotIndex }}.name"
@@ -22,25 +23,20 @@
                 <fgx:input type="time"
                     wire:model.live="form.time_slots.{{ $slotIndex }}.start_time"
                     id="form.time_slots.{{ $slotIndex }}.start_time"
-                    :label="__('Start time')" />
+                    :label="__('Start time')" :info="$slot['start_time']" />
             </div>
             <div class="col">
                 <fgx:input type="time"
                     wire:model.live="form.time_slots.{{ $slotIndex }}.end_time"
                     id="form.time_slots.{{ $slotIndex }}.end_time"
-                    :label="__('End time')" />
+                    :label="__('End time')"
+                    :info="$slot['end_time']" />
             </div>
             <div class="col">
                 <fgx:input type="number"
-                    wire:model.live="form.time_slots.{{ $slotIndex }}.slide_duration"
-                    id="form.time_slots.{{ $slotIndex }}.slide_duration"
+                    wire:model.live="form.time_slots.{{ $slotIndex }}.duration"
+                    id="form.time_slots.{{ $slotIndex }}.duration"
                     :label="__('Slide duration (ms)')" />
-            </div>
-            <div class="col">
-                <fgx:input type="number"
-                    wire:model.live="form.time_slots.{{ $slotIndex }}.priority"
-                    id="form.time_slots.{{ $slotIndex }}.priority"
-                    :label="__('Priority')" />
             </div>
             <div class="col">
                 <fgx:switch
@@ -59,23 +55,32 @@
                         @endforeach
                         <label wire:cloak for="file-{{ $slot['id'] }}"
                             x-data="UploadSlide({ slotId: @js($slot['id']) })"
-                            class="col aspect-video relative flex flex-col items-center justify-center border rounded-lg overflow-hidden cursor-pointer bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600">
-                            <i class="icon bi-cloud-upload text-5xl"></i>
-                            <div class="text-xs text-muted">
-                                {{ __('Upload image or video') }}
+                            class="col aspect-video flex flex-col items-center justify-center relative border rounded-lg overflow-hidden cursor-pointer bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600">
+                            <div x-show="!uploading" class="flex flex-col items-center justify-center">
+                                <i class="icon bi-cloud-upload text-5xl"></i>
+                                <div class="text-xs text-muted">
+                                    {{ __('Upload image or video') }}
+                                </div>
                             </div>
                             <input type="file" id="file-{{ $slot['id'] }}"
-                                class="hidden" x-ref="fileInput" x-on:change="handleFileSelect"
+                                class="hidden" x-bind="fileInput"
                                 accept="image/*, video/*">
-                            <div x-show="uploading"
-                                class="progress w-full absolute top-1/2 -translate-y-1/2 start-1/2 -translate-x-1/2"
-                                role="progressbar">
-                                <div class="progress-bar" :style="`width: ${progress}%`"></div>
+                            <div x-bind="progressContainer"
+                                class="w-full absolute top-1/2 -translate-y-1/2 start-1/2 -translate-x-1/2 flex items-center gap-2 px-2">
+                                <div
+                                    class="progress lg flex-1"
+                                    role="progressbar">
+                                    <div class="progress-bar" :style="`width: ${progress}%`" x-text="`${progress}%`">
+                                    </div>
+                                </div>
+                                <button type="button" x-bind="buttonCancelUpload">
+                                    <i class="icon bi-x-lg"></i>
+                                </button>
                             </div>
                         </label>
                     </div>
                 </div>
-                <fgx:status key="slot-{{ $slot['id'] }}" class="mt-4" />
+                <x-fgx::error id="file" />
             </div>
         </div>
 

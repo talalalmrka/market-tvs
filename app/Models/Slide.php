@@ -27,12 +27,9 @@ class Slide extends Model implements HasMedia
 
     protected $appends = [
         'url',
-        'file',
+        'type',
+        'transition_class',
     ];
-
-    /* protected $with = [
-        'media'
-    ]; */
 
     public function timeSlot()
     {
@@ -54,9 +51,21 @@ class Slide extends Model implements HasMedia
     {
         return Attribute::get(fn() => $this->getFirstMedia('file')?->type);
     }
-
-    public function file(): Attribute
+    public function transitionClass(): Attribute
     {
-        return Attribute::get(fn() => null);
+        return Attribute::get(function () {
+            try {
+                $transitions = slide_transitions();
+                if ($this->transition === 'random') {
+                    return collect($transitions)
+                        ->except('random')
+                        ->random();
+                } else {
+                    return $transitions[$this->transition];
+                }
+            } catch (\Exception $e) {
+                return 'Error: ' . $e->getMessage();
+            }
+        });
     }
 }

@@ -1,6 +1,8 @@
-import './time-slot-collapse';
+// import './time-slot-collapse';
 import './alpine-back-top';
-import './upload-slide';
+// import './upload-slide';
+import './edit-screen';
+import './show-screen';
 import { initFadgramUI } from "fadgram-ui";
 document.addEventListener("livewire:navigated", () => {
     initFadgramUI();

@@ -1,4 +1,4 @@
-<div>
+<div x-data="EditScreen">
     <form wire:submit="save" enctype="multipart/form-data">
         <div class="card">
             <div class="card-body">
@@ -31,15 +31,22 @@
                 <fgx:status id="save" class="xs alert-soft mt-3" />
                 <fgx:status id="reset" class="xs alert-soft mt-3" />
             </div>
-
         </div>
-        @include('dashboard.screens.edit.slide-modal')
-
-        <pre>
-            @php
-                print_r($form);
-            @endphp
-        </pre>
+        <div x-bind="backDrop"></div>
+        @foreach ($form['time_slots'] as $slotIndex => $slot)
+            @foreach ($slot['slides'] as $slideIndex => $slide)
+                @include('dashboard.screens.edit.edit-slide')
+            @endforeach
+        @endforeach
+        @if ($errors->any())
+            <div class="alert alert-soft alert-error mt-4">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <div class="sticky bottom-0 flex items-center justify-between bg-body-bg dark:bg-body-bg-dark p-3 z-2">
             <button type="submit" class="btn btn-primary">

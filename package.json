@@ -22,6 +22,7 @@
     },
     "devDependencies": {
         "@iconify/tailwind4": "^1.2.1",
-        "fadgram-ui": "^1.0.3"
+        "fadgram-ui": "^1.0.3",
+        "nosleep.js": "^0.12.0"
     }
 }

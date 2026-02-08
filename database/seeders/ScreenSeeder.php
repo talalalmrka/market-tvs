@@ -5,30 +5,11 @@ namespace Database\Seeders;
 use App\Models\Screen;
 use App\Models\Slide;
 use App\Models\TimeSlot;
+use DateTime;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
-
-
-/* class ScreenSeeder extends Seeder
-{
-
-    public function run(): void
-    {
-
-        Screen::factory()
-            ->count(5)
-            ->user(1)
-            ->has(
-                TimeSlot::factory()
-                    ->count(3)
-                    ->has(Slide::factory()->count(5), 'slides'),
-                'timeSlots'
-            )
-            ->create();
-     }
-}*/
 
 class ScreenSeeder extends Seeder
 {
@@ -37,18 +18,18 @@ class ScreenSeeder extends Seeder
         return [
             [
                 'name' => 'Breakfast',
-                'start_time' => sprintf('%02d:00:00', 6),
-                'end_time' => sprintf('%02d:00:00', 11),
+                'start_time' => '06:00',
+                'end_time' => '11:00',
             ],
             [
                 'name' => 'Launch',
-                'start_time' => sprintf('%02d:00:00', 11),
-                'end_time' => sprintf('%02d:00:00', 13),
+                'start_time' => '11:00',
+                'end_time' => '13:00',
             ],
             [
                 'name' => 'Dinner',
-                'start_time' => sprintf('%02d:00:00', 13),
-                'end_time' => sprintf('%02d:00:00', 6),
+                'start_time' => '13:00',
+                'end_time' => '06:00',
             ],
         ];
     }
@@ -78,9 +59,14 @@ class ScreenSeeder extends Seeder
                             "assets/images/t{$t}s{$s}.png"
                         );
 
-                        if (File::exists($imagePath)) {
+                        $videoPath = public_path(
+                            "assets/images/video.mp4"
+                        );
+                        $filePath = $s == 3 ? $videoPath : $imagePath;
+
+                        if (File::exists($filePath)) {
                             $slide
-                                ->addMedia($imagePath)
+                                ->addMedia($filePath)
                                 ->preservingOriginal()
                                 ->toMediaCollection('file');
                         }

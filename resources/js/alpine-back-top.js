@@ -6,6 +6,12 @@ document.addEventListener("alpine:init", () => {
             ["@click"]() {
                 this.top();
             },
+            [":class"]() {
+                return {
+                    'transition-all': true,
+                    'opacity-0 translate-y-80': !this.show,
+                };
+            },
         },
         top() {
             window.scrollTo({
@@ -29,5 +35,6 @@ document.addEventListener("alpine:init", () => {
                 );
             });
         },
+
     }));
 });

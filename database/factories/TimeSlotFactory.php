@@ -17,17 +17,18 @@ class TimeSlotFactory extends Factory
      */
     public function definition(): array
     {
-        $startHour = $this->faker->numberBetween(6, 18);
-        $endHour = $startHour + $this->faker->numberBetween(1, 4);
+        $start = $this->faker->dateTimeBetween('00:00', '23:59');
+
+        // Ensure end time is 1-4 hours after start time
+        $end = (clone $start)->modify('+' . rand(1, 4) . ' hours');
 
 
         return [
             'screen_id' => Screen::factory(),
             'name' => $this->faker->randomElement(['Breakfast', 'Lunch', 'Dinner', 'Evening Promo']),
-            'start_time' => sprintf('%02d:00:00', $startHour),
-            'end_time' => sprintf('%02d:00:00', $endHour),
-            'slide_duration' => 5000,
-            'priority' => 1,
+            'start_time' => $start->format('H:i:s'),
+            'end_time' => $end->format('H:i:s'),
+            'duration' => 5000,
             'is_active' => true,
         ];
     }

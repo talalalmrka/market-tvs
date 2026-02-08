@@ -16,18 +16,14 @@ class TimeSlot extends Model
         'name',
         'start_time',
         'end_time',
-        'slide_duration',
-        'priority',
+        'duration',
         'is_active'
     ];
 
     protected $with = [
         'slides'
     ];
-    
-    protected $appends = [
-    	'file'
-    ];
+
     public function screen()
     {
         return $this->belongsTo(Screen::class);
@@ -37,10 +33,5 @@ class TimeSlot extends Model
     public function slides()
     {
         return $this->hasMany(Slide::class)->orderBy('order');
-    }
-    
-    public function file(): Attribute
-    {
-        return Attribute::get(fn() => null);
     }
 }

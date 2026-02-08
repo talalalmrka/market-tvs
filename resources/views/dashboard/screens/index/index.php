@@ -38,6 +38,22 @@ new #[Title('Screens')] class extends DashboardDatatable
                 ->content(fn(Screen $screen) => $screen->timeSlots()->count()),
         ];
     }
+    public function getActions()
+    {
+        return [
+            taction('show')
+                ->icon('bi-eye')
+                ->title(__('Show'))
+                ->target('_blank')
+                ->href(fn(Screen $screen) => $screen->permalink),
+
+            taction('edit')
+                ->icon('bi-pencil-square')
+                ->title(__('Edit')),
+
+            taction('delete')->icon('bi-trash')->title(__('Delete')),
+        ];
+    }
     public function edit($id)
     {
         $this->redirect(route('dashboard.screens.edit', $id), true);

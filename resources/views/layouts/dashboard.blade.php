@@ -54,6 +54,8 @@
                             :label="__('Sortable')" />
                         <x-nav-link wire:navigate :href="route('dashboard.ui.toast')" wire:current.exact="active" icon="bi-bell"
                             :label="__('Toast')" />
+                        <x-nav-link wire:navigate :href="route('dashboard.ui.progress')" wire:current.exact="active" icon="bi-bar-chart"
+                            :label="__('Progress')" />
                     </x-nav-link-collapse>
                 </nav>
             </div>
@@ -154,5 +156,6 @@
             </div>
         </main>
     </div>
+
     <x-button-back-top class="bottom-4 end-4" />
 </x-layouts::layout>

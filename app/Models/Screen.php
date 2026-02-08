@@ -8,6 +8,7 @@ use App\Traits\WithActive;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Screen extends Model
 {
@@ -28,6 +29,9 @@ class Screen extends Model
     protected $with = [
         'timeSlots'
     ];
+    protected $appends = [
+        'permalink'
+    ];
 
     protected static function booted()
     {
@@ -46,5 +50,10 @@ class Screen extends Model
     public function timeSlots()
     {
         return $this->hasMany(TimeSlot::class);
+    }
+
+    public function permalink(): Attribute
+    {
+        return Attribute::get(fn() => !empty($this->id) ? route('screen', $this) : '');
     }
 }

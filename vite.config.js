@@ -15,11 +15,11 @@ export default defineConfig({
     server: {
         cors: true,
         watch: {
-        	interval: 1000,
-        	usePolling: true,
+            // interval: 1000,
+            usePolling: true,
             ignored: [
-            	'**/storage/framework/views/**',
-            	'**/vendor/**',
+                '**/storage/framework/views/**',
+                '**/vendor/**',
             ],
         },
     },

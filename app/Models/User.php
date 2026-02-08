@@ -34,6 +34,7 @@ class User extends Authenticatable implements HasMedia
         'name',
         'email',
         'password',
+        'slug',
     ];
 
     /**
@@ -49,7 +50,8 @@ class User extends Authenticatable implements HasMedia
     ];
 
     protected $appends = [
-        'avatar'
+        'avatar',
+        'screens_permalink',
     ];
 
     /**
@@ -104,5 +106,10 @@ class User extends Authenticatable implements HasMedia
     public function avatar(): Attribute
     {
         return Attribute::get(fn() => $this->getFirstMediaUrl('avatar'));
+    }
+
+    public function screensPermalink(): Attribute
+    {
+        return Attribute::get(fn() => !empty($this->id) ? route('screens', $this) : '');
     }
 }

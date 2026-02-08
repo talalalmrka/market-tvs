@@ -12,3 +12,14 @@
 @source '../../vendor/livewire/flux/stubs/**/*.blade.php';
 @source '../../vendor/talalalmrka/fgx/**/*.blade.php';
 @source '../../node_modules/fadgram-ui/**/*.js';
+@layer base {
+    body {
+        @apply relative font-poppins;
+        @apply antialiased;
+        @apply text-gray-700 dark:text-gray-100;
+        @apply bg-body-bg dark:bg-body-bg-dark;
+    }
+}
+@utility container {
+    @apply max-w-4xl border-dotted-red;
+}

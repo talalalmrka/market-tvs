@@ -4,28 +4,48 @@ namespace App\Traits;
 
 trait WithToast
 {
-    public function toast($message, $options = [])
+    public function toast(string $message, array $options = [])
     {
-        $options = array_merge([
-            'type' => 'info',
-            'position' => 'top-end',
-        ], $options);
         $this->dispatch('toast', [
             'message' => $message,
             'options' => $options,
         ]);
     }
-    public function toastInfo($message, $position = 'top-end')
+    public function toastInfo(string $message, array $options = [])
     {
-        $this->toast($message, ['type' => 'info', 'position' => $position]);
+        $this->toast($message, [
+            ...[
+                'type' => 'info',
+            ],
+            ...$options,
+        ]);
     }
-    public function toastSuccess($message, $position = 'top-end')
+    public function toastSuccess(string $message, array $options = [])
     {
-        $this->toast($message, ['type' => 'success', 'position' => $position]);
+        $this->toast($message, [
+            ...[
+                'type' => 'success',
+            ],
+            ...$options,
+        ]);
     }
-    public function toastError($message, $position = 'top-end')
+    public function toastWarning(string $message, array $options = [])
     {
-        $this->toast($message, ['type' => 'error', 'position' => $position]);
+        $this->toast($message, [
+            ...[
+                'type' => 'warning',
+            ],
+            ...$options,
+        ]);
+    }
+    public function toastError(string $message, array $options = [])
+    {
+        $this->toast($message, [
+            ...[
+                'type' => 'error',
+            ],
+            ...$options,
+        ]);
     }
 
     public function addSuccess($name, $message)

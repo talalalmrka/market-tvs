@@ -34,6 +34,7 @@ return [
         'layouts' => resource_path('views/layouts'),
         'pages' => resource_path('views/pages'),
         'dashboard' => resource_path('views/dashboard'),
+        'site' => resource_path('views/site'),
     ],
 
     /*
@@ -74,9 +75,9 @@ return [
         'type' => 'mfc', // Options: 'sfc', 'mfc', 'class'
         'emoji' => false, // Options: true, false
         'with' => [
-            'js' => false,
-            'css' => false,
-            'test' => false,
+            'js' => true,
+            'css' => true,
+            'test' => true,
         ],
     ],
 

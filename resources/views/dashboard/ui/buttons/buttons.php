@@ -133,4 +133,131 @@ new #[Title('Buttons')] class extends DashboardPage
             ],
         ]);
     }
+
+    #[Computed()]
+    public function circleButtons()
+    {
+        return collect([
+            [
+                'label' => __('Primary'),
+                'class' => 'btn-circle-primary',
+            ],
+            [
+                'label' => __('Secondary'),
+                'class' => 'btn-circle-secondary',
+            ],
+            [
+                'label' => __('Light'),
+                'class' => 'btn-circle-light',
+            ],
+            [
+                'label' => __('Dark'),
+                'class' => 'btn-circle-dark',
+            ],
+            [
+                'label' => __('Red'),
+                'class' => 'btn-circle-red',
+            ],
+            [
+                'label' => __('Orange'),
+                'class' => 'btn-circle-orange',
+            ],
+            [
+                'label' => __('Amber'),
+                'class' => 'btn-circle-amber',
+            ],
+            [
+                'label' => __('Yellow'),
+                'class' => 'btn-circle-yellow',
+            ],
+            [
+                'label' => __('Lime'),
+                'class' => 'btn-circle-lime',
+            ],
+            [
+                'label' => __('Green'),
+                'class' => 'btn-circle-green',
+            ],
+            [
+                'label' => __('Emerald'),
+                'class' => 'btn-circle-emerald',
+            ],
+            [
+                'label' => __('Teal'),
+                'class' => 'btn-circle-teal',
+            ],
+            [
+                'label' => __('Cyan'),
+                'class' => 'btn-circle-cyan',
+            ],
+            [
+                'label' => __('Sky'),
+                'class' => 'btn-circle-sky',
+            ],
+            [
+                'label' => __('Blue'),
+                'class' => 'btn-circle-blue',
+            ],
+            [
+                'label' => __('Indigo'),
+                'class' => 'btn-circle-indigo',
+            ],
+            [
+                'label' => __('Violet'),
+                'class' => 'btn-circle-violet',
+            ],
+            [
+                'label' => __('Purple'),
+                'class' => 'btn-circle-purple',
+            ],
+            [
+                'label' => __('Fuchsia'),
+                'class' => 'btn-circle-fuchsia',
+            ],
+            [
+                'label' => __('Pink'),
+                'class' => 'btn-circle-pink',
+            ],
+            [
+                'label' => __('Rose'),
+                'class' => 'btn-circle-rose',
+            ],
+            [
+                'label' => __('Slate'),
+                'class' => 'btn-circle-slate',
+            ],
+            [
+                'label' => __('Gray'),
+                'class' => 'btn-circle-gray',
+            ],
+            [
+                'label' => __('Zinc'),
+                'class' => 'btn-circle-zinc',
+            ],
+            [
+                'label' => __('Neutral'),
+                'class' => 'btn-circle-neutral',
+            ],
+            [
+                'label' => __('Stone'),
+                'class' => 'btn-circle-stone',
+            ],
+            [
+                'label' => __('Info'),
+                'class' => 'btn-circle-info',
+            ],
+            [
+                'label' => __('Success'),
+                'class' => 'btn-circle-success',
+            ],
+            [
+                'label' => __('Warning'),
+                'class' => 'btn-circle-warning',
+            ],
+            [
+                'label' => __('Error'),
+                'class' => 'btn-circle-error',
+            ],
+        ]);
+    }
 };
