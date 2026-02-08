@@ -1,8 +1,8 @@
-import NoSleep from 'nosleep.js';
-document.addEventListener('alpine:init', () => {
-    Alpine.data('ShowScreen', (screen) => ({
+import NoSleep from "nosleep.js";
+document.addEventListener("alpine:init", () => {
+    Alpine.data("ShowScreen", (screenData) => ({
         debug: true,
-        screen: screen,
+        screenData: screenData,
 
         slotIndex: 0,
         slideIndex: 0,
@@ -20,15 +20,15 @@ document.addEventListener('alpine:init', () => {
         containerElement: null,
         noSleep: null,
         slideShowContainer: {
-            ['@mousemove'](evt) {
-                /* this.startControls();
-                this.debugMessage('Mouse moved on:');
-                this.debugMessage(evt); */
-            },
+            ["@mousemove"](evt) {
+                this.startControls();
+                // this.debugMessage('Mouse moved on:');
+                // this.debugMessage(evt);
+            }
         },
         slideContainer(_slide) {
             return {
-                ['@mousemove'](evt) {
+                ["@mousemove"](evt) {
                     this.startControls();
                     // this.debugMessage('Mouse moved on slide:');
                     // this.debugMessage(evt);
@@ -36,131 +36,137 @@ document.addEventListener('alpine:init', () => {
             };
         },
         topBar: {
-            ['x-show']() {
+            ["x-show"]() {
                 return this.showControls;
             },
-            ['@mouseenter']() {
+            ["@mouseenter"]() {
                 this.clearControlsTimer();
                 this.showControls = true;
                 // this.debugMessage('Mouse entered Top bar');
             },
-            ['@mouseleave']() {
+            ["@mouseleave"]() {
                 this.startControls();
                 // this.debugMessage('Mouse leaved Top bar');
-            },
+            }
         },
         bottomBar: {
-            ['x-show']() {
+            ["x-show"]() {
                 return this.showControls;
             },
-            ['@mouseenter']() {
+            ["@mouseenter"]() {
                 this.clearControlsTimer();
                 this.showControls = true;
             },
-            ['@mouseleave']() {
+            ["@mouseleave"]() {
                 this.startControls();
-            },
+            }
         },
         buttonFullScreen: {
-            [':class']() {
+            [":class"]() {
                 return {
-                    'btn-circle-blue': this.fullScreen,
-                    'btn-circle-light': !this.fullScreen,
+                    "btn-circle-blue": this.fullScreen,
+                    "btn-circle-light": !this.fullScreen
                 };
             },
-            ['@click']() {
+            ["@click"]() {
                 this.toggleFullScreen();
-            },
+            }
         },
         buttonNoSleep: {
-            [':class']() {
+            [":class"]() {
                 return {
-                    'btn-circle-blue': this.wakeLook,
-                    'btn-circle-light': !this.wakeLook,
+                    "btn-circle-blue": this.wakeLook,
+                    "btn-circle-light": !this.wakeLook
                 };
             },
-            ['@click']() {
+            ["@click"]() {
                 this.toggleNoSleep();
-            },
+            }
         },
         buttonPrev: {
-            ['x-show']() {
+            ["x-show"]() {
                 return this.showControls;
             },
-            ['@click']() {
-                this.prevSlide()
+            ["@click"]() {
+                this.prevSlide();
             },
-            ['@mouseenter']() {
+            ["@mouseenter"]() {
                 this.clearControlsTimer();
                 this.showControls = true;
             },
-            ['@mouseleave']() {
+            ["@mouseleave"]() {
                 this.startControls();
-            },
+            }
         },
         buttonNext: {
-            ['x-show']() {
+            ["x-show"]() {
                 return this.showControls;
             },
-            ['@click']() {
-                this.nextSlide()
+            ["@click"]() {
+                this.nextSlide();
             },
-            ['@mouseenter']() {
+            ["@mouseenter"]() {
                 this.clearControlsTimer();
                 this.showControls = true;
             },
-            ['@mouseleave']() {
+            ["@mouseleave"]() {
                 this.startControls();
-            },
+            }
         },
         buttonPlayPause: {
-            ['x-show']() {
+            ["x-show"]() {
                 return this.showControls;
             },
-            ['@click']() {
+            ["@click"]() {
                 this.playPause();
             },
-            ['@mouseenter']() {
+            ["@mouseenter"]() {
                 this.clearControlsTimer();
                 this.showControls = true;
             },
-            ['@mouseleave']() {
+            ["@mouseleave"]() {
                 this.startControls();
-            },
+            }
         },
 
         buttonSlot(slot) {
             return {
-                ['x-text']() {
+                ["x-text"]() {
                     return slot.name;
                 },
-                [':class']() {
+                [":class"]() {
                     const index = this.getSlotIndex(slot);
                     const isCurrent = this.slotIndex == index;
                     return {
-                        'bg-blue hover:bg-blue': isCurrent,
-                        'bg-secondary/50 hover:bg-secondary': !isCurrent,
+                        "bg-blue hover:bg-blue": isCurrent,
+                        "bg-secondary/50 hover:bg-secondary": !isCurrent
                     };
                 },
-                ['@click']() {
+                ["@click"]() {
                     const index = this.getSlotIndex(slot);
-                    this.clearTimer();      // وقف أي Timer شغال
+                    this.clearTimer(); // وقف أي Timer شغال
                     this.slotIndex = index; // حدد الـ slot المختار
-                    this.slideIndex = 0;        // ابدأ من أول slide
-                    this.playSlide();           // شغّل الـ slide
+                    this.slideIndex = 0; // ابدأ من أول slide
+                    this.playSlide(); // شغّل الـ slide
 
                     if (this.debug) {
-                        console.log('Slot manually changed:', slot.id, 'Index:', index);
+                        console.log(
+                            "Slot manually changed:",
+                            slot.id,
+                            "Index:",
+                            index
+                        );
                     }
-                },
+                }
             };
         },
 
         init() {
             this.noSleep = new NoSleep();
-            this.normalize()
-            this.start()
-            this.startSlot()
+            this.normalize();
+            this.start();
+            this.startSlot();
+            console.log(screen.orientation.lock);
         },
 
         // =========================
@@ -169,7 +175,7 @@ document.addEventListener('alpine:init', () => {
 
         normalize() {
             // keep only active slots & slides
-            this.screen.time_slots = this.screen.time_slots
+            this.screenData.time_slots = this.screenData.time_slots
                 .filter(slot => slot.is_active)
                 .sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0))
                 .map(slot => ({
@@ -177,63 +183,63 @@ document.addEventListener('alpine:init', () => {
                     slides: slot.slides
                         .filter(slide => slide.is_active)
                         .sort((a, b) => a.order - b.order)
-                }))
+                }));
         },
         get nowMinutes() {
-            const now = new Date()
-            return now.getHours() * 60 + now.getMinutes()
+            const now = new Date();
+            return now.getHours() * 60 + now.getMinutes();
         },
 
         timeToMinutes(time) {
             // "HH:mm" or "HH:mm:ss"
-            const [h, m] = time.split(':')
-            return (parseInt(h) * 60) + parseInt(m)
+            const [h, m] = time.split(":");
+            return parseInt(h) * 60 + parseInt(m);
         },
         getSlotIndex(_slot) {
             const index = this.slots.findIndex(s => s.id == _slot.id);
             return index;
         },
         getCurrentSlotIndex() {
-            const now = this.nowMinutes
+            const now = this.nowMinutes;
 
-            const index = this.screen.time_slots.findIndex(slot => {
-                if (!slot.start_time || !slot.end_time) return false
+            const index = this.screenData.time_slots.findIndex(slot => {
+                if (!slot.start_time || !slot.end_time) {
+                    return false;
+                }
 
-                const start = this.timeToMinutes(slot.start_time)
-                const end = this.timeToMinutes(slot.end_time)
+                const start = this.timeToMinutes(slot.start_time);
+                const end = this.timeToMinutes(slot.end_time);
 
                 // normal range (08:00 → 14:00)
                 if (start <= end) {
-                    return now >= start && now < end
+                    return now >= start && now < end;
                 }
 
                 // overnight range (22:00 → 05:00)
-                return now >= start || now < end
-            })
+                return now >= start || now < end;
+            });
 
             // fallback to first slot
-            return index !== -1 ? index : 0
+            return index !== -1 ? index : 0;
         },
         getSlideIndex(_slide) {
             const index = this.slides.findIndex(s => s.id == _slide.id);
             return index;
         },
         get slots() {
-            return Array.isArray(this.screen.time_slots)
-                ? this.screen.time_slots
+            return Array.isArray(this.screenData.time_slots)
+                ? this.screenData.time_slots
                 : [];
         },
         get slot() {
-            return this.slots[this.slotIndex] ?? null
+            return this.slots[this.slotIndex] ?? null;
         },
 
         get slides() {
-            return Array.isArray(this.slot?.slides)
-                ? this.slot?.slides
-                : [];
+            return Array.isArray(this.slot?.slides) ? this.slot?.slides : [];
         },
         get slide() {
-            return this.slides[this.slideIndex] ?? null
+            return this.slides[this.slideIndex] ?? null;
         },
 
         // =========================
@@ -241,37 +247,41 @@ document.addEventListener('alpine:init', () => {
         // =========================
 
         startt() {
-            if (!this.slot || !this.slide) return
-            this.playSlide()
+            if (!this.slot || !this.slide) {
+                return;
+            }
+            this.playSlide();
         },
         startSlot() {
             this.clearSlotTimer();
             this.slotTimer = setInterval(() => {
-                const newIndex = this.getCurrentSlotIndex()
+                const newIndex = this.getCurrentSlotIndex();
 
                 if (newIndex !== this.slotIndex) {
-                    this.clearTimer()
-                    this.slotIndex = newIndex
-                    this.slideIndex = 0
-                    this.playSlide()
+                    this.clearTimer();
+                    this.slotIndex = newIndex;
+                    this.slideIndex = 0;
+                    this.playSlide();
 
                     if (this.debug) {
-                        console.log('Slot changed:', this.slot)
+                        console.log("Slot changed:", this.slot);
                     }
                 }
-            }, 60000)
+            }, 60000);
         },
         start() {
-            if (!this.screen.time_slots.length) return
-
-            this.slotIndex = this.getCurrentSlotIndex()
-            this.slideIndex = 0
-
-            if (this.debug) {
-                console.log('Current slot:', this.slot)
+            if (!this.screenData.time_slots.length) {
+                return;
             }
 
-            this.playSlide()
+            this.slotIndex = this.getCurrentSlotIndex();
+            this.slideIndex = 0;
+
+            if (this.debug) {
+                console.log("Current slot:", this.slot);
+            }
+
+            this.playSlide();
         },
         playPause() {
             // Toggles playback between playing and paused.
@@ -281,82 +291,85 @@ document.addEventListener('alpine:init', () => {
             } else {
                 this.isPaused = true;
                 this.clearTimer();
-                if (this.currentVideo && typeof this.currentVideo.pause === 'function') {
+                if (
+                    this.currentVideo &&
+                    typeof this.currentVideo.pause === "function"
+                ) {
                     this.currentVideo.pause();
                 }
             }
         },
         playSlide() {
-            this.clearTimer()
+            this.clearTimer();
 
-            if (!this.slide) return
+            if (!this.slide) {
+                return;
+            }
 
-            if (this.slide.type === 'video') {
-                this.playVideo()
+            if (this.slide.type === "video") {
+                this.playVideo();
             } else {
-                this.playImage()
+                this.playImage();
             }
             this.isPaused = false;
         },
 
         playImage() {
             const duration =
-                this.slide.duration ??
-                this.slot.slide_duration ??
-                5000
+                this.slide.duration ?? this.slot.slide_duration ?? 5000;
 
             this.timer = setTimeout(() => {
-                this.nextSlide()
-            }, duration)
+                this.nextSlide();
+            }, duration);
         },
 
         playVideo() {
             this.$nextTick(() => {
-                const video = this.$refs.video
-                if (!video) return
+                const video = this.$refs.video;
+                if (!video) return;
 
-                this.currentVideo = video
-                video.currentTime = 0
-                video.play()
+                this.currentVideo = video;
+                video.currentTime = 0;
+                video.play();
 
                 video.onended = () => {
-                    this.nextSlide()
-                }
-            })
+                    this.nextSlide();
+                };
+            });
         },
 
         // =========================
         // Navigation
         // =========================
         prevSlide() {
-            this.clearTimer()
+            this.clearTimer();
 
             if (this.slideIndex > 0) {
-                this.slideIndex--
+                this.slideIndex--;
             } else {
-                this.slideIndex = this.slot.slides.length - 1
+                this.slideIndex = this.slot.slides.length - 1;
             }
 
-            this.playSlide()
+            this.playSlide();
         },
         nextSlide() {
-            this.clearTimer()
+            this.clearTimer();
 
             if (this.slideIndex < this.slot.slides.length - 1) {
-                this.slideIndex++
+                this.slideIndex++;
             } else {
-                this.slideIndex = 0
+                this.slideIndex = 0;
                 // this.nextSlot()
             }
 
-            this.playSlide()
+            this.playSlide();
         },
 
         nextSlot() {
-            if (this.slotIndex < this.screen.time_slots.length - 1) {
-                this.slotIndex++
+            if (this.slotIndex < this.screenData.time_slots.length - 1) {
+                this.slotIndex++;
             } else {
-                this.slotIndex = 0
+                this.slotIndex = 0;
             }
         },
 
@@ -366,19 +379,19 @@ document.addEventListener('alpine:init', () => {
 
         clearTimer() {
             if (this.timer) {
-                clearTimeout(this.timer)
-                this.timer = null
+                clearTimeout(this.timer);
+                this.timer = null;
             }
 
             if (this.currentVideo) {
-                this.currentVideo.pause()
-                this.currentVideo = null
+                this.currentVideo.pause();
+                this.currentVideo = null;
             }
         },
         clearSlotTimer() {
             if (this.slotTimer) {
-                clearInterval(this.slotTimer)
-                this.slotTimer = null
+                clearInterval(this.slotTimer);
+                this.slotTimer = null;
             }
         },
         startControls() {
@@ -390,11 +403,12 @@ document.addEventListener('alpine:init', () => {
         },
         clearControlsTimer() {
             if (this.controlsTimer) {
-                clearTimeout(this.controlsTimer)
-                this.controlsTimer = null
+                clearTimeout(this.controlsTimer);
+                this.controlsTimer = null;
             }
         },
         toggleFullScreen() {
+        	console.log('Toggle full screen');
             if (this.fullScreen) {
                 this.disableFullScreen();
             } else {
@@ -404,6 +418,7 @@ document.addEventListener('alpine:init', () => {
         enableFullScreen() {
             try {
                 const element = this.$refs.container;
+                // console.log(element);
                 if (element.requestFullscreen) {
                     element.requestFullscreen();
                 } else if (element.mozRequestFullScreen) {
@@ -412,6 +427,17 @@ document.addEventListener('alpine:init', () => {
                     element.webkitRequestFullscreen();
                 } else if (element.msRequestFullscreen) {
                     element.msRequestFullscreen();
+                }
+                if (window.screen.orientation && window.screen.orientation.lock) {
+                	this.debugMessage('screen orientation found');
+                    window.screen.orientation
+                        .lock("landscape")
+                        .then(() => {
+                            console.log("Locked to landscape");
+                        })
+                        .catch(error => {
+                            console.error(`Orientation lock failed: ${error}`);
+                        });
                 }
                 this.enableNoSleep();
                 this.fullScreen = true;
@@ -431,10 +457,14 @@ document.addEventListener('alpine:init', () => {
                 } else if (document.msExitFullscreen) {
                     document.msExitFullscreen();
                 }
+                if (window.screen.orientation && window.screen.orientation.unlock) {
+                    window.screen.orientation.unlock();
+                    console.log("Orientation unlocked");
+                }
+                this.disableNoSleep();
                 this.fullScreen = false;
             } catch (e) {
                 console.error(e);
-                Toast.error(e.toString());
             }
         },
         toggleNoSleep() {
