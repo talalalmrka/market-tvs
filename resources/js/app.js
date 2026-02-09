@@ -2,7 +2,7 @@
 import './alpine-back-top';
 // import './upload-slide';
 import './edit-screen';
-import './show-screen';
+import './screen-slideshow';
 import { initFadgramUI } from "fadgram-ui";
 document.addEventListener("livewire:navigated", () => {
     initFadgramUI();
@@ -22,3 +22,11 @@ document.addEventListener("livewire:init", () => {
     }
 });
 
+
+/**
+ * Echo exposes an expressive API for subscribing to channels and listening
+ * for events that are broadcast by Laravel. Echo and event broadcasting
+ * allow your team to quickly build robust real-time web applications.
+ */
+
+import './echo';

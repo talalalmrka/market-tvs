@@ -379,3 +379,15 @@ if (!function_exists('today_formatted')) {
         return date_format(today(), 'j F، Y');
     }
 }
+
+if (!function_exists('get_the_title')) {
+    function get_the_title(?string $title = null, string $seperator = '-')
+    {
+        $ret = '';
+        if (!empty($title)) {
+            $ret .= "$title - ";
+        }
+        $ret .= config('app.name');
+        return $ret;
+    }
+}

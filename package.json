@@ -22,8 +22,11 @@
     },
     "devDependencies": {
         "@iconify/tailwind4": "^1.2.1",
+        "alpinejs": "^3.15.8",
         "eruda": "^3.4.3",
         "fadgram-ui": "^1.0.3",
-        "nosleep.js": "^0.12.0"
+        "laravel-echo": "^2.3.0",
+        "nosleep.js": "^0.12.0",
+        "pusher-js": "^8.4.0"
     }
 }

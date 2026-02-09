@@ -31,6 +31,10 @@ class Slide extends Model implements HasMedia
         'transition_class',
     ];
 
+    protected $hidden = [
+        'media'
+    ];
+
     public function timeSlot()
     {
         return $this->belongsTo(TimeSlot::class);

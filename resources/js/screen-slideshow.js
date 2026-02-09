@@ -1,6 +1,7 @@
 import NoSleep from "nosleep.js";
 document.addEventListener("alpine:init", () => {
-    Alpine.data("ShowScreen", (screenData) => ({
+    Alpine.data("ScreenSlideshow", (screenData) => ({
+        container: null,
         debug: true,
         screenData: screenData,
 
@@ -17,15 +18,22 @@ document.addEventListener("alpine:init", () => {
         controlsTimer: null,
         fullScreen: false,
         wakeLook: false,
-        containerElement: null,
         noSleep: null,
-        slideShowContainer: {
+        refreshing: false,
+        fullScreenListener: null,
+        ["@mousemove"](evt) {
+            this.startControls();
+            console.log("Mouse move on:", evt.target);
+            // this.debugMessage('Mouse moved on:');
+            // this.debugMessage(evt);
+        },
+        /*slideShowContainer: {
             ["@mousemove"](evt) {
                 this.startControls();
                 // this.debugMessage('Mouse moved on:');
                 // this.debugMessage(evt);
             }
-        },
+        },*/
         slideContainer(_slide) {
             return {
                 ["@mousemove"](evt) {
@@ -81,6 +89,16 @@ document.addEventListener("alpine:init", () => {
             },
             ["@click"]() {
                 this.toggleNoSleep();
+            }
+        },
+        buttonRefresh: {
+            ["x-html"]() {
+                return this.refreshing
+                    ? '<i class="icon fg-loader-dots-bounce"></i>'
+                    : '<i class="icon bi-arrow-repeat"></i>';
+            },
+            ["@click"]() {
+                this.refresh();
             }
         },
         buttonPrev: {
@@ -144,31 +162,35 @@ document.addEventListener("alpine:init", () => {
                 },
                 ["@click"]() {
                     const index = this.getSlotIndex(slot);
-                    this.clearTimer(); // وقف أي Timer شغال
-                    this.slotIndex = index; // حدد الـ slot المختار
-                    this.slideIndex = 0; // ابدأ من أول slide
-                    this.playSlide(); // شغّل الـ slide
-
-                    if (this.debug) {
-                        console.log(
-                            "Slot manually changed:",
-                            slot.id,
-                            "Index:",
-                            index
-                        );
-                    }
+                    this.clearTimer();
+                    this.slotIndex = index;
+                    this.slideIndex = 0;
+                    this.playSlide();
                 }
             };
         },
 
         init() {
-            this.noSleep = new NoSleep();
+            this.container = this.$el;
+            this.initNoSleep();
+            this.addFullScreenListener();
             this.normalize();
             this.start();
             this.startSlot();
-            console.log(screen.orientation.lock);
         },
-
+        initNoSleep() {
+            if (!this.noSleep) {
+                this.noSleep = new NoSleep();
+            }
+        },
+        addFullScreenListener() {
+            if (!this.fullScreenListener) {
+                this.fullScreenListener = document.addEventListener('fullscreenchange', () => {
+                    this.fullScreen = !!document.fullscreenElement;
+                    console.log(document.fullscreenElement);
+                });
+            }
+        },
         // =========================
         // Helpers
         // =========================
@@ -262,12 +284,8 @@ document.addEventListener("alpine:init", () => {
                     this.slotIndex = newIndex;
                     this.slideIndex = 0;
                     this.playSlide();
-
-                    if (this.debug) {
-                        console.log("Slot changed:", this.slot);
-                    }
                 }
-            }, 60000);
+            }, this.slotInterval);
         },
         start() {
             if (!this.screenData.time_slots.length) {
@@ -278,7 +296,7 @@ document.addEventListener("alpine:init", () => {
             this.slideIndex = 0;
 
             if (this.debug) {
-                console.log("Current slot:", this.slot);
+                // console.log("Current slot:", this.slot);
             }
 
             this.playSlide();
@@ -408,7 +426,7 @@ document.addEventListener("alpine:init", () => {
             }
         },
         toggleFullScreen() {
-        	console.log('Toggle full screen');
+            console.log('Toggle full screen');
             if (this.fullScreen) {
                 this.disableFullScreen();
             } else {
@@ -417,28 +435,17 @@ document.addEventListener("alpine:init", () => {
         },
         enableFullScreen() {
             try {
-                const element = this.$refs.container;
                 // console.log(element);
-                if (element.requestFullscreen) {
-                    element.requestFullscreen();
-                } else if (element.mozRequestFullScreen) {
-                    element.mozRequestFullScreen();
-                } else if (element.webkitRequestFullscreen) {
-                    element.webkitRequestFullscreen();
-                } else if (element.msRequestFullscreen) {
-                    element.msRequestFullscreen();
+                if (this.container.requestFullscreen) {
+                    this.container.requestFullscreen();
+                } else if (this.container.mozRequestFullScreen) {
+                    this.container.mozRequestFullScreen();
+                } else if (this.container.webkitRequestFullscreen) {
+                    this.container.webkitRequestFullscreen();
+                } else if (this.container.msRequestFullscreen) {
+                    this.container.msRequestFullscreen();
                 }
-                if (window.screen.orientation && window.screen.orientation.lock) {
-                	this.debugMessage('screen orientation found');
-                    window.screen.orientation
-                        .lock("landscape")
-                        .then(() => {
-                            console.log("Locked to landscape");
-                        })
-                        .catch(error => {
-                            console.error(`Orientation lock failed: ${error}`);
-                        });
-                }
+                this.enableLandscape();
                 this.enableNoSleep();
                 this.fullScreen = true;
             } catch (e) {
@@ -457,16 +464,14 @@ document.addEventListener("alpine:init", () => {
                 } else if (document.msExitFullscreen) {
                     document.msExitFullscreen();
                 }
-                if (window.screen.orientation && window.screen.orientation.unlock) {
-                    window.screen.orientation.unlock();
-                    console.log("Orientation unlocked");
-                }
+                this.disableLandscape();
                 this.disableNoSleep();
                 this.fullScreen = false;
             } catch (e) {
                 console.error(e);
             }
         },
+
         toggleNoSleep() {
             if (this.wakeLook) {
                 this.disableNoSleep();
@@ -490,11 +495,86 @@ document.addEventListener("alpine:init", () => {
                 console.error(error);
             }
         },
+        enableLandscape() {
+            try {
+                if (window.screen.orientation && window.screen.orientation.lock) {
+                    window.screen.orientation
+                        .lock("landscape")
+                        .then(() => {
+                            console.log("Locked to landscape");
+                        })
+                        .catch(error => {
+                            console.log(`Orientation lock failed: ${error}`);
+                        });
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        },
+        disableLandscape() {
+            try {
+                if (window.screen.orientation && window.screen.orientation.unlock) {
+                    window.screen.orientation.unlock();
+                    console.log("Orientation unlocked");
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        },
+        updateData(_data) {
+            this.clearAllTimers();
+            this.screenData = _data;
+            this.normalize();
+            this.start();
+            this.startSlot();
+            Toast.success('Screen refresh done');
+        },
+        refresh() {
+            this.refreshing = true;
+            fetch(this.screenData.api_url, { method: "GET" })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(data => {
 
+                    const newScreenData = data.data ? data.data : null;
+                    console.log(newScreenData);
+                    if (newScreenData) {
+                        this.updateData(newScreenData);
+                    } else {
+                        Toast.error('Screen refresh failed');
+                    }
+                    // Update screenData with the latest data from the API
+                    // this.screenData = data.data ? data.data : data;
+                    // Optionally, reset slide/slot index if needed:
+                    // this.slotIndex = 0;
+                    // this.slideIndex = 0;
+                })
+                .catch(error => {
+                    Toast.error(`Failed to refresh screen data: ${error}`);
+                    console.error("Failed to refresh screen data:", error);
+                })
+                .finally(() => {
+                    this.refreshing = false;
+                });
+        },
+        clearAllTimers() {
+            this.clearTimer();
+            this.clearControlsTimer();
+            this.clearSlotTimer();
+        },
         debugMessage(message) {
             if (this.debug) {
                 console.log(message);
             }
+        },
+
+        destroy() {
+            this.clearAllTimers();
         }
+
     }));
 });

@@ -30,7 +30,8 @@ class Screen extends Model
         'timeSlots'
     ];
     protected $appends = [
-        'permalink'
+        'permalink',
+        'api_url',
     ];
 
     protected static function booted()
@@ -55,5 +56,9 @@ class Screen extends Model
     public function permalink(): Attribute
     {
         return Attribute::get(fn() => !empty($this->id) ? route('screen', $this) : '');
+    }
+    public function apiUrl(): Attribute
+    {
+        return Attribute::get(fn() => !empty($this->id) ? route('api.screen', $this) : '');
     }
 }

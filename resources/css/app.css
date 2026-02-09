@@ -14,44 +14,46 @@
 @source '../../node_modules/fadgram-ui/**/*.js';
 
 @layer base {
-	body {
-		@apply relative font-poppins;
-		@apply antialiased;
-		@apply text-gray-700 dark:text-gray-100;
-		@apply bg-body-bg dark:bg-body-bg-dark;
-	}
-	
-	.screen-slideshow-container * {
-		-webkit-user-select: none;
-		user-select: none;
-	}
-	
-	.screen-slideshow-container {
-		max-width: 100%;
-		max-height: 100vh;
-		position: relative;
-		margin: auto;
-		width: 100vw;
-		height: 45vw;
-		background-color: #fff;
-		border: 1px dotted red;
-	}
-	
-	.screen-slideshow-container.full {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		z-index: 100000000;
-		margin: 0;
-		width: 100vw;
-		height: 100vh;
-		max-width: none;
-		max-height: none;
-	}
+    body {
+        @apply relative font-poppins;
+        @apply antialiased;
+        @apply text-gray-700 dark:text-gray-100;
+        @apply bg-body-bg dark:bg-body-bg-dark;
+    }
+    .entry {
+        @apply container px-2 lg:px-4 p-4 pb-20;
+    }
+    .screen-slideshow-container * {
+        -webkit-user-select: none;
+        user-select: none;
+    }
+
+    .screen-slideshow-container {
+        max-width: 100%;
+        max-height: 100vh;
+        position: relative;
+        margin: auto;
+        width: 100vw;
+        height: 45vw;
+        background-color: #fff;
+        border: 1px dotted red;
+    }
+
+    .screen-slideshow-container.full {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 100000000;
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        max-width: none;
+        max-height: none;
+    }
 }
 
 @utility container {
-	@apply max-w-4xl;
+    @apply max-w-4xl;
 }

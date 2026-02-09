@@ -1,6 +1,18 @@
+import Alpine from 'alpinejs'
+
+window.Alpine = Alpine
+
+
 document.addEventListener("alpine:init", () => {
-    Alpine.data("FgFullScreen", screen => ({
+    Alpine.data("FgFullScreen", () => ({
         fullScreen: false,
+        slideShowContainer: {
+            ["@mousemove"](evt) {
+                // this.startControls();
+                // this.debugMessage('Mouse moved on:');
+                // this.debugMessage(evt);
+            }
+        },
         buttonFullScreen: {
             [":class"]() {
                 return {
@@ -51,6 +63,35 @@ document.addEventListener("alpine:init", () => {
             } catch (e) {
                 console.error(e);
             }
+        },
+        enableLandscape() {
+            try {
+                if (window.screen.orientation && window.screen.orientation.lock) {
+                    window.screen.orientation
+                        .lock("landscape")
+                        .then(() => {
+                            console.log("Locked to landscape");
+                        })
+                        .catch(error => {
+                            console.error(`Orientation lock failed: ${error}`);
+                        });
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        },
+        disableLandscape() {
+            try {
+                if (window.screen.orientation && window.screen.orientation.unlock) {
+                    window.screen.orientation.unlock();
+                    console.log("Orientation unlocked");
+                }
+            } catch (error) {
+                console.error(error);
+            }
         }
     }));
 });
+
+Alpine.start()
+console.log(Alpine);

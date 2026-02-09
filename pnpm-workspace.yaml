@@ -1,5 +1,2 @@
 onlyBuiltDependencies:
   - esbuild
-
-overrides:
-  fadgram-ui: link:../../../Library/pnpm/global/5/node_modules/fadgram-ui
