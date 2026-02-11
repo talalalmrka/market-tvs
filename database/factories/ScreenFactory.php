@@ -20,9 +20,11 @@ class ScreenFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'uuid' => Str::uuid(),
             'name' => $this->faker->company . ' TV',
+            'slot_duration' => 60000,
+            'controls_duration' => 3000,
             'is_active' => true,
+            'description' => $this->faker->sentence,
         ];
     }
     /**

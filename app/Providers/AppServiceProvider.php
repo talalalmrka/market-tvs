@@ -9,6 +9,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
 use Livewire\Livewire;
+use Illuminate\Support\Facades\Blade;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
+        $this->registerDirectives();
         $this->configureLayouts();
     }
 
@@ -55,12 +58,44 @@ class AppServiceProvider extends ServiceProvider
 
             // اسم الـ page component (مثلاً: dashboard.users)
             $name = $component->getName();
-
-            if (Str::startsWith($name, 'dashboard.')) {
+            dd($name);
+            /* if (Str::startsWith($name, 'dashboard.')) {
                 return 'layouts.dashboard';
             }
 
-            return 'layouts.app';
+            return 'layouts.app'; */
+        });
+    }
+    protected function registerDirectives()
+    {
+        Blade::directive('menu', function ($expression) {
+            $parts = explode(',', $expression, 2);
+            $position = isset($parts[0]) ? trim($parts[0]) : "'default'";
+            $attributes = isset($parts[1]) ? trim($parts[1]) : '[]';
+            return <<<PHP
+            <?php
+            navMenu({$position}, {$attributes});
+            ?>
+            PHP;
+        });
+
+        Blade::directive('ads', function (string $expression) {
+            $parts = explode(',', $expression, 2);
+            $position = isset($parts[0]) ? trim($parts[0]) : null;
+            $attributes = isset($parts[1]) ? trim($parts[1]) : '[]';
+            return <<<PHP
+            <?php
+            ads({$position});
+            ?>
+            PHP;
+        });
+
+        Blade::directive('atts', function ($expression) {
+            return "<?php echo atts($expression); ?>";
+        });
+
+        Blade::directive('cssClasses', function ($expression) {
+            return "<?php echo 'class=\"' . e(css_classes($expression)) . '\"'; ?>";
         });
     }
 }

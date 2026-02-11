@@ -7,7 +7,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-#[Layout('layouts.dashboard')]
+#[Layout('layouts::app.sidebar')]
 abstract class DashboardPage extends Component
 {
     use WithToast, WithFileUploads;

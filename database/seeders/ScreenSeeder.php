@@ -56,11 +56,11 @@ class ScreenSeeder extends Seeder
                         ]);
 
                         $imagePath = public_path(
-                            "assets/images/t{$t}s{$s}.png"
+                            "assets/images/slides/t{$t}s{$s}.png"
                         );
 
                         $videoPath = public_path(
-                            "assets/images/video.mp4"
+                            "assets/images/slides/video.mp4"
                         );
                         $filePath = $s == 3 ? $videoPath : $imagePath;
 

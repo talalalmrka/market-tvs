@@ -1,91 +1,53 @@
-<x-layouts::layout :title="isset($title) ? $title : null">
-    <flux:header container class="border-b border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
-        <flux:sidebar.toggle class="lg:hidden mr-2" icon="bars-2" inset="left" />
-
-        <x-app-logo href="{{ route('dashboard') }}" wire:navigate />
-
-        <flux:navbar class="-mb-px max-lg:hidden">
-            <flux:navbar.item icon="layout-grid" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
-                wire:navigate>
-                {{ __('Dashboard') }}
-            </flux:navbar.item>
-            @auth
-                <flux:navbar.item icon="layout-grid" :href="route('screens', current_user())"
-                    :current="request()->routeIs('screens')"
-                    wire:navigate>
-                    {{ __('Screens') }}
-                </flux:navbar.item>
-            @endauth
-        </flux:navbar>
-
-        <flux:spacer />
-
-        <flux:navbar class="me-1.5 space-x-0.5 rtl:space-x-reverse py-0!">
-            <flux:tooltip :content="__('Search')" position="bottom">
-                <flux:navbar.item class="!h-10 [&>div>svg]:size-5" icon="magnifying-glass" href="#"
-                    :label="__('Search')" />
-            </flux:tooltip>
-            <flux:tooltip :content="__('Repository')" position="bottom">
-                <flux:navbar.item
-                    class="h-10 max-lg:hidden [&>div>svg]:size-5"
-                    icon="folder-git-2"
-                    href="https://github.com/laravel/livewire-starter-kit"
-                    target="_blank"
-                    :label="__('Repository')" />
-            </flux:tooltip>
-            <flux:tooltip :content="__('Documentation')" position="bottom">
-                <flux:navbar.item
-                    class="h-10 max-lg:hidden [&>div>svg]:size-5"
-                    icon="book-open-text"
-                    href="https://laravel.com/docs/starter-kits#livewire"
-                    target="_blank"
-                    :label="__('Documentation')" />
-            </flux:tooltip>
-        </flux:navbar>
-
-        <x-desktop-user-menu />
-    </flux:header>
-
-    <!-- Mobile Menu -->
-    <flux:sidebar collapsible="mobile" sticky
-        class="lg:hidden border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
-        <flux:sidebar.header>
-            <x-app-logo :sidebar="true" href="{{ route('dashboard') }}" wire:navigate />
-            <flux:sidebar.collapse
-                class="in-data-flux-sidebar-on-desktop:not-in-data-flux-sidebar-collapsed-desktop:-mr-2" />
-        </flux:sidebar.header>
-
-        <flux:sidebar.nav>
-            <flux:sidebar.group :heading="__('Platform')">
-                <flux:sidebar.item icon="layout-grid" :href="route('dashboard')"
-                    :current="request()->routeIs('dashboard')" wire:navigate>
-                    {{ __('Dashboard') }}
-                </flux:sidebar.item>
-            </flux:sidebar.group>
-        </flux:sidebar.nav>
-
-        <flux:spacer />
-
-        <flux:sidebar.nav>
-            <flux:sidebar.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit"
-                target="_blank">
-                {{ __('Repository') }}
-            </flux:sidebar.item>
-            <flux:sidebar.item icon="book-open-text" href="https://laravel.com/docs/starter-kits#livewire"
-                target="_blank">
-                {{ __('Documentation') }}
-            </flux:sidebar.item>
-        </flux:sidebar.nav>
-    </flux:sidebar>
-    <div class="container px-2 lg:px-4 p-4 pb-20 {{ $containerClass ?? '' }}">
-        @if (isset($title))
-            <h3 class="text-gray-500 dark:text-white text-2xl">{{ $title }}</h3>
-        @endif
+@props([
+    'title' => '',
+    'description' => '',
+    'navbarClass' => null,
+    'bodyClass' => null,
+    'mainClass' => null,
+    'seo_title' => null,
+    'seo_description' => null,
+    'logoTheme' => 'dark',
+])
+<x-layouts::layout :title="$title ?? ''" :description="$description">
+    <x-mobile-menu />
+    @include('partials.header', [
+        'class' => $navbarClass ?? 'header sticky top-0 bg-gray-50 dark:bg-gray-700 max-w-full z-50 shadow-xs',
+        'logoTheme' => $logoTheme,
+    ])
+    <main class="main min-h-[75vh] {{ $mainClass ?? '' }}">
         {{ $slot }}
-    </div>
-
-
-    @fluxScripts
-
-    <x-button-back-top class="bottom-4 end-4" />
+    </main>
+    @include('partials.footer')
+    @if (boolval(get_option('custom_css_enabled')))
+        @push('head')
+            <style>
+                {!! get_option('custom_css') !!}
+            </style>
+        @endpush
+    @endif
+    @if (boolval(get_option('header_code_enabled')))
+        @push('head')
+            {!! get_option('header_code') !!}
+        @endpush
+    @endif
+    @if (boolval(get_option('ads_auto_enabled')))
+        @push('head')
+            {!! get_option('ads_auto_code') !!}
+        @endpush
+    @endif
+    @if (boolval(get_option('custom_js_enabled')))
+        @push('head')
+            <script>
+                {!! get_option('custom_js') !!}
+            </script>
+        @endpush
+    @endif
+    @if (boolval(get_option('footer_code_enabled')))
+        @push('footer')
+            {!! get_option('footer_code') !!}
+        @endpush
+    @endif
+    @if (isset($footer))
+        {{ $footer }}
+    @endif
 </x-layouts::layout>

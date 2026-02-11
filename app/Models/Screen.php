@@ -5,25 +5,35 @@ namespace App\Models;
 use App\Traits\HasSlug;
 use App\Traits\HasUser;
 use App\Traits\WithActive;
+use App\Traits\WithDate;
+use App\Traits\HasMeta;
+use App\Traits\WithEditUrl;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Screen extends Model
+class Screen extends Model implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\ScreenFactory> */
     use HasFactory,
+        InteractsWithMedia,
         WithActive,
         HasUser,
-        HasSlug;
+        HasSlug,
+        WithDate,
+        HasMeta,
+        WithEditUrl;
 
     protected $fillable = [
         'user_id',
         'name',
-        'uuid',
         'slug',
-        'is_active'
+        'slot_duration',
+        'controls_duration',
+        'is_active',
+        'description',
     ];
 
     protected $with = [
@@ -34,7 +44,7 @@ class Screen extends Model
         'api_url',
     ];
 
-    protected static function booted()
+    /*protected static function booted()
     {
         static::creating(function ($screen) {
             $screen->uuid = Str::uuid();
@@ -47,7 +57,7 @@ class Screen extends Model
                 $screen->slug = self::generateSlug($screen->name);
             }
         });
-    }
+    }*/
     public function timeSlots()
     {
         return $this->hasMany(TimeSlot::class);

@@ -2,7 +2,7 @@
     <div class="min-h-screen bg-primary/3 dark:bg-gray-900">
         <div class="offcanvas offcanvas-start offcanvas-primary expand-lg dashboard-sidebar" id="dashboard-sidebar">
             <div class="offcanvas-header flex items-center gap-2 justify-between h-14">
-                <x-app-logo :sidebar="true" />
+                <x-logo theme="dark" :label-enabled="true" />
                 <button class="offcanvas-close text-white lg:hidden">
                     <i class="icon bi-x-lg"></i>
                 </button>
@@ -156,6 +156,5 @@
             </div>
         </main>
     </div>
-
     <x-button-back-top class="bottom-4 end-4" />
 </x-layouts::layout>

@@ -55,5 +55,5 @@
 }
 
 @utility container {
-    @apply max-w-4xl;
+    @apply max-w-5xl mx-auto;
 }

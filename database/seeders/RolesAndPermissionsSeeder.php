@@ -15,11 +15,18 @@ class RolesAndPermissionsSeeder extends Seeder
                 'manage_users',
                 'manage_roles',
                 'manage_permissions',
+                'manage_posts',
+                'manage_categories',
                 'manage_screens',
                 'manage_timeSlots',
                 'manage_slides',
+                'manage_tags',
+                'manage_comments',
+                'manage_menus',
                 'manage_media',
                 'manage_settings',
+                'manage_fonts',
+                'manage_messages',
             ],
         ];
     }

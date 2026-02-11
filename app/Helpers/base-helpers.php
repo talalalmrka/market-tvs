@@ -6,6 +6,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
+use Illuminate\View\ComponentAttributeBag;
 use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
 
 if (!function_exists('route_has')) {
@@ -389,5 +390,30 @@ if (!function_exists('get_the_title')) {
         }
         $ret .= config('app.name');
         return $ret;
+    }
+}
+
+if (!function_exists('atts')) {
+    /**
+     * Create a new ComponentAttributeBag instance.
+     *
+     * This helper allows you to easily generate an attribute bag
+     * that can be merged or manipulated when building Blade components.
+     *
+     * @param  string|array|null  $attributes  The attributes to initialize the bag with Can be a string of attributes, an array, or null.
+     * @return \Illuminate\View\ComponentAttributeBag
+     */
+    function atts(...$attributes)
+    {
+        $atts = new ComponentAttributeBag();
+        foreach ($attributes as $attsItem) {
+            if (empty($attsItem)) {
+                $attsItem = [];
+            } elseif (is_string($attsItem)) {
+                $attsItem = [$attsItem];
+            }
+            $atts = $atts->merge($attsItem);
+        }
+        return $atts;
     }
 }

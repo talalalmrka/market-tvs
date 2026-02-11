@@ -10,11 +10,13 @@ document.addEventListener("alpine:init", () => {
 
         timer: null,
         slotTimer: null,
-        slotInterval: screen.slotInterval || 60000,
+        slotDuration: screenData.slot_duration || 60000,
+        controlsDuration: screenData.controls_duration || 60000,
+        // slotInterval: screen.slotInterval || 60000,
         currentVideo: null,
         isPaused: true,
         showControls: false,
-        controlsInterval: 3000,
+        // controlsInterval: 3000,
         controlsTimer: null,
         fullScreen: false,
         wakeLook: false,
@@ -285,7 +287,7 @@ document.addEventListener("alpine:init", () => {
                     this.slideIndex = 0;
                     this.playSlide();
                 }
-            }, this.slotInterval);
+            }, this.slotDuration);
         },
         start() {
             if (!this.screenData.time_slots.length) {
@@ -417,7 +419,7 @@ document.addEventListener("alpine:init", () => {
             this.showControls = true;
             this.controlsTimer = setTimeout(() => {
                 this.showControls = false;
-            }, this.controlsInterval);
+            }, this.controlsDuration);
         },
         clearControlsTimer() {
             if (this.controlsTimer) {

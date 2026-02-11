@@ -7,7 +7,7 @@ use App\Traits\WithToast;
 use Livewire\Attributes\Layout;
 use Livewire\WithFileUploads;
 
-#[Layout('layouts.dashboard')]
+#[Layout('layouts::app.sidebar')]
 abstract class DashboardDatatable extends Datatable
 {
     use WithToast, WithFileUploads;

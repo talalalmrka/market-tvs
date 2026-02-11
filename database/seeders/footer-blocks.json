@@ -1,0 +1,2430 @@
+[
+    {
+        "type": "container",
+        "attributes": {
+            "type": null,
+            "textColor": "text-white",
+            "fontSize": null,
+            "fontWeight": null,
+            "fontStyle": null,
+            "textTransform": null,
+            "textAlign": null,
+            "bgColor": "bg-gradient-primary",
+            "bgImage": null,
+            "bgSize": null,
+            "bgPosition": null,
+            "bgAttachment": null,
+            "margin": {
+                "sm": {
+                    "top": null,
+                    "start": null,
+                    "end": null,
+                    "bottom": null
+                },
+                "md": {
+                    "top": null,
+                    "start": null,
+                    "end": null,
+                    "bottom": null
+                },
+                "lg": {
+                    "top": null,
+                    "start": null,
+                    "end": null,
+                    "bottom": null
+                },
+                "xl": {
+                    "top": null,
+                    "start": null,
+                    "end": null,
+                    "bottom": null
+                }
+            },
+            "padding": {
+                "sm": {
+                    "top": "pt-6",
+                    "start": null,
+                    "end": null,
+                    "bottom": "pb-6"
+                },
+                "md": {
+                    "top": null,
+                    "start": null,
+                    "end": null,
+                    "bottom": null
+                },
+                "lg": {
+                    "top": null,
+                    "start": null,
+                    "end": null,
+                    "bottom": null
+                },
+                "xl": {
+                    "top": null,
+                    "start": null,
+                    "end": null,
+                    "bottom": null
+                }
+            },
+            "borderSize": null,
+            "borderColor": null,
+            "borderStyle": null,
+            "borderRadius": null,
+            "shadowSize": null,
+            "shadowColor": null,
+            "position": {
+                "sm": null,
+                "md": null,
+                "lg": null,
+                "xl": null
+            },
+            "display": {
+                "sm": null,
+                "md": null,
+                "lg": null,
+                "xl": null
+            },
+            "flexDirection": {
+                "sm": null,
+                "md": null,
+                "lg": null,
+                "xl": null
+            },
+            "alignItems": {
+                "sm": null,
+                "md": null,
+                "lg": null,
+                "xl": null
+            },
+            "justifyContent": {
+                "sm": null,
+                "md": null,
+                "lg": null,
+                "xl": null
+            },
+            "gap": {
+                "sm": null,
+                "md": null,
+                "lg": null,
+                "xl": null
+            },
+            "inset": {
+                "sm": {
+                    "top": null,
+                    "start": null,
+                    "end": null,
+                    "bottom": null
+                },
+                "md": {
+                    "top": null,
+                    "start": null,
+                    "end": null,
+                    "bottom": null
+                },
+                "lg": {
+                    "top": null,
+                    "start": null,
+                    "end": null,
+                    "bottom": null
+                },
+                "xl": {
+                    "top": null,
+                    "start": null,
+                    "end": null,
+                    "bottom": null
+                }
+            },
+            "zIndex": null,
+            "htmlAnchor": null,
+            "className": null,
+            "style": null
+        },
+        "children": [
+            {
+                "type": "container",
+                "attributes": {
+                    "type": "container",
+                    "textColor": null,
+                    "fontSize": null,
+                    "fontWeight": null,
+                    "fontStyle": null,
+                    "textTransform": null,
+                    "textAlign": null,
+                    "bgColor": null,
+                    "bgImage": null,
+                    "bgSize": null,
+                    "bgPosition": null,
+                    "bgAttachment": null,
+                    "margin": {
+                        "sm": {
+                            "top": null,
+                            "start": null,
+                            "end": null,
+                            "bottom": null
+                        },
+                        "md": {
+                            "top": null,
+                            "start": null,
+                            "end": null,
+                            "bottom": null
+                        },
+                        "lg": {
+                            "top": null,
+                            "start": null,
+                            "end": null,
+                            "bottom": null
+                        },
+                        "xl": {
+                            "top": null,
+                            "start": null,
+                            "end": null,
+                            "bottom": null
+                        }
+                    },
+                    "padding": {
+                        "sm": {
+                            "top": null,
+                            "start": null,
+                            "end": null,
+                            "bottom": null
+                        },
+                        "md": {
+                            "top": null,
+                            "start": null,
+                            "end": null,
+                            "bottom": null
+                        },
+                        "lg": {
+                            "top": null,
+                            "start": null,
+                            "end": null,
+                            "bottom": null
+                        },
+                        "xl": {
+                            "top": null,
+                            "start": null,
+                            "end": null,
+                            "bottom": null
+                        }
+                    },
+                    "borderSize": null,
+                    "borderColor": null,
+                    "borderStyle": null,
+                    "borderRadius": null,
+                    "shadowSize": null,
+                    "shadowColor": null,
+                    "position": {
+                        "sm": null,
+                        "md": null,
+                        "lg": null,
+                        "xl": null
+                    },
+                    "display": {
+                        "sm": null,
+                        "md": null,
+                        "lg": null,
+                        "xl": null
+                    },
+                    "flexDirection": {
+                        "sm": null,
+                        "md": null,
+                        "lg": null,
+                        "xl": null
+                    },
+                    "alignItems": {
+                        "sm": null,
+                        "md": null,
+                        "lg": null,
+                        "xl": null
+                    },
+                    "justifyContent": {
+                        "sm": null,
+                        "md": null,
+                        "lg": null,
+                        "xl": null
+                    },
+                    "gap": {
+                        "sm": null,
+                        "md": null,
+                        "lg": null,
+                        "xl": null
+                    },
+                    "inset": {
+                        "sm": {
+                            "top": null,
+                            "start": null,
+                            "end": null,
+                            "bottom": null
+                        },
+                        "md": {
+                            "top": null,
+                            "start": null,
+                            "end": null,
+                            "bottom": null
+                        },
+                        "lg": {
+                            "top": null,
+                            "start": null,
+                            "end": null,
+                            "bottom": null
+                        },
+                        "xl": {
+                            "top": null,
+                            "start": null,
+                            "end": null,
+                            "bottom": null
+                        }
+                    },
+                    "zIndex": null,
+                    "htmlAnchor": null,
+                    "className": null,
+                    "style": null
+                },
+                "children": [
+                    {
+                        "type": "container",
+                        "attributes": {
+                            "type": "grid",
+                            "textColor": null,
+                            "fontSize": null,
+                            "fontWeight": null,
+                            "fontStyle": null,
+                            "textTransform": null,
+                            "textAlign": null,
+                            "bgColor": null,
+                            "bgImage": null,
+                            "bgSize": null,
+                            "bgPosition": null,
+                            "bgAttachment": null,
+                            "margin": {
+                                "sm": {
+                                    "top": null,
+                                    "start": null,
+                                    "end": null,
+                                    "bottom": null
+                                },
+                                "md": {
+                                    "top": null,
+                                    "start": null,
+                                    "end": null,
+                                    "bottom": null
+                                },
+                                "lg": {
+                                    "top": null,
+                                    "start": null,
+                                    "end": null,
+                                    "bottom": null
+                                },
+                                "xl": {
+                                    "top": null,
+                                    "start": null,
+                                    "end": null,
+                                    "bottom": null
+                                }
+                            },
+                            "padding": {
+                                "sm": {
+                                    "top": null,
+                                    "start": null,
+                                    "end": null,
+                                    "bottom": null
+                                },
+                                "md": {
+                                    "top": null,
+                                    "start": null,
+                                    "end": null,
+                                    "bottom": null
+                                },
+                                "lg": {
+                                    "top": null,
+                                    "start": null,
+                                    "end": null,
+                                    "bottom": null
+                                },
+                                "xl": {
+                                    "top": null,
+                                    "start": null,
+                                    "end": null,
+                                    "bottom": null
+                                }
+                            },
+                            "borderSize": null,
+                            "borderColor": null,
+                            "borderStyle": null,
+                            "borderRadius": null,
+                            "shadowSize": null,
+                            "shadowColor": null,
+                            "position": {
+                                "sm": null,
+                                "md": null,
+                                "lg": null,
+                                "xl": null
+                            },
+                            "display": {
+                                "sm": null,
+                                "md": null,
+                                "lg": null,
+                                "xl": null
+                            },
+                            "flexDirection": {
+                                "sm": null,
+                                "md": null,
+                                "lg": null,
+                                "xl": null
+                            },
+                            "alignItems": {
+                                "sm": null,
+                                "md": null,
+                                "lg": null,
+                                "xl": null
+                            },
+                            "justifyContent": {
+                                "sm": null,
+                                "md": null,
+                                "lg": null,
+                                "xl": null
+                            },
+                            "gap": {
+                                "sm": "gap-6",
+                                "md": null,
+                                "lg": null,
+                                "xl": null
+                            },
+                            "inset": {
+                                "sm": {
+                                    "top": null,
+                                    "start": null,
+                                    "end": null,
+                                    "bottom": null
+                                },
+                                "md": {
+                                    "top": null,
+                                    "start": null,
+                                    "end": null,
+                                    "bottom": null
+                                },
+                                "lg": {
+                                    "top": null,
+                                    "start": null,
+                                    "end": null,
+                                    "bottom": null
+                                },
+                                "xl": {
+                                    "top": null,
+                                    "start": null,
+                                    "end": null,
+                                    "bottom": null
+                                }
+                            },
+                            "zIndex": null,
+                            "htmlAnchor": null,
+                            "className": null,
+                            "style": null,
+                            "cols": {
+                                "sm": "grid-cols-1",
+                                "md": "md:grid-cols-3",
+                                "lg": null,
+                                "xl": null
+                            }
+                        },
+                        "children": [
+                            {
+                                "type": "container",
+                                "attributes": {
+                                    "type": "col",
+                                    "textColor": null,
+                                    "fontSize": null,
+                                    "fontWeight": null,
+                                    "fontStyle": null,
+                                    "textTransform": null,
+                                    "textAlign": null,
+                                    "bgColor": null,
+                                    "bgImage": null,
+                                    "bgSize": null,
+                                    "bgPosition": null,
+                                    "bgAttachment": null,
+                                    "margin": {
+                                        "sm": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "md": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "lg": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "xl": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        }
+                                    },
+                                    "padding": {
+                                        "sm": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "md": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "lg": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "xl": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        }
+                                    },
+                                    "borderSize": null,
+                                    "borderColor": null,
+                                    "borderStyle": null,
+                                    "borderRadius": null,
+                                    "shadowSize": null,
+                                    "shadowColor": null,
+                                    "position": {
+                                        "sm": null,
+                                        "md": null,
+                                        "lg": null,
+                                        "xl": null
+                                    },
+                                    "display": {
+                                        "sm": null,
+                                        "md": null,
+                                        "lg": null,
+                                        "xl": null
+                                    },
+                                    "flexDirection": {
+                                        "sm": null,
+                                        "md": null,
+                                        "lg": null,
+                                        "xl": null
+                                    },
+                                    "alignItems": {
+                                        "sm": null,
+                                        "md": null,
+                                        "lg": null,
+                                        "xl": null
+                                    },
+                                    "justifyContent": {
+                                        "sm": null,
+                                        "md": null,
+                                        "lg": null,
+                                        "xl": null
+                                    },
+                                    "gap": {
+                                        "sm": null,
+                                        "md": null,
+                                        "lg": null,
+                                        "xl": null
+                                    },
+                                    "inset": {
+                                        "sm": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "md": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "lg": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "xl": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        }
+                                    },
+                                    "zIndex": null,
+                                    "htmlAnchor": null,
+                                    "className": null,
+                                    "style": null
+                                },
+                                "children": [
+                                    {
+                                        "type": "logo",
+                                        "attributes": {
+                                            "theme": "light",
+                                            "width": null,
+                                            "height": null,
+                                            "textColor": null,
+                                            "fontSize": null,
+                                            "fontWeight": null,
+                                            "fontStyle": null,
+                                            "textTransform": null,
+                                            "textAlign": null,
+                                            "bgColor": null,
+                                            "bgImage": null,
+                                            "bgSize": null,
+                                            "bgPosition": null,
+                                            "bgAttachment": null,
+                                            "margin": {
+                                                "sm": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "md": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "lg": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "xl": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                }
+                                            },
+                                            "padding": {
+                                                "sm": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "md": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "lg": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "xl": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                }
+                                            },
+                                            "borderSize": null,
+                                            "borderColor": null,
+                                            "borderStyle": null,
+                                            "borderRadius": null,
+                                            "shadowSize": null,
+                                            "shadowColor": null,
+                                            "position": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "display": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "flexDirection": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "alignItems": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "justifyContent": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "gap": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "inset": {
+                                                "sm": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "md": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "lg": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "xl": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                }
+                                            },
+                                            "zIndex": null,
+                                            "htmlAnchor": null,
+                                            "className": null,
+                                            "style": null
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "type": "paragraph",
+                                        "attributes": {
+                                            "content": "Discover quotes that heal souls, spark inspiration, and books that whisper the truth.",
+                                            "textColor": null,
+                                            "fontSize": null,
+                                            "fontWeight": null,
+                                            "fontStyle": null,
+                                            "textTransform": null,
+                                            "textAlign": null,
+                                            "bgColor": null,
+                                            "bgImage": null,
+                                            "bgSize": null,
+                                            "bgPosition": null,
+                                            "bgAttachment": null,
+                                            "margin": {
+                                                "sm": {
+                                                    "top": "mt-6",
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "md": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "lg": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "xl": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                }
+                                            },
+                                            "padding": {
+                                                "sm": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "md": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "lg": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "xl": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                }
+                                            },
+                                            "borderSize": null,
+                                            "borderColor": null,
+                                            "borderStyle": null,
+                                            "borderRadius": null,
+                                            "shadowSize": null,
+                                            "shadowColor": null,
+                                            "position": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "display": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "flexDirection": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "alignItems": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "justifyContent": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "gap": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "inset": {
+                                                "sm": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "md": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "lg": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "xl": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                }
+                                            },
+                                            "zIndex": null,
+                                            "htmlAnchor": null,
+                                            "className": null,
+                                            "style": null
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "container",
+                                "attributes": {
+                                    "type": "col",
+                                    "textColor": null,
+                                    "fontSize": null,
+                                    "fontWeight": null,
+                                    "fontStyle": null,
+                                    "textTransform": null,
+                                    "textAlign": null,
+                                    "bgColor": null,
+                                    "bgImage": null,
+                                    "bgSize": null,
+                                    "bgPosition": null,
+                                    "bgAttachment": null,
+                                    "margin": {
+                                        "sm": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "md": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "lg": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "xl": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        }
+                                    },
+                                    "padding": {
+                                        "sm": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "md": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "lg": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "xl": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        }
+                                    },
+                                    "borderSize": null,
+                                    "borderColor": null,
+                                    "borderStyle": null,
+                                    "borderRadius": null,
+                                    "shadowSize": null,
+                                    "shadowColor": null,
+                                    "position": {
+                                        "sm": null,
+                                        "md": null,
+                                        "lg": null,
+                                        "xl": null
+                                    },
+                                    "display": {
+                                        "sm": null,
+                                        "md": null,
+                                        "lg": null,
+                                        "xl": null
+                                    },
+                                    "flexDirection": {
+                                        "sm": null,
+                                        "md": null,
+                                        "lg": null,
+                                        "xl": null
+                                    },
+                                    "alignItems": {
+                                        "sm": null,
+                                        "md": null,
+                                        "lg": null,
+                                        "xl": null
+                                    },
+                                    "justifyContent": {
+                                        "sm": null,
+                                        "md": null,
+                                        "lg": null,
+                                        "xl": null
+                                    },
+                                    "gap": {
+                                        "sm": null,
+                                        "md": null,
+                                        "lg": null,
+                                        "xl": null
+                                    },
+                                    "inset": {
+                                        "sm": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "md": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "lg": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "xl": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        }
+                                    },
+                                    "zIndex": null,
+                                    "htmlAnchor": null,
+                                    "className": null,
+                                    "style": null
+                                },
+                                "children": [
+                                    {
+                                        "type": "heading",
+                                        "attributes": {
+                                            "tag": "h3",
+                                            "title": "Pages",
+                                            "icon": null,
+                                            "link": {
+                                                "url": null,
+                                                "title": null,
+                                                "target": null,
+                                                "htmlAnchor": null,
+                                                "className": null,
+                                                "style": null
+                                            },
+                                            "textColor": null,
+                                            "fontSize": "text-xl",
+                                            "fontWeight": null,
+                                            "fontStyle": null,
+                                            "textTransform": null,
+                                            "textAlign": null,
+                                            "bgColor": null,
+                                            "bgImage": null,
+                                            "bgSize": null,
+                                            "bgPosition": null,
+                                            "bgAttachment": null,
+                                            "margin": {
+                                                "sm": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "md": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "lg": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "xl": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                }
+                                            },
+                                            "padding": {
+                                                "sm": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "md": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "lg": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "xl": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                }
+                                            },
+                                            "borderSize": null,
+                                            "borderColor": null,
+                                            "borderStyle": null,
+                                            "borderRadius": null,
+                                            "shadowSize": null,
+                                            "shadowColor": null,
+                                            "position": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "display": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "flexDirection": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "alignItems": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "justifyContent": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "gap": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "htmlAnchor": null,
+                                            "className": null,
+                                            "style": null
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "type": "nav",
+                                        "attributes": {
+                                            "theme": "dark",
+                                            "direction": "vertical",
+                                            "textColor": null,
+                                            "fontSize": null,
+                                            "fontWeight": null,
+                                            "fontStyle": null,
+                                            "textTransform": null,
+                                            "textAlign": null,
+                                            "bgColor": null,
+                                            "bgImage": null,
+                                            "bgSize": null,
+                                            "bgPosition": null,
+                                            "bgAttachment": null,
+                                            "margin": {
+                                                "sm": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "md": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "lg": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "xl": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                }
+                                            },
+                                            "padding": {
+                                                "sm": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "md": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "lg": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "xl": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                }
+                                            },
+                                            "borderSize": null,
+                                            "borderColor": null,
+                                            "borderStyle": null,
+                                            "borderRadius": null,
+                                            "shadowSize": null,
+                                            "shadowColor": null,
+                                            "position": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "display": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "flexDirection": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "alignItems": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "justifyContent": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "gap": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "inset": {
+                                                "sm": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "md": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "lg": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "xl": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                }
+                                            },
+                                            "zIndex": null,
+                                            "htmlAnchor": null,
+                                            "className": null,
+                                            "style": null
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "nav-item",
+                                                "attributes": {
+                                                    "label": "Home",
+                                                    "icon": null,
+                                                    "url": "http://localhost:8000/",
+                                                    "title": "Quoteread",
+                                                    "target": null,
+                                                    "navigate": false,
+                                                    "noFollow": false,
+                                                    "textColor": null,
+                                                    "fontSize": null,
+                                                    "fontWeight": null,
+                                                    "fontStyle": null,
+                                                    "textTransform": null,
+                                                    "textAlign": null,
+                                                    "bgColor": null,
+                                                    "bgImage": null,
+                                                    "bgSize": null,
+                                                    "bgPosition": null,
+                                                    "bgAttachment": null,
+                                                    "margin": {
+                                                        "sm": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "md": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "lg": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "xl": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        }
+                                                    },
+                                                    "padding": {
+                                                        "sm": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "md": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "lg": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "xl": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        }
+                                                    },
+                                                    "borderSize": null,
+                                                    "borderColor": null,
+                                                    "borderStyle": null,
+                                                    "borderRadius": null,
+                                                    "shadowSize": null,
+                                                    "shadowColor": null,
+                                                    "position": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "display": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "flexDirection": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "alignItems": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "justifyContent": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "gap": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "inset": {
+                                                        "sm": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "md": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "lg": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "xl": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        }
+                                                    },
+                                                    "zIndex": null,
+                                                    "htmlAnchor": null,
+                                                    "className": null,
+                                                    "style": null
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "type": "nav-item",
+                                                "attributes": {
+                                                    "label": "Blog",
+                                                    "icon": null,
+                                                    "url": "http://localhost:8000/blog",
+                                                    "title": "Blog",
+                                                    "target": null,
+                                                    "navigate": false,
+                                                    "noFollow": false,
+                                                    "textColor": null,
+                                                    "fontSize": null,
+                                                    "fontWeight": null,
+                                                    "fontStyle": null,
+                                                    "textTransform": null,
+                                                    "textAlign": null,
+                                                    "bgColor": null,
+                                                    "bgImage": null,
+                                                    "bgSize": null,
+                                                    "bgPosition": null,
+                                                    "bgAttachment": null,
+                                                    "margin": {
+                                                        "sm": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "md": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "lg": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "xl": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        }
+                                                    },
+                                                    "padding": {
+                                                        "sm": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "md": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "lg": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "xl": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        }
+                                                    },
+                                                    "borderSize": null,
+                                                    "borderColor": null,
+                                                    "borderStyle": null,
+                                                    "borderRadius": null,
+                                                    "shadowSize": null,
+                                                    "shadowColor": null,
+                                                    "position": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "display": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "flexDirection": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "alignItems": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "justifyContent": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "gap": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "inset": {
+                                                        "sm": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "md": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "lg": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "xl": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        }
+                                                    },
+                                                    "zIndex": null,
+                                                    "htmlAnchor": null,
+                                                    "className": null,
+                                                    "style": null
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "type": "nav-item",
+                                                "attributes": {
+                                                    "label": "About us",
+                                                    "icon": null,
+                                                    "url": "http://localhost:8000/about-us",
+                                                    "title": "About us",
+                                                    "target": null,
+                                                    "navigate": false,
+                                                    "noFollow": false,
+                                                    "textColor": null,
+                                                    "fontSize": null,
+                                                    "fontWeight": null,
+                                                    "fontStyle": null,
+                                                    "textTransform": null,
+                                                    "textAlign": null,
+                                                    "bgColor": null,
+                                                    "bgImage": null,
+                                                    "bgSize": null,
+                                                    "bgPosition": null,
+                                                    "bgAttachment": null,
+                                                    "margin": {
+                                                        "sm": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "md": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "lg": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "xl": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        }
+                                                    },
+                                                    "padding": {
+                                                        "sm": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "md": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "lg": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "xl": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        }
+                                                    },
+                                                    "borderSize": null,
+                                                    "borderColor": null,
+                                                    "borderStyle": null,
+                                                    "borderRadius": null,
+                                                    "shadowSize": null,
+                                                    "shadowColor": null,
+                                                    "position": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "display": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "flexDirection": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "alignItems": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "justifyContent": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "gap": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "inset": {
+                                                        "sm": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "md": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "lg": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "xl": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        }
+                                                    },
+                                                    "zIndex": null,
+                                                    "htmlAnchor": null,
+                                                    "className": null,
+                                                    "style": null
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "type": "nav-item",
+                                                "attributes": {
+                                                    "label": "Contact us",
+                                                    "icon": null,
+                                                    "url": "http://localhost:8000/contact-us",
+                                                    "title": "Contact us",
+                                                    "target": null,
+                                                    "navigate": false,
+                                                    "noFollow": false,
+                                                    "textColor": null,
+                                                    "fontSize": null,
+                                                    "fontWeight": null,
+                                                    "fontStyle": null,
+                                                    "textTransform": null,
+                                                    "textAlign": null,
+                                                    "bgColor": null,
+                                                    "bgImage": null,
+                                                    "bgSize": null,
+                                                    "bgPosition": null,
+                                                    "bgAttachment": null,
+                                                    "margin": {
+                                                        "sm": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "md": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "lg": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "xl": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        }
+                                                    },
+                                                    "padding": {
+                                                        "sm": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "md": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "lg": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "xl": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        }
+                                                    },
+                                                    "borderSize": null,
+                                                    "borderColor": null,
+                                                    "borderStyle": null,
+                                                    "borderRadius": null,
+                                                    "shadowSize": null,
+                                                    "shadowColor": null,
+                                                    "position": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "display": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "flexDirection": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "alignItems": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "justifyContent": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "gap": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "inset": {
+                                                        "sm": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "md": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "lg": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "xl": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        }
+                                                    },
+                                                    "zIndex": null,
+                                                    "htmlAnchor": null,
+                                                    "className": null,
+                                                    "style": null
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "type": "nav-item",
+                                                "attributes": {
+                                                    "label": "Privacy policy",
+                                                    "icon": null,
+                                                    "url": "http://localhost:8000/privacy-policy",
+                                                    "title": "Privacy policy",
+                                                    "target": null,
+                                                    "navigate": false,
+                                                    "noFollow": false,
+                                                    "textColor": null,
+                                                    "fontSize": null,
+                                                    "fontWeight": null,
+                                                    "fontStyle": null,
+                                                    "textTransform": null,
+                                                    "textAlign": null,
+                                                    "bgColor": null,
+                                                    "bgImage": null,
+                                                    "bgSize": null,
+                                                    "bgPosition": null,
+                                                    "bgAttachment": null,
+                                                    "margin": {
+                                                        "sm": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "md": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "lg": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "xl": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        }
+                                                    },
+                                                    "padding": {
+                                                        "sm": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "md": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "lg": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "xl": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        }
+                                                    },
+                                                    "borderSize": null,
+                                                    "borderColor": null,
+                                                    "borderStyle": null,
+                                                    "borderRadius": null,
+                                                    "shadowSize": null,
+                                                    "shadowColor": null,
+                                                    "position": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "display": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "flexDirection": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "alignItems": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "justifyContent": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "gap": {
+                                                        "sm": null,
+                                                        "md": null,
+                                                        "lg": null,
+                                                        "xl": null
+                                                    },
+                                                    "inset": {
+                                                        "sm": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "md": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "lg": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        },
+                                                        "xl": {
+                                                            "top": null,
+                                                            "start": null,
+                                                            "end": null,
+                                                            "bottom": null
+                                                        }
+                                                    },
+                                                    "zIndex": null,
+                                                    "htmlAnchor": null,
+                                                    "className": null,
+                                                    "style": null
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "container",
+                                "attributes": {
+                                    "type": "col",
+                                    "textColor": null,
+                                    "fontSize": null,
+                                    "fontWeight": null,
+                                    "fontStyle": null,
+                                    "textTransform": null,
+                                    "textAlign": null,
+                                    "bgColor": null,
+                                    "bgImage": null,
+                                    "bgSize": null,
+                                    "bgPosition": null,
+                                    "bgAttachment": null,
+                                    "margin": {
+                                        "sm": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "md": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "lg": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "xl": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        }
+                                    },
+                                    "padding": {
+                                        "sm": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "md": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "lg": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "xl": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        }
+                                    },
+                                    "borderSize": null,
+                                    "borderColor": null,
+                                    "borderStyle": null,
+                                    "borderRadius": null,
+                                    "shadowSize": null,
+                                    "shadowColor": null,
+                                    "position": {
+                                        "sm": null,
+                                        "md": null,
+                                        "lg": null,
+                                        "xl": null
+                                    },
+                                    "display": {
+                                        "sm": null,
+                                        "md": null,
+                                        "lg": null,
+                                        "xl": null
+                                    },
+                                    "flexDirection": {
+                                        "sm": null,
+                                        "md": null,
+                                        "lg": null,
+                                        "xl": null
+                                    },
+                                    "alignItems": {
+                                        "sm": null,
+                                        "md": null,
+                                        "lg": null,
+                                        "xl": null
+                                    },
+                                    "justifyContent": {
+                                        "sm": null,
+                                        "md": null,
+                                        "lg": null,
+                                        "xl": null
+                                    },
+                                    "gap": {
+                                        "sm": null,
+                                        "md": null,
+                                        "lg": null,
+                                        "xl": null
+                                    },
+                                    "inset": {
+                                        "sm": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "md": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "lg": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        },
+                                        "xl": {
+                                            "top": null,
+                                            "start": null,
+                                            "end": null,
+                                            "bottom": null
+                                        }
+                                    },
+                                    "zIndex": null,
+                                    "htmlAnchor": null,
+                                    "className": null,
+                                    "style": null
+                                },
+                                "children": [
+                                    {
+                                        "type": "heading",
+                                        "attributes": {
+                                            "tag": "h3",
+                                            "title": "Follow us",
+                                            "icon": null,
+                                            "link": {
+                                                "url": null,
+                                                "title": null,
+                                                "target": null,
+                                                "htmlAnchor": null,
+                                                "className": null,
+                                                "style": null
+                                            },
+                                            "textColor": null,
+                                            "fontSize": "text-xl",
+                                            "fontWeight": null,
+                                            "fontStyle": null,
+                                            "textTransform": null,
+                                            "textAlign": null,
+                                            "bgColor": null,
+                                            "bgImage": null,
+                                            "bgSize": null,
+                                            "bgPosition": null,
+                                            "bgAttachment": null,
+                                            "margin": {
+                                                "sm": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "md": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "lg": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "xl": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                }
+                                            },
+                                            "padding": {
+                                                "sm": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "md": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "lg": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "xl": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                }
+                                            },
+                                            "borderSize": null,
+                                            "borderColor": null,
+                                            "borderStyle": null,
+                                            "borderRadius": null,
+                                            "shadowSize": null,
+                                            "shadowColor": null,
+                                            "position": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "display": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "flexDirection": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "alignItems": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "justifyContent": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "gap": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "htmlAnchor": null,
+                                            "className": null,
+                                            "style": null
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "type": "menu",
+                                        "attributes": {
+                                            "menuId": 3,
+                                            "direction": "horizontal",
+                                            "theme": "dark",
+                                            "textColor": null,
+                                            "fontSize": null,
+                                            "fontWeight": null,
+                                            "fontStyle": null,
+                                            "textTransform": null,
+                                            "textAlign": null,
+                                            "bgColor": null,
+                                            "bgImage": null,
+                                            "bgSize": null,
+                                            "bgPosition": null,
+                                            "bgAttachment": null,
+                                            "margin": {
+                                                "sm": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "md": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "lg": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "xl": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                }
+                                            },
+                                            "padding": {
+                                                "sm": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "md": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "lg": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "xl": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                }
+                                            },
+                                            "borderSize": null,
+                                            "borderColor": null,
+                                            "borderStyle": null,
+                                            "borderRadius": null,
+                                            "shadowSize": null,
+                                            "shadowColor": null,
+                                            "position": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "display": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "flexDirection": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "alignItems": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "justifyContent": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "gap": {
+                                                "sm": null,
+                                                "md": null,
+                                                "lg": null,
+                                                "xl": null
+                                            },
+                                            "inset": {
+                                                "sm": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "md": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "lg": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                },
+                                                "xl": {
+                                                    "top": null,
+                                                    "start": null,
+                                                    "end": null,
+                                                    "bottom": null
+                                                }
+                                            },
+                                            "zIndex": null,
+                                            "htmlAnchor": null,
+                                            "className": null,
+                                            "style": null
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

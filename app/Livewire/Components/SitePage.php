@@ -7,7 +7,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-#[Layout('layouts.site')]
+#[Layout('layouts::app.curve')]
 abstract class SitePage extends Component
 {
     use WithToast, WithFileUploads;

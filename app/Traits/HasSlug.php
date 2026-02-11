@@ -6,6 +6,21 @@ use Illuminate\Support\Str;
 
 trait HasSlug
 {
+    protected static function booted()
+    {
+
+        static::creating(function ($model) {
+            if (empty($model->slug)) {
+                $model->slug = self::generateSlug($model->name);
+            }
+        });
+
+        static::updating(function ($model) {
+            if (empty($model->slug)) {
+                $model->slug = self::generateSlug($model->name);
+            }
+        });
+    }
     public static function generateSlug($name, $separator = '-', $language = 'en', $dictionary = ['@' => 'at']): string
     {
         $slug = Str::slug($name, $separator, $language, $dictionary);
@@ -16,7 +31,7 @@ trait HasSlug
         }
         return $slug;
     }
-    public function scopeSlug($query, $slug)
+    public function scopeWithSlug($query, $slug)
     {
         return $query->firstWhere('slug', $slug);
     }

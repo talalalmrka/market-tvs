@@ -22,7 +22,7 @@ new class extends SitePage
     }
     public function render()
     {
-        return view('site.screens.index.index')->layout('layouts.site', [
+        return view('site.screens.index.index')->layout('layouts::app.curve', [
             'title' => __('Screens for: :user', ['user' => $this->user->name]),
         ]);
     }

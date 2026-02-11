@@ -15,3 +15,9 @@ Route::get('/welcome', function () {
 Route::view('dashboard-old', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard.old');
+
+Route::get('/atts', function () {
+    $args1 = ['class' => 'main-class'];
+    $args2 = ['data-theme' => 'dark'];
+    dd(atts($args1, $args2));
+})->name('atts');

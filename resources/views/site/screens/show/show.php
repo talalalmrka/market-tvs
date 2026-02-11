@@ -17,7 +17,7 @@ new class extends SitePage
 
     public function render()
     {
-        return view('site.screens.show.show')->layout('layouts.site', [
+        return view('site.screens.show.show')->layout('layouts::app.header', [
             'title' => $this->screen->name,
         ]);
     }
