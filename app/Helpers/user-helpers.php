@@ -83,7 +83,7 @@ if (!function_exists('user_options')) {
 }
 
 if (!function_exists('current_user')) {
-    function current_user()
+    function current_user(): User|null
     {
         return auth()->user();
     }

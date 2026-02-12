@@ -1,32 +1,31 @@
-// import './time-slot-collapse';
-import './alpine-back-top';
-// import './upload-slide';
-import './edit-screen';
-import './screen-slideshow';
-import { initFadgramUI } from "fadgram-ui";
-document.addEventListener("livewire:navigated", () => {
-    initFadgramUI();
-    // NavbarTransparentTop.init();
-
-});
-let toastListener = null;
-document.addEventListener("livewire:init", () => {
-    if (!toastListener) {
-        toastListener = Livewire.on("toast", (event) => {
-            const data = Array.isArray(event) ? event[0] : event;
-            if (!toast) {
-                console.log("Window toast not inited!");
-            }
-            toast(data.message, data.options);
-        });
-    }
-});
-
+/**
+ * 1️⃣ Import Echo FIRST (so window.Echo is ready)
+ */
+import './echo'
 
 /**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allow your team to quickly build robust real-time web applications.
+ * 2️⃣ Import Alpine and expose globally
  */
+import Alpine from 'alpinejs'
+window.Alpine = Alpine
 
-import './echo';
+/**
+ * 3️⃣ Import libraries / plugins that depend on Alpine
+ */
+import 'fadgram-ui'
+import './alpine-back-top'
+import './screen-slideshow'
+import './chat'
+import { NavbarTransparentTop } from './navbar-transparent-top'
+
+/**
+ * 4️⃣ DOM ready logic
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    NavbarTransparentTop.init()
+})
+
+/**
+ * 5️⃣ Start Alpine LAST
+ */
+Alpine.start()

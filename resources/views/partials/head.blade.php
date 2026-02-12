@@ -1,5 +1,6 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <title>{{ get_the_title(isset($title) ? $title : null) }}</title>
 @php
     $description = isset($description) ?? get_option('description');
@@ -12,6 +13,12 @@
 @endif
 <link rel="canonical" href="{{ request()->url() }}">
 <x-favicon />
-@vite(['resources/css/app.css'])
+@stack('head_before_styles')
+@if (isset($style))
+    {{ $style }}
+@else
+    @vite(['resources/css/app.css'])
+@endif
 @stack('styles')
+@stack('head')
 @fluxAppearance

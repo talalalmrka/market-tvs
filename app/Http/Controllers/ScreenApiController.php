@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ScreenResource;
 use App\Models\Screen;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class ScreenController extends Controller
+class ScreenApiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,7 @@ class ScreenController extends Controller
     {
         $perPage = $request->get('per_page', 15);
         $screens = Screen::paginate($perPage);
-        $title = __('Screens');
-        return view('site.screens.index', compact('title', 'screens'));
+        return ScreenResource::collection($screens);
     }
 
     /**
@@ -26,8 +26,7 @@ class ScreenController extends Controller
     {
         $perPage = $request->get('per_page', 15);
         $screens = $user->screens()->paginate($perPage);
-        $title = __(':user\'s Screens', ['user' => $user->name]);
-        return view('site.screens.index', compact('title', 'screens'));
+        return ScreenResource::collection($screens);
     }
 
     /**
@@ -43,10 +42,7 @@ class ScreenController extends Controller
      */
     public function show(Screen $screen)
     {
-        $title = $screen->name;
-        $subtitle = $screen->user_name;
-        $secondSubtitle = $screen->date_ago;
-        return view('site.screens.show', compact('screen', 'title', 'subtitle', 'secondSubtitle'));
+        return new ScreenResource($screen);
     }
 
     /**

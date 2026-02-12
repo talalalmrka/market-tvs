@@ -12,7 +12,11 @@
     'class' => null,
     'atts' => [],
 ])
-<x-layouts::layout :title="isset($title) ? $title : null">
+<x-layouts::app.layout :title="isset($title) ? $title : null">
+    <x-slot name="script">
+        @vite(['resources/js/dashboard.js'])
+        @livewireScriptConfig
+    </x-slot>
     <div {!! $attributes->merge([
         ...[
             'class' => css_classes(['min-h-screen bg-primary/3 dark:bg-gray-900', $class]),
@@ -177,4 +181,4 @@
         </main>
     </div>
     <x-button-back-top class="bottom-4 end-4" />
-</x-layouts::layout>
+</x-layouts::app.layout>

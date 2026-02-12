@@ -12,10 +12,22 @@ trait HasUser
     {
         return $this->belongsTo(User::class);
     }
+
     public function userName(): Attribute
     {
         return Attribute::get(fn() => $this->user?->name);
     }
+
+    public function userEmail(): Attribute
+    {
+        return Attribute::get(fn() => $this->user?->email);
+    }
+
+    public function userAvatar(): Attribute
+    {
+        return Attribute::get(fn() => $this->user?->avatar);
+    }
+
     public function resolveUserId($user): array
     {
         if ($user instanceof User) {

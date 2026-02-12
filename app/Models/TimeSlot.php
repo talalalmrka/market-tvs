@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Traits\WithActive;
+use App\Traits\WithDate;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +12,10 @@ use Illuminate\Database\Eloquent\Model;
 class TimeSlot extends Model
 {
     /** @use HasFactory<\Database\Factories\TimeSlotFactory> */
-    use HasFactory, WithActive;
+    use HasFactory,
+        WithActive,
+        WithDate;
+
     protected $fillable = [
         'screen_id',
         'name',
@@ -33,5 +38,15 @@ class TimeSlot extends Model
     public function slides()
     {
         return $this->hasMany(Slide::class)->orderBy('order');
+    }
+
+    protected function startTimeFormatted(): Attribute
+    {
+        return Attribute::make(get: fn() => $this->start_time ? Carbon::parse($this->start_time)->format('h:i A') : null);
+    }
+
+    protected function endTimeFormatted(): Attribute
+    {
+        return Attribute::make(get: fn() => $this->end_time ? Carbon::parse($this->end_time)->format('h:i A') : null);
     }
 }

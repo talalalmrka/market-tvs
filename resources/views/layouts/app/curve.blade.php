@@ -13,6 +13,9 @@
     'logoTheme' => 'light',
     'navbarClass' => null,
     'mainClass' => null,
+    'mainAtts' => [],
+    'containerClass' => null,
+    'containerAtts' => [],
 ])
 @php
     $seoTitle = !empty($seoTitle) ? $seoTitle : $title;
@@ -58,14 +61,14 @@
         ]),
         'logoTheme' => $logoTheme,
     ])
-    <main @cssClasses(['main flex flex-col min-h-screen', $mainClass])>
+    <main @atts(['class' => css_classes(['main flex flex-col min-h-screen', $mainClass])], $mainAtts)>
         <section class="relative bg-linear-to-br from-primary-800 to-primary-600 text-white">
             <div class="max-w-4xl mx-auto px-4 pt-18 pb-12 md:py-28 text-center relative" data-theme="dark">
                 @if ($hasTitle)
                     <h1 class="text-2xl md:text-4xl">{{ $title }}</h1>
                 @endif
                 @if ($hasSubtitle)
-                    <div class="text-lg">{!! $subTitle !!}</div>
+                    <div class="text-lg">{!! $subtitle !!}</div>
                 @endif
                 @if ($hasSecondSubtitle)
                     <div class="text-sm">{!! $secondSubtitle !!}</div>
@@ -83,7 +86,7 @@
                 </svg>
             </div>
         </section>
-        <div class="md:container mobile:px-2 relative flex-1">
+        <div @atts(['class' => css_classes(['relative md:container mobile:px-2 py-6 flex-1', $containerClass])], $containerAtts)>
             {{ $slot }}
         </div>
         @include('partials.footer')
