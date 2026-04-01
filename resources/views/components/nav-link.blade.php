@@ -32,5 +32,7 @@
     ) }}>
     @icon($icon)
     <span>{!! $label !!}</span>
-    {{ $slot ?? '' }}
+    @if (isset($slot))
+        {{ $slot }}
+    @endif
 </a>

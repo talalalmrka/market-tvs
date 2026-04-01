@@ -3,12 +3,12 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <title>{{ get_the_title(isset($title) ? $title : null) }}</title>
 @php
-    $description = isset($description) ?? get_option('description');
+    $description = isset($description) ?? get_option('app.description');
 @endphp
 @if (!empty($description))
     <meta name="description" content="{{ $description ?? get_option('description') }}">
 @endif
-@if (get_option('disable_search_engines', false))
+@if (boolval(get_option('reading.disable_search_engines', false)))
     <meta name="robots" content="noindex, nofollow">
 @endif
 <link rel="canonical" href="{{ request()->url() }}">
@@ -21,4 +21,7 @@
 @endif
 @stack('styles')
 @stack('head')
-@fluxAppearance
+<link rel="stylesheet" href="{{ route('style') }}" type="text/css">
+@customCode('header_code')
+@customCss()
+{{-- @fluxAppearance --}}

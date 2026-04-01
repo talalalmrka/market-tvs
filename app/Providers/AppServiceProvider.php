@@ -97,5 +97,52 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('cssClasses', function ($expression) {
             return "<?php echo 'class=\"' . e(css_classes($expression)) . '\"'; ?>";
         });
+
+        Blade::directive('customCode', function ($expression) {
+            return <<<PHP
+            <?php
+            custom_code({$expression});
+            ?>
+            PHP;
+        });
+
+        Blade::directive('customCss', function ($expression) {
+            return <<<PHP
+            <?php
+            custom_css();
+            ?>
+            PHP;
+        });
+
+        Blade::directive('customJs', function ($expression) {
+            return <<<PHP
+            <?php
+            custom_js();
+            ?>
+            PHP;
+        });
+
+        Blade::directive('preCard', function ($expression) {
+            $parts = explode(',', $expression, 2);
+            $obj = isset($parts[0]) ? trim($parts[0]) : "'null'";
+            $title = isset($parts[1]) ? trim($parts[1]) : "''";
+            $className = isset($parts[2]) ? trim($parts[2]) : "'mt-6'";
+            return <<<PHP
+            <?php
+            pre_card({$obj}, {$title}, {$className});
+            ?>
+            PHP;
+        });
+
+        Blade::directive('pre100', function ($expression) {
+            $parts = explode(',', $expression, 2);
+            $obj = isset($parts[0]) ? trim($parts[0]) : "'null'";
+            $className = isset($parts[1]) ? trim($parts[1]) : "''";
+            return <<<PHP
+            <?php
+            pre100({$obj}, {$className});
+            ?>
+            PHP;
+        });
     }
 }

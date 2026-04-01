@@ -17,6 +17,8 @@
         "laravel/tinker": "^2.10.1",
         "livewire/flux": "^2.9.0",
         "livewire/livewire": "^4.0",
+        "phenx/php-font-lib": "^1.0",
+        "sensiolabs/ansi-to-html": "^2.0",
         "spatie/laravel-medialibrary": "^11.17",
         "spatie/laravel-permission": "^6.24",
         "talalalmrka/fgx": "^1.2"

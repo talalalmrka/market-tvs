@@ -21,7 +21,7 @@
     if (!empty($height)) {
         $styles[] = "height: {$height}px";
     }
-    $collection = $theme === 'light' ? 'logo_light' : 'logo';
+    $collection = $theme === 'light' ? 'app.logo_light' : 'app.logo';
     $setting = setting($collection);
     $hasMedia = instance_setting($setting) && $setting->hasMedia($collection);
     $labelEnabled = ($labelEnabled && !empty($label)) || !$hasMedia;

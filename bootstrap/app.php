@@ -6,7 +6,7 @@ use Illuminate\Foundation\Configuration\Middleware;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
-        channels: __DIR__.'/../routes/channels.php',
+        channels: __DIR__ . '/../routes/channels.php',
         api: __DIR__ . '/../routes/api.php',
         // apiPrefix: 'api/admin',
         web: __DIR__ . '/../routes/web.php',
@@ -22,4 +22,10 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
+    })
+    ->booted(function ($app) {
+        /* $settings = settings()->mapWithKeys(function ($value, $key) {
+            return ["app.$key" => $value];
+        })->toArray();
+        config($settings); */
     })->create();

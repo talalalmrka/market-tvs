@@ -15,8 +15,8 @@
 
 @layer base {
     body {
-        @apply relative font-poppins;
-        @apply antialiased;
+        /* @apply relative font-poppins; */
+        /* @apply antialiased; */
         @apply text-gray-700 dark:text-gray-100;
         @apply bg-body-bg dark:bg-body-bg-dark;
     }
@@ -52,8 +52,19 @@
         max-width: none;
         max-height: none;
     }
+    .sf-dump,
+    .sf-dump * {
+        z-index: 1 !important;
+    }
+    .sortable-ghost {
+        /* opacity: 0.5 !important; */
+        /* border-style: dashed; */
+    }
 }
 
 @utility container {
     @apply max-w-5xl mx-auto;
+}
+@utility pre-100 {
+    @apply max-h-100 overflow-auto;
 }

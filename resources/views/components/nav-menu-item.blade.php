@@ -8,7 +8,7 @@
         @endforeach
     </x-dropdown>
 @else
-    <x-nav-link :navigate="$item->navigate" :icon="$item->icon" :label="$item->name" :title="$item->title" :class="$item->class_name"
+    <x-nav-link :navigate="$item->navigate" :icon="$item->icon" :label="$item->name" :class="$item->class_name"
         :href="$item->href"
         :target="$item->target" title="{{ $item->name }}" />
 @endif

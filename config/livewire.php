@@ -35,6 +35,8 @@ return [
         'pages' => resource_path('views/pages'),
         'dashboard' => resource_path('views/dashboard'),
         'site' => resource_path('views/site'),
+        'auth' => resource_path('views/auth'),
+        'components' => resource_path('views/livewire/components'),
     ],
 
     /*
@@ -293,6 +295,7 @@ return [
         'max_size' => 1024 * 1024,   // 1MB - maximum request payload size in bytes
         'max_nesting_depth' => 10,   // Maximum depth of dot-notation property paths
         'max_calls' => 50,           // Maximum method calls per request
-        'max_components' => 20,      // Maximum components per batch request
+        // 'max_components' => 20,      // Maximum components per batch request
+        'max_components' => 100,      // Maximum components per batch request
     ],
 ];

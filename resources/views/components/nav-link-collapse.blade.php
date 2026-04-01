@@ -2,6 +2,7 @@
     'label' => null,
     'icon' => null,
     'open' => false,
+    'items' => [],
 ])
 <div x-cloak x-data="{ open: @js($open) }" class="block w-full">
     <a href="#!" x-on:click.prevent="open = !open"
@@ -11,6 +12,20 @@
         <i x-cloak class="icon bi-chevron-down" :class="{ 'rotate-180': open }"></i>
     </a>
     <nav x-collapse x-show="open" class="nav vertical space-y-3 ms-3 px-2 py-3 border-s border-s-white/50">
-        {{ $slot }}
+        @if (!empty($items))
+            @foreach ($items as $item)
+                @if (data_get($item, 'type') === 'collapse')
+                    @component('components.nav-link-collapse', $item)
+                    @endcomponent
+                @else
+                    @component('components.nav-link', $item)
+                    @endcomponent
+                @endif
+            @endforeach
+        @else
+            @if (isset($slot))
+                {{ $slot }}
+            @endif
+        @endif
     </nav>
 </div>

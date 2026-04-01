@@ -6,6 +6,8 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 new #[Title('Media')] class extends DashboardDatatable
 {
+    public ?Media $currentMedia;
+    public bool $showModal = false;
     public function builder()
     {
         return Media::query();
@@ -28,5 +30,16 @@ new #[Title('Media')] class extends DashboardDatatable
                     return view('dashboard::media.details', ['media' => $media]);
                 }),
         ];
+    }
+    public function updatedShowModal($value)
+    {
+        if (!$value) {
+            $this->currentMedia = null;
+        }
+    }
+    public function details(Media $media)
+    {
+        $this->currentMedia = $media;
+        $this->showModal = true;
     }
 };

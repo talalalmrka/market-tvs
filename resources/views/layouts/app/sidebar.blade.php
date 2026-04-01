@@ -12,10 +12,17 @@
     'class' => null,
     'atts' => [],
 ])
-<x-layouts::app.layout :title="isset($title) ? $title : null">
+@php
+    $apiUrl = route('dashboard.search');
+@endphp
+<x-layouts::app.layout x-data="DashboardSearch('{{ $apiUrl }}')" :title="isset($title) ? $title : null">
     <x-slot name="script">
         @vite(['resources/js/dashboard.js'])
         @livewireScriptConfig
+    </x-slot>
+    <x-slot name="style">
+        @vite(['resources/css/app.css'])
+        @livewireStyles
     </x-slot>
     <div {!! $attributes->merge([
         ...[
@@ -33,64 +40,18 @@
             </div>
             <div class="offcanvas-body pb-6">
                 <nav class="sidebar-nav">
-                    <x-nav-link wire:navigate :href="route('dashboard')" wire:current.exact="active" icon="bi-speedometer"
-                        :label="__('Dashboard')" />
-                    <x-nav-link wire:navigate :href="route('dashboard.old')" wire:current.exact="active" icon="bi-speedometer"
-                        :label="__('Dashboard old')" />
-                    <x-nav-link wire:navigate :href="route('dashboard.users')" wire:current.exact="active" icon="bi-people"
-                        :label="__('Users')" />
-                    @can('manage_roles')
-                        <x-nav-link-collapse icon="bi-person-fill-lock" :label="__('Roles & Permissions')" :open="request()->routeIs([
-                            'dashboard.roles',
-                            'dashboard.roles.*',
-                            'dashboard.permissions',
-                            'dashboard.permissions.*',
-                        ])">
-                            @can('manage_roles')
-                                <x-nav-link wire:navigate :href="route('dashboard.roles')" wire:current="active" icon="bi-person-gear"
-                                    :label="__('Roles')" />
-                            @endcan
-                            @can('manage_permissions')
-                                <x-nav-link wire:navigate :href="route('dashboard.permissions')" wire:current="active" icon="bi-key-fill"
-                                    :label="__('Permissions')" />
-                            @endcan
-                        </x-nav-link-collapse>
-                    @endcan
-                    @can('manage_screens')
-                        <x-nav-link wire:navigate :href="route('dashboard.screens')" wire:current="active" icon="bi-tv"
-                            :label="__('Screens')" />
-                    @endcan
-
-                    @can('manage_media')
-                        <x-nav-link wire:navigate :href="route('dashboard.media')" wire:current.exact="active" icon="bi-image"
-                            :label="__('Media')" />
-                    @endcan
-                    <x-nav-link-collapse icon="bi-grid" :label="__('Ui Components')" :open="request()->routeIs(['dashboard.ui', 'dashboard.ui.*'])">
-                        <x-nav-link wire:navigate :href="route('dashboard.ui.colors')" wire:current.exact="active" icon="bi-palette"
-                            :label="__('Colors')" />
-                        <x-nav-link wire:navigate :href="route('dashboard.ui.backgrounds')" wire:current.exact="active" icon="bi-palette"
-                            :label="__('Backgrounds')" />
-                        <x-nav-link wire:navigate :href="route('dashboard.ui.buttons')" wire:current.exact="active" icon="bi-square"
-                            :label="__('Buttons')" />
-                        <x-nav-link wire:navigate :href="route('dashboard.ui.modal')" wire:current.exact="active" icon="bi-window"
-                            :label="__('Modal')" />
-                        <x-nav-link wire:navigate :href="route('dashboard.ui.sortable')" wire:current.exact="active" icon="bi-sort-down"
-                            :label="__('Sortable')" />
-                        <x-nav-link wire:navigate :href="route('dashboard.ui.toast')" wire:current.exact="active" icon="bi-bell"
-                            :label="__('Toast')" />
-                        <x-nav-link wire:navigate :href="route('dashboard.ui.progress')" wire:current.exact="active" icon="bi-bar-chart"
-                            :label="__('Progress')" />
-                    </x-nav-link-collapse>
+                    {!! dashboard_sidebar() !!}
                 </nav>
             </div>
         </div>
         <main @atts(['class' => css_classes(['lg:ps-64 min-h-75vh relative', $mainClass])], $mainAtts)>
             <div class="navbar h-14 bg-white dark:bg-gray-700 shadow-xs sticky top-0">
                 <div class="nav">
-                    <button class="navbar-brand nav-link md:hidden offcanvas-toggle" data-fg-toggle="offcanvas"
+                    <button class="navbar-brand nav-link lg:hidden offcanvas-toggle" data-fg-toggle="offcanvas"
                         data-fg-target="#dashboard-sidebar">
                         <i class="icon bi-list text-2xl"></i>
                     </button>
+                    <x-dashboard-top-search />
                     @if (isset($navbar))
                         {!! $navbar !!}
                     @endif
@@ -181,4 +142,7 @@
         </main>
     </div>
     <x-button-back-top class="bottom-4 end-4" />
+    <x-slot name="footer">
+        <x-dashboard-search-dialog />
+    </x-slot>
 </x-layouts::app.layout>

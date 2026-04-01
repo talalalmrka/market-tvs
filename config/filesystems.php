@@ -61,7 +61,8 @@ return [
         ],
         'uploads' => [
             'driver' => 'local',
-            'root' => public_path('uploads'),
+            // 'root' => public_path('uploads'),
+            'root' => storage_path('app/uploads'),
             'url' => rtrim(env('APP_URL', 'http://localhost'), '/') . '/uploads',
             'visibility' => 'public',
             'throw' => false,
@@ -82,6 +83,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('uploads') => storage_path('app/uploads'),
     ],
 
 ];

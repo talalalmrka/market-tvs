@@ -67,6 +67,8 @@ return [
 
     'timezone' => 'UTC',
 
+    'date_format' => env('DATE_FORMAT', 'j F Y'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
@@ -122,6 +124,7 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
-    'eruda_enabled' => true,
+    'eruda_enabled' => env('ERUDA_ENABLED', false),
+    'admin_email' => env('ADMIN_EMAIL', 'admin@example.com'),
 
 ];

@@ -1,5 +1,4 @@
 @props(['menu', 'class' => null, 'atts' => []])
-{{-- @dump(get_defined_vars()) --}}
 <div
     {{ $attributes->merge([
         ...[

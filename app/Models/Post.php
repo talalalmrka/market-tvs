@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\PageBuilderController;
 use App\Traits\HasCategories;
 use App\Traits\HasComments;
@@ -12,8 +10,6 @@ use App\Traits\HasNextPrev;
 use App\Traits\HasRelated;
 use App\Traits\HasSlug;
 use App\Traits\HasTags;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Traits\HasThumbnail;
 use App\Traits\HasUser;
 use App\Traits\WithDate;
@@ -25,31 +21,36 @@ use App\Traits\WithStatus;
 use App\Traits\WithTemplate;
 use App\Traits\WithViews;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Post extends Model implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */
-    use HasFactory,
-        InteractsWithMedia,
-        HasThumbnail,
-        HasMeta,
-        HasCategories,
-        HasUser,
-        HasTags,
-        HasSlug,
-        WithPermalink,
-        WithDate,
-        WithTemplate,
-        WithStatus,
-        WithViews,
-        WithExcerpt,
-        HasRelated,
-        WithSeo,
+    use HasCategories,
         HasComments,
+        HasFactory,
+        HasMeta,
         HasNextPrev,
-        WithShare;
+        HasRelated,
+        HasSlug,
+        HasTags,
+        HasThumbnail,
+        HasUser,
+        InteractsWithMedia,
+        WithDate,
+        WithExcerpt,
+        WithPermalink,
+        WithSeo,
+        WithShare,
+        WithStatus,
+        WithTemplate,
+        WithViews;
+
     protected $fillable = [
         'user_id',
         'name',
@@ -58,12 +59,14 @@ class Post extends Model implements HasMedia
         'status',
         'content',
     ];
+
     protected $appends = [
         'permalink',
         'excerpt',
         'blocks',
         'blocks_cache_key',
     ];
+
     public function registerMediaCollections(): void
     {
         $this->registerThumbnail();
@@ -95,10 +98,12 @@ class Post extends Model implements HasMedia
                     ->nonQueued();
             });
     }
+
     public function thumbnailFallbackUrl(): Attribute
     {
-        return Attribute::get(fn() => asset('assets/images/post-thumbnail.svg'));
+        return Attribute::get(fn () => asset('assets/images/post-thumbnail.svg'));
     }
+
     public function editUrl(): Attribute
     {
         return Attribute::get(function () {
@@ -112,24 +117,38 @@ class Post extends Model implements HasMedia
                         return route("dashboard.$plural.edit", $this);
                     }
                 }
-                route_has("dashboard.posts.edit") ? route('dashboard.posts.edit', $this) : null;
+                route_has('dashboard.posts.edit') ? route('dashboard.posts.edit', $this) : null;
             } else {
                 return null;
             }
         });
     }
+
     public function scopeType($query, $type)
     {
         return $query->where('type', $type);
     }
+
     public function scopePost($query)
     {
         return $query->where('type', 'post');
     }
+
     public function scopePage($query)
     {
         return $query->where('type', 'page');
     }
+
+    public function scopeHome($query)
+    {
+        return $query->where('type', 'post')->where('slug', 'home')->first();
+    }
+
+    public function scopeBlog($query)
+    {
+        return $query->where('type', 'post')->where('slug', 'blog')->first();
+    }
+
     public static function resolveBlocks($blocks)
     {
         return arr_map($blocks, function ($block) {
@@ -143,28 +162,35 @@ class Post extends Model implements HasMedia
                 ...$attributes,
             ];
             $children = data_get($block, 'children');
-            if ($children && is_array($children) && !empty($children)) {
+            if ($children && is_array($children) && ! empty($children)) {
                 $block['children'] = static::resolveBlocks($children);
             }
+
             return $block;
         });
     }
+
     public function blocksCacheKey(): Attribute
     {
         return Attribute::get(function () {
             $updated_at = $this->meta('blocks')?->updated_at ?? now();
-            return "post-blocks-{$this->id}-" . md5($updated_at);
+
+            return "post-blocks-{$this->id}-".md5($updated_at);
         });
     }
+
     public function cleanBlocksCache()
     {
         return Cache::forget($this->blocks_cache_key);
     }
+
     public function getBlocks()
     {
         $blocks = is_array($this->getMeta('blocks')) ? $this->getMeta('blocks') : [];
+
         return static::resolveBlocks($blocks);
     }
+
     public function blocks(): Attribute
     {
         return Attribute::get(function () {
@@ -174,6 +200,7 @@ class Post extends Model implements HasMedia
                     return $this->getBlocks();
                 });
             }
+
             return $this->getBlocks();
         });
     }
@@ -185,6 +212,7 @@ class Post extends Model implements HasMedia
         if ($update) {
             $blocks = $this->blocks;
         }
+
         return $update;
     }
 
@@ -200,6 +228,7 @@ class Post extends Model implements HasMedia
         if (is_string($post)) {
             return static::withSlug($post);
         }
+
         return null;
     }
 }

@@ -5,10 +5,13 @@
     @include('partials.head')
 </head>
 
-<body x-data="{ mobileMenu: false }">
-
+<body
+    {{ $attributes->merge([
+        'x-data' => '{ mobileMenu: false }',
+        'class' => css_classes([typography_classes()]),
+    ]) }}>
     {{ $slot }}
-    @if (get_option('eruda_enabled'))
+    @if (get_option('app.eruda_enabled'))
         <script type="text/javascript" src="{{ url('assets/eruda/eruda.js') }}"></script>
         <script>
             eruda.init();
@@ -20,6 +23,11 @@
         @vite(['resources/js/app.js'])
     @endif
     @stack('scripts')
+    @customCode('footer_code')
+    @customJs()
+    @isset($footer)
+        {{ $footer }}
+    @endisset
 </body>
 
 </html>

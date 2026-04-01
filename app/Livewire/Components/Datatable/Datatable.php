@@ -416,6 +416,11 @@ abstract class Datatable extends Component
     {
         return null;
     }
+    #[Computed()]
+    public function count()
+    {
+        return $this->builder()->count();
+    }
     #[Computed]
     public function table()
     {
@@ -427,6 +432,7 @@ abstract class Datatable extends Component
             'selectAll' => $this->selectAll,
             'selected' => $this->selected,
             'checkbox' => $this->checkbox,
+            'count' => $this->count()
         ]);
     }
 }

@@ -1,11 +1,14 @@
 <?php
+
 return [
     'user' => 'bi-person-fill',
     'role' => 'bi-person-cog',
     'permission' => 'bi-key-fill',
     'post' => 'bi-newspaper',
-    'category' => 'bi-folder-fill',
-    'tag' => 'bi-tag-fill',
+    'page' => 'bi-file-earmark-text',
+    'category' => 'bi-folder',
+    'tag' => 'bi-tag',
+    'screen' => 'bi-tv',
     'media' => 'bi-image',
     'setting' => 'bi-gear-wide-connected',
     'admin' => 'bi-person-badge',

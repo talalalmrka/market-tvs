@@ -44,4 +44,6 @@
         </div>
     </div>
 </footer>
-<x-button-back-top class="bottom-4 end-4" />
+@if (boolval(get_option('design.backtop_enabled')))
+    <x-button-back-top class="bottom-4 end-4" />
+@endif

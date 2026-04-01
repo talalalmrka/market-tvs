@@ -1,5 +1,5 @@
 @php
-    $setting = setting('favicon');
+    $setting = setting('app.favicon');
 @endphp
 @if ($setting)
     <link rel="icon" type="image/png" sizes="16x16" href="{{ $setting->getFirstMediaUrl('favicon', 'favicon-16') }}">

@@ -1,7 +1,7 @@
 /**
  * 1️⃣ Import Echo FIRST (so window.Echo is ready)
  */
-import './echo'
+// import './echo'
 
 /**
  * 2️⃣ Import Alpine and expose globally

@@ -1,0 +1,241 @@
+<?php
+
+namespace App\Traits;
+
+use Livewire\Attributes\Computed;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
+
+trait WithEditModel
+{
+    use HasMediaProperties, WithFileUploads, WithToast;
+
+    public $title = '';
+
+    public $status_key = 'status';
+
+    public function updated($property, $value)
+    {
+        $this->validateOnly($property);
+    }
+
+    public function mountWithEditModel()
+    {
+        if (! $this->model()) {
+            abort(500, 'You must set the $model_type add protected $model_type = (user, post, ...etc)');
+        }
+        if (method_exists($this, 'beforeMount')) {
+            $this->beforeMount();
+        }
+        if (method_exists($this, 'beforeFill')) {
+            $this->beforeFill();
+        }
+        $this->fillData();
+        $this->fillMeta();
+        $this->fillTitle();
+        if (method_exists($this, 'afterFill')) {
+            $this->afterFill();
+        }
+        if (method_exists($this, 'afterMount')) {
+            $this->afterMount();
+        }
+    }
+
+    public function model()
+    {
+        return isset($this->model_type) ? $this->{$this->model_type} : null;
+    }
+
+    public function table()
+    {
+        return $this->model()->getTable();
+    }
+
+    public function singularName()
+    {
+        return str()->singular($this->table());
+    }
+
+    public function pluralName()
+    {
+        return str()->plural($this->model_type);
+    }
+
+    public function editTitle()
+    {
+        return __("Edit {$this->singularName()} :name", ['name' => data_get($this, 'name', '')]);
+    }
+
+    public function createTitle()
+    {
+        return __("Create {$this->singularName()}");
+    }
+
+    public function title()
+    {
+        return $this->saved()
+            ? $this->editTitle()
+            : $this->createTitle();
+    }
+
+    public function fillData()
+    {
+        if (method_exists($this, 'beforeFillData')) {
+            $this->beforeFillData();
+        }
+        $this->fill($this->model()->only($this->fillable_data));
+        if (method_exists($this, 'afterFillData')) {
+            $this->afterFillData();
+        }
+    }
+
+    public function fillMeta()
+    {
+        if (method_exists($this, 'beforeFillMeta')) {
+            $this->beforeFillMeta();
+        }
+        if (method_exists($this->model(), 'getMetas')) {
+
+            $this->fill($this->model()->getMetas($this->fillable_meta));
+        }
+        if (method_exists($this, 'afterFillMeta')) {
+            $this->afterFillMeta();
+        }
+    }
+
+    public function fillTitle()
+    {
+        if (method_exists($this, 'beforeFillTitle')) {
+            $this->beforeFillTitle();
+        }
+        /*$this->title = $this->saved()
+            ? __("models.{$this->model_type}.edit", ['name' => data_get($this, 'name', '')])
+            : __("models.{$this->model_type}.create");*/
+        $this->title = $this->title();
+        if (method_exists($this, 'afterFillTitle')) {
+            $this->afterFillTitle();
+        }
+    }
+
+    #[Computed]
+    public function getPreviews($property)
+    {
+        return previews($this->model()->getMedia($property), $this->$property)->toArray();
+    }
+
+    public function fillMedia()
+    {
+        if (method_exists($this, 'beforefillMedia')) {
+            $this->beforefillMedia();
+        }
+        if (method_exists($this, 'afterfillMedia')) {
+            $this->afterfillMedia();
+        }
+    }
+
+    public function saveData()
+    {
+        $this->model()->fill($this->only($this->fillable_data));
+        if (method_exists($this, 'beforeSaveData')) {
+            $this->beforeSaveData();
+        }
+        $this->model()->save();
+        if (method_exists($this, 'afterSaveData')) {
+            $this->afterSaveData();
+        }
+    }
+
+    public function saveMeta()
+    {
+        if (method_exists($this, 'beforeSaveMeta')) {
+            $this->beforeSaveMeta();
+        }
+        if (method_exists($this->model(), 'saveMetas')) {
+            $this->model()->saveMetas($this->only($this->fillable_meta));
+        }
+        if (method_exists($this, 'afterSaveMeta')) {
+            $this->afterSaveMeta();
+        }
+    }
+
+    public function saveMedia()
+    {
+        if (method_exists($this, 'beforeSaveMedia')) {
+            $this->beforeSaveMedia();
+        }
+        if (method_exists($this->model(), 'addMedia')) {
+            foreach ($this->fillable_media as $property) {
+                $files = $this->pull($property);
+                if (is_temporary_file($files)) {
+                    $this->model()->addMedia($files)->toMediaCollection($property);
+                } elseif (is_temporary_files($files)) {
+                    foreach ($files as $file) {
+                        $this->model()->addMedia($file)->toMediaCollection($property);
+                    }
+                }
+            }
+        }
+        if (method_exists($this, 'afterSaveMedia')) {
+            $this->afterSaveMedia();
+        }
+    }
+
+    #[Computed]
+    public function saved()
+    {
+        return ! empty($this->model()?->id);
+    }
+
+    public function getStatusKey()
+    {
+        return method_exists($this, 'statusKey') ? $this->statusKey() : $this->status_key;
+    }
+
+    public function authorizeSave()
+    {
+        $this->authorize("manage_{$this->table()}");
+    }
+
+    public function save()
+    {
+        if (method_exists($this, 'beforeSave')) {
+            $this->beforeSave();
+        }
+        $this->authorizeSave();
+        if (method_exists($this, 'beforeValidate')) {
+            $this->beforeValidate();
+        }
+        $this->validate();
+        if (method_exists($this, 'afterValidate')) {
+            $this->afterValidate();
+        }
+        try {
+            $this->saveData();
+            $this->saveMeta();
+            $this->saveMedia();
+            session()->flash($this->getStatusKey(), __('Saved'));
+            $this->toastSuccess(__('Saved successfully'), [
+                'position' => 'top-center',
+            ]);
+            $this->dispatch('saved', $this->model_type, $this->model()->id);
+        } catch (\Exception $e) {
+            $this->addError($this->getStatusKey(), $e->getMessage());
+            $this->toastError($e->getMessage());
+        }
+        if (method_exists($this, 'afterSave')) {
+            $this->afterSave();
+        }
+    }
+
+    #[Computed]
+    public function actions()
+    {
+        return view('livewire.components.edit-model.actions', ['model' => $this->model()]);
+    }
+    /* public function render()
+    {
+        $plural_name = $this->pluralName();
+        return view("livewire.dashboard.{$plural_name}.edit")->layout("layouts.dashboard", [
+            "title" => $this->title,
+        ]);
+    } */
+}

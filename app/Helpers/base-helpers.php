@@ -48,7 +48,68 @@ if (!function_exists('arr_map')) {
         return Arr::map($array, $callback);
     }
 }
-
+if (!function_exists('is_numeric_array')) {
+    /**
+     * setting is select
+     * @param mixed $value
+     * @return bool
+     */
+    function is_numeric_array($value)
+    {
+        if (is_array($value)) {
+            $ret = true;
+            foreach (array_keys($value) as $k) {
+                if (gettype($k) !== 'integer') {
+                    $ret = false;
+                }
+            }
+            return $ret;
+        }
+        return false;
+    }
+}
+if (!function_exists('arr_options')) {
+    /**
+     * setting is select
+     * @param array $array
+     * @return bool
+     */
+    function arr_options($array)
+    {
+        return collect($array)->map(fn($val, $key) => [
+            'label' => ucfirst($val),
+            'value' => $val,
+        ]);
+    }
+}
+if (!function_exists("arr_flat")) {
+    /**
+     * Flatten array to dot notation.
+     *
+     * @param array|null $array
+     * @param string|null $path
+     * @param bool $ignoreNumeric
+     * @param array|null $flat
+     * @return Illuminate\Support\Collection
+     */
+    function arr_flat($array, $path = null, $ignoreNumeric = false, &$flat = null)
+    {
+        $flat ?? [];
+        foreach ($array as $key => $value) {
+            $newPath = $path ? "{$path}.{$key}" : $key;
+            if (is_array($value)) {
+                if ($ignoreNumeric && is_numeric_array($value)) {
+                    $flat[$newPath] = $value;
+                } else {
+                    arr_flat($value, $newPath, $ignoreNumeric, $flat);
+                }
+            } elseif (is_scalar($value) || is_null($value)) {
+                $flat[$newPath] = $value;
+            }
+        }
+        return $flat;
+    }
+}
 if (!function_exists('arr_filter')) {
     /**
      * Filter elements of an array using a callback function.
@@ -330,7 +391,11 @@ if (!function_exists('human_number')) {
         if ($num < 1000) {
             return (string) $num;
         }
-        $units = ['', 'K', 'M'];
+        $units = [
+            '',
+            'K',
+            'M'
+        ];
         $i = 0;
         while ($num >= 1000 && $i < count($units) - 1) {
             $num /= 1000;
@@ -415,5 +480,36 @@ if (!function_exists('atts')) {
             $atts = $atts->merge($attsItem);
         }
         return $atts;
+    }
+}
+
+if (!function_exists('pre_card')) {
+    /**
+     * pre card
+     * @param mixed $obj
+     * @param string $title
+     * @param string|null $className
+     */
+    function pre_card($obj, $title = '', $className = "mt-6")
+    {
+        echo view('components.pre-card', [
+            'object' => $obj,
+            'title' => $title,
+            'class' => $className,
+        ])->render();
+    }
+}
+if (!function_exists('pre100')) {
+    /**
+     * pre card
+     * @param mixed $obj
+     * @param string|null $className
+     */
+    function pre100($obj, $className = '')
+    {
+        echo view('components.pre-100', [
+            'object' => $obj,
+            'class' => $className,
+        ])->render();
     }
 }

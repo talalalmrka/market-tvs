@@ -5,9 +5,6 @@
     @switch($media->type)
         @case('image')
             {{ $media }}
-            {{-- <img class="max-w-full max-h-full"
-                src="{{ $media->hasGeneratedConversion('sm') ? $media->getUrl('sm') : $media->original_url }}"
-                alt="{{ $media->name }}" loading="lazy" /> --}}
         @break
 
         @case('video')

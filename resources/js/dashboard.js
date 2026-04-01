@@ -1,9 +1,18 @@
 import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
+import './helpers';
 import './alpine-back-top';
 import './edit-screen';
 import './screen-slideshow';
+import './fg-accordion';
+import './edit-menu';
+import './my-sort';
+import './sort-group';
+import './dashboard-search';
+// import './sort';
 import { NavbarTransparentTop } from './navbar-transparent-top';
 import { initFadgramUI } from "fadgram-ui";
+// import accordion from 'fadgram-ui/js/accordion';
+// Alpine.plugin(accordion);
 document.addEventListener("livewire:navigated", () => {
     initFadgramUI();
     NavbarTransparentTop.init();
@@ -28,4 +37,4 @@ Livewire.start()
  * allow your team to quickly build robust real-time web applications.
  */
 
-import './echo';
+// import './echo';

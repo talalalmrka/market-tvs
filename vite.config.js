@@ -11,6 +11,7 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/js/dashboard.js',
+                "resources/js/preview.js",
             ],
             refresh: true,
         }),
@@ -19,11 +20,13 @@ export default defineConfig({
     server: {
         cors: true,
         watch: {
-            interval: 1000,
+            // interval: 500,
             usePolling: true,
             ignored: [
                 '**/storage/framework/views/**',
                 '**/vendor/**',
+                '**/lang/**',
+                '**/public/**',
             ],
         },
     },

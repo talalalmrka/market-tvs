@@ -4,36 +4,55 @@ namespace Database\Seeders;
 
 use App\Models\Setting;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\File;
 
 class SettingSeeder extends Seeder
 {
     public static function defaultSettings(): array
     {
+        $home = PostSeeder::createHome();
+        $blog = PostSeeder::createBlog();
+
         return [
+            // app
             [
                 'type' => 'string',
-                'key' => 'name',
+                'key' => 'app.name',
                 'value' => config('app.name'),
             ],
             [
                 'type' => 'string',
-                'key' => 'description',
+                'key' => 'app.description',
                 'value' => 'Markets & Restaurants Screens SlideShows',
             ],
             [
                 'type' => 'string',
-                'key' => 'url',
+                'key' => 'app.url',
                 'value' => config('app.url'),
             ],
             [
                 'type' => 'string',
-                'key' => 'admin_email',
+                'key' => 'app.admin_email',
                 'value' => config('app.admin_email'),
             ],
             [
+                'type' => 'string',
+                'key' => 'app.env',
+                'value' => config('app.env'),
+            ],
+            [
+                'type' => 'boolean',
+                'key' => 'app.debug',
+                'value' => config('app.debug'),
+            ],
+            [
+                'type' => 'boolean',
+                'key' => 'app.eruda_enabled',
+                'value' => config('app.eruda_enabled'),
+            ],
+            [
                 'type' => 'file',
-                'key' => 'logo',
+                'key' => 'app.logo',
                 'value' => public_path('assets/images/logo.png'),
                 'conversions' => [
                     'navbar' => [
@@ -47,7 +66,7 @@ class SettingSeeder extends Seeder
             ],
             [
                 'type' => 'file',
-                'key' => 'logo_light',
+                'key' => 'app.logo_light',
                 'value' => public_path('assets/images/logo-light.png'),
                 'conversions' => [
                     'navbar' => [
@@ -61,17 +80,17 @@ class SettingSeeder extends Seeder
             ],
             [
                 'type' => 'string',
-                'key' => 'logo_width',
+                'key' => 'app.logo_width',
                 'value' => null,
             ],
             [
                 'type' => 'string',
-                'key' => 'logo_height',
+                'key' => 'app.logo_height',
                 'value' => 35,
             ],
             [
                 'type' => 'file',
-                'key' => 'favicon',
+                'key' => 'app.favicon',
                 'value' => public_path('assets/images/favicon.png'),
                 'conversions' => [
                     'favicon-16' => [
@@ -118,788 +137,366 @@ class SettingSeeder extends Seeder
             ],
             [
                 'type' => 'boolean',
-                'key' => 'logo_label_enabled',
+                'key' => 'app.logo_label_enabled',
                 'value' => false,
             ],
             [
                 'type' => 'string',
-                'key' => 'locale',
-                'value' => 'en',
+                'key' => 'app.locale',
+                'value' => config('app.locale'),
             ],
             [
                 'type' => 'string',
-                'key' => 'timezone',
-                'value' => 'UTC',
+                'key' => 'app.fallback_locale',
+                'value' => config('app.fallback_locale'),
             ],
             [
                 'type' => 'string',
-                'key' => 'date_format',
+                'key' => 'app.faker_locale',
+                'value' => config('app.faker_locale'),
+            ],
+            [
+                'type' => 'string',
+                'key' => 'app.timezone',
+                'value' => config('app.timezone'),
+            ],
+            [
+                'type' => 'string',
+                'key' => 'app.date_format',
                 'value' => 'j F Y',
             ],
             [
-                'type' => 'boolean',
-                'key' => 'maintenance_mode_enabled',
-                'value' => false,
+                'type' => 'string',
+                'key' => 'app.cipher',
+                'value' => config('app.cipher'),
             ],
             [
-                'type' => 'boolean',
-                'key' => 'site_closed',
-                'value' => false,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'users_can_register',
-                'value' => true,
+                'type' => 'string',
+                'key' => 'app.key',
+                'value' => config('app.key'),
             ],
             [
                 'type' => 'array',
-                'key' => 'default_roles',
-                'value' => [
-                    'customer',
-                ],
+                'key' => 'app.maintenance',
+                'value' => config('app.maintenance'),
             ],
+
+            // membership
             [
                 'type' => 'boolean',
-                'key' => 'email_verification_required',
-                'value' => false,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'ads_auto_enabled',
-                'value' => false,
-            ],
-            [
-                'type' => 'string',
-                'key' => 'ads_auto_code',
-                'value' => null,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'ads_above_content_enabled',
-                'value' => false,
-            ],
-            [
-                'type' => 'string',
-                'key' => 'ads_above_content_code',
-                'value' => null,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'ads_below_content_enabled',
-                'value' => false,
-            ],
-            [
-                'type' => 'string',
-                'key' => 'ads_below_content_code',
-                'value' => null,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'header_code_enabled',
-                'value' => false,
-            ],
-            [
-                'type' => 'string',
-                'key' => 'header_code',
-                'value' => null,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'backtop_enabled',
-                'value' => true,
-            ],
-            [
-                'type' => 'string',
-                'key' => 'footer_copyrights',
-                'value' => 'Copyrights reserved @ :link | :year',
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'footer_code_enabled',
-                'value' => false,
-            ],
-            [
-                'type' => 'string',
-                'key' => 'footer_code',
-                'value' => null,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'custom_css_enabled',
-                'value' => false,
-            ],
-            [
-                'type' => 'string',
-                'key' => 'custom_css',
-                'value' => null,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'custom_js_enabled',
-                'value' => false,
-            ],
-            [
-                'type' => 'string',
-                'key' => 'custom_js',
-                'value' => null,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'eruda_enabled',
-                'value' => false,
-            ],
-            [
-                'type' => 'string',
-                'key' => 'color_primary',
-                'value' => null,
-            ],
-            [
-                'type' => 'string',
-                'key' => 'color_secondary',
-                'value' => null,
-            ],
-            [
-                'type' => 'string',
-                'key' => 'font_family',
-                'value' => 'sans',
-            ],
-            [
-                'type' => 'string',
-                'key' => 'font_smoothing',
-                'value' => 'antialiased',
-            ],
-            [
-                'type' => 'string',
-                'key' => 'font_size',
-                'value' => null,
-            ],
-            [
-                'type' => 'string',
-                'key' => 'front_type',
-                'value' => 'posts',
-            ],
-            [
-                'type' => 'string',
-                'key' => 'front_page',
-                'value' => null,
-            ],
-            [
-                'type' => 'string',
-                'key' => 'posts_page',
-                'value' => null,
-            ],
-            [
-                'type' => 'number',
-                'key' => 'posts_per_page',
-                'value' => 8,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'disable_search_engines',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'excerpt_enabled',
-                'value' => true,
-            ],
-            [
-                'type' => 'number',
-                'key' => 'excerpt_length',
-                'value' => 139,
-            ],
-            [
-                'type' => 'string',
-                'key' => 'excerpt_more',
-                'value' => '...',
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'excerpt_preverse_words',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'share_enabled',
-                'value' => true,
-            ],
-            [
-                'type' => 'string',
-                'key' => 'share_label',
-                'value' => __('Share:'),
+                'key' => 'membership.users_can_register',
+                'value' => config('membership.users_can_register'),
             ],
             [
                 'type' => 'array',
-                'key' => 'share_buttons',
-                'value' => [
-                    [
-                        'enabled' => true,
-                        'name' => 'instagram',
-                        'icon' => 'bi-instagram',
-                        'url' => 'https://instagram.com/share/url={permalink}',
-                    ],
-                    [
-                        'enabled' => true,
-                        'name' => 'snapchat',
-                        'icon' => 'bi-snapchat',
-                        'url' => 'https://snapchat.com/share/url={permalink}',
-                    ],
-                    [
-                        'enabled' => true,
-                        'name' => 'telegram',
-                        'icon' => 'bi-telegram',
-                        'url' => 'https://t.me/share/url?url={permalink}',
-                    ],
-                    [
-                        'enabled' => true,
-                        'name' => 'pinterest',
-                        'icon' => 'bi-pinterest',
-                        'url' => 'https://pinterest.com/share/url?url={permalink}',
-                    ],
-                    [
-                        'enabled' => true,
-                        'name' => 'linkedin',
-                        'icon' => 'bi-linkedin',
-                        'url' => 'https://www.linkedin.com/shareArticle?url={permalink}',
-                    ],
-                    [
-                        'enabled' => true,
-                        'name' => 'whatsapp',
-                        'icon' => 'bi-whatsapp',
-                        'url' => 'https://wa.me/?text={name}\n{permalink}',
-                    ],
-                    [
-                        'enabled' => true,
-                        'name' => 'twitter',
-                        'icon' => 'bi-twitter',
-                        'url' => 'https://twitter.com/intent/tweet?url={permalink}',
-                    ],
-                    [
-                        'enabled' => true,
-                        'name' => 'facebook',
-                        'icon' => 'bi-facebook',
-                        'url' => 'https://www.facebook.com/sharer/sharer.php?u={permalink}',
-                    ],
-                ],
-            ],
-            // Single category
-            [
-                'type' => 'string',
-                'key' => 'category_title',
-                'value' => "{name}'s quotes and books",
+                'key' => 'membership.default_roles',
+                'value' => config('membership.default_roles'),
             ],
             [
-                'type' => 'string',
-                'key' => 'category_seo_title',
-                'value' => "{name}'s quotes and books",
-            ],
-            [
-                'type' => 'string',
-                'key' => 'category_seo_description',
-                'value' => "Discover best {name}'s quotes and generate quote images and read & download books",
+                'type' => 'boolean',
+                'key' => 'membership.email_verification_required',
+                'value' => config('membership.email_verification_required'),
             ],
 
+            // ads
+            [
+                'type' => 'boolean',
+                'key' => 'ads.auto_enabled',
+                'value' => config('ads.auto_enabled'),
+            ],
             [
                 'type' => 'string',
-                'key' => 'category_permalink',
-                'value' => '{category:slug}',
+                'key' => 'ads.auto_code',
+                'value' => config('ads.auto_code'),
             ],
             [
                 'type' => 'boolean',
-                'key' => 'category_description_enabled',
-                'value' => true,
+                'key' => 'ads.above_content_enabled',
+                'value' => config('ads.above_content_enabled'),
             ],
             [
                 'type' => 'string',
-                'key' => 'category_description_label',
-                'value' => null,
+                'key' => 'ads.above_content_code',
+                'value' => config('ads.above_content_code'),
             ],
             [
                 'type' => 'boolean',
-                'key' => 'category_share_enabled',
-                'value' => true,
+                'key' => 'ads.below_content_enabled',
+                'value' => config('ads.below_content_enabled'),
             ],
             [
                 'type' => 'string',
-                'key' => 'category_share_label',
-                'value' => 'Share',
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'category_next_prev_enabled',
-                'value' => true,
-            ],
-            [
-                'type' => 'string',
-                'key' => 'category_next_label',
-                'value' => 'Next',
-            ],
-            [
-                'type' => 'string',
-                'key' => 'category_prev_label',
-                'value' => 'Previous',
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'related_categories_enabled',
-                'value' => true,
-            ],
-            [
-                'type' => 'string',
-                'key' => 'related_categories_label',
-                'value' => 'Related topics',
-            ],
-            [
-                'type' => 'number',
-                'key' => 'related_categories_count',
-                'value' => 5,
+                'key' => 'ads.below_content_code',
+                'value' => config('ads.below_content_code'),
             ],
 
-            // Single post
-            [
-                'type' => 'string',
-                'key' => 'post_permalink',
-                'value' => '{post:slug}',
-            ],
+            // design
             [
                 'type' => 'boolean',
-                'key' => 'post_meta_enabled',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'post_meta_author',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'post_meta_date',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'post_meta_categories',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'post_meta_views',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'post_meta_comments',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'post_tags_enabled',
-                'value' => true,
+                'key' => 'design.header_code_enabled',
+                'value' => config('design.header_code_enabled'),
             ],
             [
                 'type' => 'string',
-                'key' => 'post_tags_label',
-                'value' => __('Tags'),
+                'key' => 'design.header_code',
+                'value' => config('design.header_code'),
             ],
             [
                 'type' => 'boolean',
-                'key' => 'post_share_enabled',
-                'value' => true,
+                'key' => 'design.backtop_enabled',
+                'value' => config('design.backtop_enabled'),
             ],
             [
                 'type' => 'string',
-                'key' => 'post_share_label',
-                'value' => __('Share ":name"'),
+                'key' => 'design.footer_copyrights',
+                'value' => config('design.footer_copyrights'),
             ],
             [
                 'type' => 'boolean',
-                'key' => 'post_next_prev_enabled',
-                'value' => true,
+                'key' => 'design.footer_code_enabled',
+                'value' => config('design.footer_code_enabled'),
             ],
             [
                 'type' => 'string',
-                'key' => 'post_next_label',
-                'value' => __('Next'),
+                'key' => 'design.footer_code',
+                'value' => config('design.footer_code'),
+            ],
+            [
+                'type' => 'boolean',
+                'key' => 'design.custom_css_enabled',
+                'value' => config('design.custom_css_enabled'),
             ],
             [
                 'type' => 'string',
-                'key' => 'post_prev_label',
-                'value' => __('Previous'),
+                'key' => 'design.custom_css',
+                'value' => config('design.custom_css'),
             ],
             [
                 'type' => 'boolean',
-                'key' => 'related_posts_enabled',
-                'value' => true,
+                'key' => 'design.custom_js_enabled',
+                'value' => config('design.custom_js_enabled'),
             ],
             [
                 'type' => 'string',
-                'key' => 'related_posts_label',
-                'value' => __('Related posts'),
-            ],
-            [
-                'type' => 'number',
-                'key' => 'related_posts_count',
-                'value' => 5,
+                'key' => 'design.custom_js',
+                'value' => config('design.custom_js'),
             ],
             [
                 'type' => 'string',
-                'key' => 'related_posts_query',
-                'value' => 'category',
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'comments_enabled',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'comments_login_required',
-                'value' => false,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'comments_name_email_required',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'comments_auto_close',
-                'value' => false,
-            ],
-            [
-                'type' => 'number',
-                'key' => 'comments_auto_close_days',
-                'value' => 7,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'comments_nested_enabled',
-                'value' => true,
-            ],
-            [
-                'type' => 'number',
-                'key' => 'comments_nested_level',
-                'value' => 5,
-            ],
-            [
-                'type' => 'number',
-                'key' => 'comments_per_page',
-                'value' => 5,
+                'key' => 'design.color_primary',
+                'value' => config('design.color_primary'),
             ],
             [
                 'type' => 'string',
-                'key' => 'comments_sort',
-                'value' => 'newest',
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'comments_approve_required',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'comments_approve_previous',
-                'value' => true,
-            ],
-            [
-                'type' => 'number',
-                'key' => 'comments_hold_links',
-                'value' => 2,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'comments_avatar_enabled',
-                'value' => true,
+                'key' => 'design.color_secondary',
+                'value' => config('design.color_secondary'),
             ],
             [
                 'type' => 'string',
-                'key' => 'comments_hold_words',
-                'value' => null,
-            ],
-            [
-                'type' => 'string',
-                'key' => 'comments_black_list',
-                'value' => null,
+                'key' => 'design.color_accent',
+                'value' => config('design.color_accent'),
             ],
 
+            // typography
             [
-                'type' => 'boolean',
-                'key' => 'cache_block_enabled',
-                'value' => true,
+                'type' => 'string',
+                'key' => 'typography.font_family',
+                'value' => config('typography.font_family'),
             ],
             [
-                'type' => 'boolean',
-                'key' => 'cache_block_classes_enabled',
-                'value' => true,
+                'type' => 'string',
+                'key' => 'typography.font_smoothing',
+                'value' => config('typography.font_smoothing'),
             ],
             [
-                'type' => 'boolean',
-                'key' => 'cache_block_styles_enabled',
-                'value' => true,
+                'type' => 'string',
+                'key' => 'typography.font_size',
+                'value' => config('typography.font_size'),
             ],
             [
-                'type' => 'boolean',
-                'key' => 'cache_block_atts_enabled',
-                'value' => true,
+                'type' => 'string',
+                'key' => 'typography.font_weight',
+                'value' => config('typography.font_weight'),
             ],
             [
-                'type' => 'boolean',
-                'key' => 'cache_page_blocks_enabled',
-                'value' => true,
+                'type' => 'string',
+                'key' => 'typography.font_style',
+                'value' => config('typography.font_style'),
             ],
             [
-                'type' => 'boolean',
-                'key' => 'cache_footer_blocks_enabled',
-                'value' => true,
+                'type' => 'string',
+                'key' => 'typography.font_display',
+                'value' => config('typography.font_display'),
             ],
 
-            // Archive category
+            // reading
             [
                 'type' => 'string',
-                'key' => 'archive_category_title',
-                'value' => 'Topics',
-            ],
-            [
-                'type' => 'string',
-                'key' => 'archive_category_seo_title',
-                'value' => "Topics",
+                'key' => 'reading.front_type',
+                'value' => $home ? 'page' : 'posts',
             ],
             [
                 'type' => 'string',
-                'key' => 'archive_category_seo_description',
-                'value' => "Browse the topics",
+                'key' => 'reading.front_page',
+                'value' => $home?->id,
             ],
             [
                 'type' => 'string',
-                'key' => 'archive_category_permalink',
-                'value' => "topics",
-            ],
-            [
-                'type' => 'file',
-                'key' => 'archive_category_image',
-                'value' => public_path('assets/images/categories.jpeg'),
-                'conversions' => [
-                    'thumb' => [
-                        'width' => 600,
-                        'height' => 315,
-                        'format' => 'jpg',
-                    ],
-                ],
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'archive_category_meta_date',
-                'value' => false,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'archive_category_meta_views',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'archive_category_meta_quotes',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'archive_category_meta_books',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'archive_category_meta_posts',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'archive_category_meta_favorite',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'archive_category_meta_favorite_count',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'archive_category_meta_share',
-                'value' => true,
-            ],
-
-            // Archive tag
-            [
-                'type' => 'string',
-                'key' => 'archive_tag_title',
-                'value' => 'Tags',
-            ],
-            [
-                'type' => 'string',
-                'key' => 'archive_tag_seo_title',
-                'value' => "Tags",
-            ],
-            [
-                'type' => 'string',
-                'key' => 'archive_tag_seo_description',
-                'value' => "Browse the tags",
-            ],
-            [
-                'type' => 'string',
-                'key' => 'archive_tag_permalink',
-                'value' => "tags",
-            ],
-            [
-                'type' => 'file',
-                'key' => 'archive_tag_image',
-                'value' => public_path('assets/images/tags.jpeg'),
-                'conversions' => [
-                    'thumb' => [
-                        'width' => 600,
-                        'height' => 315,
-                        'format' => 'jpg',
-                    ],
-                ],
-            ],
-            // Archive post
-            [
-                'type' => 'string',
-                'key' => 'archive_post_title',
-                'value' => 'Blog',
-            ],
-            [
-                'type' => 'string',
-                'key' => 'archive_post_seo_title',
-                'value' => "Blog",
-            ],
-            [
-                'type' => 'string',
-                'key' => 'archive_post_seo_description',
-                'value' => "Quoteread blog",
-            ],
-            [
-                'type' => 'string',
-                'key' => 'archive_post_permalink',
-                'value' => "blog",
-            ],
-            [
-                'type' => 'file',
-                'key' => 'archive_post_image',
-                'value' => public_path('assets/images/posts.jpeg'),
-                'conversions' => [
-                    'thumb' => [
-                        'width' => 600,
-                        'height' => 315,
-                        'format' => 'jpg',
-                    ],
-                ],
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'archive_post_meta_author',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'archive_post_meta_date',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'archive_post_meta_views',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'archive_post_meta_category',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'archive_post_meta_favorite',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'archive_post_meta_favorite_count',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'archive_post_meta_share',
-                'value' => true,
-            ],
-
-            // Sitemap
-            [
-                'type' => 'boolean',
-                'key' => 'sitemap_generate_enabled',
-                'value' => true,
-            ],
-            [
-                'type' => 'string',
-                'key' => 'sitemap_generate_time',
-                'value' => '00:00',
+                'key' => 'reading.posts_page',
+                'value' => $blog?->id,
             ],
             [
                 'type' => 'number',
-                'key' => 'sitemap_chunk_size',
-                'value' => 1000,
+                'key' => 'reading.posts_per_page',
+                'value' => config('reading.posts_per_page'),
             ],
             [
                 'type' => 'boolean',
-                'key' => 'sitemap_include_pages',
-                'value' => true,
+                'key' => 'reading.disable_search_engines',
+                'value' => config('reading.disable_search_engines'),
             ],
-            [
-                'type' => 'boolean',
-                'key' => 'sitemap_include_posts',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'sitemap_include_screens',
-                'value' => true,
-            ],
-            [
-                'type' => 'boolean',
-                'key' => 'sitemap_include_categories',
-                'value' => true,
+
+            // Mail
+            /*[
+                'type' => 'string',
+                'key' => 'mail.default',
+                'value' => config('mail.default'),
             ],
             [
                 'type' => 'array',
-                'key' => 'footer_blocks',
-                'value' => footer_blocks_default(),
+                'key' => 'mail.from',
+                'value' => config('mail.from'),
             ],
+            [
+                'type' => 'array',
+                'key' => 'mail.mailers',
+                'value' => config('mail.mailers'),
+            ],*/
+            ...config_seeder('auth'),
+            ...config_seeder('broadcasting'),
+            ...config_seeder('cache'),
+            ...config_seeder('database'),
+            ...config_seeder('filesystems'),
+            ...config_seeder('fortify'),
+            ...config_seeder('livewire'),
+            ...config_seeder('logging'),
+            ...config_seeder('mail'),
+            ...config_seeder('media-library'),
+            ...config_seeder('permission'),
+            ...config_seeder('queue'),
+            ...config_seeder('reverb'),
+            ...config_seeder('sanctum'),
+            ...config_seeder('services'),
+            ...config_seeder('session'),
+            ...config_seeder('thumbnail'),
         ];
 
         // return config('settings');
     }
-    public static function all(): Collection
+
+    /**
+     * get all default settings
+     * @return use Illuminate\Support\Collection<array>
+     */
+    public static function all()
     {
         return collect(self::defaultSettings());
     }
+
+    /**
+     * get all default settings
+     * @return use Illuminate\Support\Collection<Setting>
+     */
+    public static function defaults()
+    {
+        return self::all()->map(function (array $item) {
+            $type = data_get($item, 'type');
+            $key = data_get($item, 'key');
+            $value = $type === 'file' ? null : data_get($item, 'value', config($key));
+            $setting = new Setting([
+                'type' => $type,
+                'key' => $key,
+            ]);
+            return $setting->setValue($value);
+        });
+    }
+
+    /**
+     * setting array with key
+     * @param string $key
+     * @return array|null
+     */
     public static function withKey($key)
     {
         return self::all()->where('key', '=', $key)->first();
+    }
+
+    public static function getFiles($key)
+    {
+        $item = self::withKey($key);
+        return data_get($item, 'value');
     }
     public static function getDefaultOption(string $key, $defaultValue = null)
     {
         $setting = arr_first(self::defaultSettings(), function ($data) use ($key) {
             return data_get($data, 'key') === $key;
         });
+
         return $setting ? resolve_option_value(data_get($setting, 'type'), data_get($setting, 'value')) : $defaultValue;
     }
+
     public static function getDefaultOptionType(string $key, $default = null)
     {
         $setting = arr_first(self::defaultSettings(), function ($data) use ($key) {
             return data_get($data, 'key') === $key;
         });
+
         return data_get($setting, 'type', $default);
     }
+
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
+    {
+        $settings = self::defaults();
+        $settings->each(function (Setting $setting) {
+            try {
+                $setting->save();
+                if ($setting->type === 'file') {
+                    $files = self::getFiles($setting->key);
+                    if (!empty($files)) {
+                        if (is_array($files)) {
+                            foreach ($files as $file) {
+                                if (File::exists($file)) {
+                                    $setting->addMedia($file)
+                                        ->preservingOriginal()
+                                        ->toMediaCollection($setting->key);
+                                    // $this->command->info("File saved: {$setting->key}: {$file}");
+                                } else {
+                                    $this->command->warn("File not exists: {$setting->key}: {$file}");
+                                }
+                            }
+                        } elseif (is_string($files)) {
+                            if (File::exists($files)) {
+                                $setting->addMedia($files)
+                                    ->preservingOriginal()
+                                    ->toMediaCollection($setting->key);
+                                // $this->command->info("File saved: {$setting->key}: {$files}");
+                            } else {
+                                $this->command->warn("File not exists: {$setting->key}: {$files}");
+                            }
+                        }
+                    } else {
+                        $this->command->warn("Setting: {$setting->key}: Have not files");
+                    }
+                }
+            } catch (\Exception $e) {
+                $this->command->error("{$setting->key}: {$e->getMessage()}");
+            }
+        });
+    }
+    public function runOld(): void
     {
         $defaultSettings = self::defaultSettings();
         foreach ($defaultSettings as $item) {

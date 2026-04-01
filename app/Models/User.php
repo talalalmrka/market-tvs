@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Traits\HasSlug;
+use App\Traits\WithPermalink;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,11 +20,12 @@ class User extends Authenticatable implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory,
+        HasRoles,
+        HasSlug,
+        InteractsWithMedia,
         Notifiable,
         TwoFactorAuthenticatable,
-        HasRoles,
-        InteractsWithMedia,
-        HasSlug;
+        WithPermalink;
 
     /**
      * The attributes that are mass assignable.
@@ -75,9 +77,10 @@ class User extends Authenticatable implements HasMedia
         return Str::of($this->name)
             ->explode(' ')
             ->take(2)
-            ->map(fn($word) => Str::substr($word, 0, 1))
+            ->map(fn ($word) => Str::substr($word, 0, 1))
             ->implode('');
     }
+
     protected static function booted()
     {
         static::creating(function ($user) {
@@ -91,6 +94,7 @@ class User extends Authenticatable implements HasMedia
             }
         });
     }
+
     public function screens()
     {
         return $this->hasMany(Screen::class);
@@ -103,13 +107,14 @@ class User extends Authenticatable implements HasMedia
             ->useFallbackUrl('/assets/images/user.svg')
             ->useFallbackPath(public_path('/assets/images/user.svg'));
     }
+
     public function avatar(): Attribute
     {
-        return Attribute::get(fn() => $this->getFirstMediaUrl('avatar'));
+        return Attribute::get(fn () => $this->getFirstMediaUrl('avatar'));
     }
 
     public function screensPermalink(): Attribute
     {
-        return Attribute::get(fn() => !empty($this->id) ? route('screens', $this) : '');
+        return Attribute::get(fn () => ! empty($this->id) ? route('screens', $this) : '');
     }
 }

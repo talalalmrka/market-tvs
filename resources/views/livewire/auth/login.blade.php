@@ -7,7 +7,7 @@
 
         <form method="POST" action="{{ route('login.store') }}" class="flex flex-col gap-6">
             @csrf
-
+            <h1>this is login</h1>
             <!-- Email Address -->
             <flux:input
                 name="email"
@@ -17,8 +17,7 @@
                 required
                 autofocus
                 autocomplete="email"
-                placeholder="email@example.com"
-            />
+                placeholder="email@example.com" />
 
             <!-- Password -->
             <div class="relative">
@@ -29,8 +28,7 @@
                     required
                     autocomplete="current-password"
                     :placeholder="__('Password')"
-                    viewable
-                />
+                    viewable />
 
                 @if (Route::has('password.request'))
                     <flux:link class="absolute top-0 text-sm end-0" :href="route('password.request')" wire:navigate>
