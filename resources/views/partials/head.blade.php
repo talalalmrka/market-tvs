@@ -24,4 +24,4 @@
 <link rel="stylesheet" href="{{ route('style') }}" type="text/css">
 @customCode('header_code')
 @customCss()
-{{-- @fluxAppearance --}}
+@fluxAppearance

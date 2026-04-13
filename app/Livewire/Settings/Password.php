@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 
-class Password extends Component
+class Password extends BasePage
 {
     use PasswordValidationRules;
 

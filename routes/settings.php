@@ -11,6 +11,7 @@ Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
 
     Route::livewire('settings/profile', Profile::class)->name('profile.edit');
+    Route::livewire('profile/{user?}', 'dashboard::profile.index')->name('profile');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -21,7 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->middleware(
             when(
                 Features::canManageTwoFactorAuthentication()
-                && Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword'),
+                    && Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword'),
                 ['password.confirm'],
                 [],
             ),

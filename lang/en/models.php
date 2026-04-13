@@ -103,6 +103,7 @@ return [
     'roles' => [
         'admin' => 'Admin',
         'writer' => 'Writer',
+        'customer' => 'Customer',
         'editor' => 'Editor',
         'member' => 'Member',
         'guest' => 'Guest',

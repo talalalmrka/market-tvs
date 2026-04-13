@@ -7,6 +7,7 @@ require __DIR__ . '/datatable-helpers.php';
 require __DIR__ . '/design-helpers.php';
 require __DIR__ . '/font-helpers.php';
 require __DIR__ . '/footer-helpers.php';
+require __DIR__ . '/guard-helpers.php';
 require __DIR__ . '/locale-helpers.php';
 require __DIR__ . '/mail-helpers.php';
 require __DIR__ . '/media-helpers.php';

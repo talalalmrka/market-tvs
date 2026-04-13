@@ -52,6 +52,16 @@
     $navbarColor = data_get($navbarColors, $color, 'navbar-transparent-primary');
 @endphp
 <x-layouts::app.layout :title="$seoTitle" :description="$description">
+    @isset($script)
+        <x-slot name="script">
+            {{ $script }}
+        </x-slot>
+    @endisset
+    @isset($style)
+        <x-slot name="style">
+            {{ $style }}
+        </x-slot>
+    @endisset
     <x-mobile-menu />
     @include('partials.header', [
         'class' => css_classes([

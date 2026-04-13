@@ -1,6 +1,4 @@
 <x-settings-page>
-    @dump($this->all())
-    {{-- @dump($prefix) --}}
     <x-settings-card :title="__('Site information')" icon="bi-info-circle" body-class="space-y-4">
         <x-settings-row for="name" :label="__('Site name')">
             <fgx:input id="name" wire:model.live="name" />
@@ -38,24 +36,33 @@
         </x-settings-row>
     </x-settings-card>
 
-    <x-settings-card :title="__('Language & Region')" icon="bi-translate" class="mt-4" body-class="space-y-4">
+    <x-settings-card :title="__('Language & Region')" icon="bi-translate" class="mt-4 overflow-visible" body-class="space-y-4">
         <x-settings-row for="locale" :label="__('Language')">
-            <fgx:select id="locale" wire:model.live="locale" :options="locale_options()" />
+            {{-- <fgx:select id="locale" wire:model.live="locale" :options="locale_options()" /> --}}
+            <x-rich-select id="locale" wire:model.live="locale" :options="locale_options()" />
         </x-settings-row>
         <x-settings-row for="fallback_locale" :label="__('Fallback language')">
-            <fgx:select id="fallback_locale" wire:model.live="fallback_locale" :options="locale_options()" />
+            {{-- <fgx:select id="fallback_locale" wire:model.live="fallback_locale" :options="locale_options()" /> --}}
+            <x-rich-select id="fallback_locale" wire:model.live="fallback_locale" :options="locale_options()" />
         </x-settings-row>
         <x-settings-row for="faker_locale" :label="__('Faker language')">
-            <fgx:select id="faker_locale" wire:model.live="faker_locale" :options="locale_options()" />
+            {{-- <fgx:select id="faker_locale" wire:model.live="faker_locale" :options="locale_options()" /> --}}
+            <x-rich-select id="faker_locale" wire:model.live="faker_locale" :options="locale_options()" />
         </x-settings-row>
         <x-settings-row for="timezone" :label="__('Timezone')">
-            <fgx:select id="timezone" wire:model.live="timezone" :options="timezone_options()" />
-            <span class="text-sm text-muted">
-                {{ __('Current date:') }} {{ date('D/M/Y h:i a') }}
-            </span>
+            {{-- <fgx:select id="timezone" wire:model.live="timezone" :options="timezone_options()"
+                :info="$this->currentDateFormatted('j F Y - h:i a')" /> --}}
+            <x-rich-select id="timezone" wire:model.live="timezone" :options="timezone_options()"
+                :info="$this->currentDateFormatted('j F Y - h:i a')" />
+            <span class="text-xs text-muted">{{ $timezone }}</span>
         </x-settings-row>
         <x-settings-row for="date_format" :label="__('Date format')">
-            <fgx:input id="date_format" wire:model.live="date_format" />
+            <fgx:input id="date_format" wire:model.live="date_format"
+                :info="$this->currentDateFormatted($date_format)" />
+        </x-settings-row>
+        <x-settings-row for="datatable_date_format" :label="__('Datatable Date format')">
+            <fgx:input id="datatable_date_format" wire:model.live="datatable_date_format"
+                :info="$this->currentDateFormatted($datatable_date_format)" />
         </x-settings-row>
     </x-settings-card>
 

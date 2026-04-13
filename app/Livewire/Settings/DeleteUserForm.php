@@ -7,7 +7,7 @@ use App\Livewire\Actions\Logout;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class DeleteUserForm extends Component
+class DeleteUserForm extends BasePage
 {
     use PasswordValidationRules;
 

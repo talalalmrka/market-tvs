@@ -83,6 +83,22 @@
                                 </a>
                             @endguest
                             @auth
+                                <a href="{{ route('profile') }}"
+                                    class="dropdown-link border-b pt-0 border-gray-200 dark:border-gray-700">
+                                    <div class="text-sm flex items-center gap-2">
+                                        <img src="{{ auth()->user()->avatar }}" class="w-8 h-8 rounded-full"
+                                            alt="{{ auth()->user()->name }}">
+                                        <div class="flex-1">
+                                            <div>
+                                                {{ auth()->user()->name }}
+                                            </div>
+                                            <div class="text-muted text-xs overflow-hidden text-ellipsis">
+                                                {{ auth()->user()->email }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </a>
                                 <a href="{{ route('profile.edit') }}"
                                     class="dropdown-link border-b pt-0 border-gray-200 dark:border-gray-700">
                                     <div class="text-sm flex items-center gap-2">

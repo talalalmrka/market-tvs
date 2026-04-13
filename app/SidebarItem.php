@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Livewire\Wireable;
 
-class SidebarItem implements Wireable, Arrayable
+class SidebarItem implements Arrayable, Wireable
 {
     public function __construct(
         public ?string $id = null,
@@ -24,8 +24,10 @@ class SidebarItem implements Wireable, Arrayable
         ],
         public ?Collection $items = null,
     ) {}
+
     /**
      * All items
+     *
      * @return Illuminate\Support\Collection
      */
     public static function all(): Collection
@@ -94,6 +96,26 @@ class SidebarItem implements Wireable, Arrayable
                 'permission' => current_user()?->can('manage_media'),
             ]),
             self::make([
+                'type' => 'collapse',
+                'label' => __('Crud'),
+                'icon' => 'bi-table',
+                'open' => request()->routeIs(['dashboard.crud', 'dashboard.crud.*']),
+                'permission' => current_user()?->hasRole('admin'),
+                'items' => models()->map(function ($model) {
+                    $table = data_get($model, 'table');
+                    $href = route('dashboard.crud.item', $table);
+                    $permission = current_user_can("manage_{$table}");
+
+                    return self::make([
+                        'type' => 'link',
+                        'label' => data_get($model, 'plural'),
+                        'icon' => data_get($model, 'icon'),
+                        'href' => $href,
+                        'permission' => $permission,
+                    ]);
+                }),
+            ]),
+            self::make([
                 'type' => 'link',
                 'label' => __('Translations'),
                 'icon' => 'bi-translate',
@@ -109,6 +131,7 @@ class SidebarItem implements Wireable, Arrayable
                     $route = data_get($page, 'route');
                     $label = data_get($page, 'label');
                     $icon = data_get($page, 'icon');
+
                     return self::make([
                         'type' => 'link',
                         'label' => $label,
@@ -140,6 +163,7 @@ class SidebarItem implements Wireable, Arrayable
 
     /**
      * get settings items
+     *
      * @return array
      */
     public static function settings()
@@ -154,7 +178,7 @@ class SidebarItem implements Wireable, Arrayable
                 'permission' => current_user()?->can('manage_settings'),
                 'atts' => [
                     'wire:current.exact' => 'active',
-                ]
+                ],
             ]),
             self::make([
                 'id' => 'app',
@@ -286,6 +310,7 @@ class SidebarItem implements Wireable, Arrayable
                 'permission' => current_user()?->can('manage_settings'),
             ]),
             self::make([
+                'id' => 'mail',
                 'type' => 'link',
                 'label' => __('Mail settings'),
                 'icon' => 'bi-envelope',
@@ -364,8 +389,10 @@ class SidebarItem implements Wireable, Arrayable
             ]),
         ]);
     }
+
     /**
      * get route data
+     *
      * @return array
      */
     public function getRouteData()
@@ -378,6 +405,7 @@ class SidebarItem implements Wireable, Arrayable
             ? 'dashboard.settings'
             : "dashboard.settings.{$this->id}";
         $viewExists = view()->exists("{$view}.{$this->id}");
+
         return [
             'uri' => $uri,
             'name' => $name,
@@ -386,10 +414,12 @@ class SidebarItem implements Wireable, Arrayable
             'route' => route_has($name) ? route($name) : null,
         ];
     }
+
     public static function settingsRoutes()
     {
-        return self::flatSettings()->map(fn(SidebarItem $item) => $item->getRouteData());
+        return self::flatSettings()->map(fn (SidebarItem $item) => $item->getRouteData());
     }
+
     public static function registerSettingsRoutes()
     {
         self::flatSettings()->each(function (SidebarItem $item) {
@@ -405,10 +435,12 @@ class SidebarItem implements Wireable, Arrayable
             }
         });
     }
+
     /**
      * get settings items
-     * @param Illuminate\Support\Collection|null $settings
-     * @param Illuminate\Support\Collection|null $flat
+     *
+     * @param  Illuminate\Support\Collection|null  $settings
+     * @param  Illuminate\Support\Collection|null  $flat
      * @return Illuminate\Support\Collection
      */
     public static function flatSettings(?Collection $settings = null, ?Collection &$flat = null)
@@ -427,6 +459,7 @@ class SidebarItem implements Wireable, Arrayable
                 self::flatSettings($items, $flat);
             }
         });
+
         return $flat;
     }
     /* public static function routes()
@@ -460,7 +493,8 @@ class SidebarItem implements Wireable, Arrayable
 
     /**
      * flat items
-     * @param Illuminate\Support\Collection|null $flat
+     *
+     * @param  Illuminate\Support\Collection|null  $flat
      * @return Illuminate\Support\Collection
      */
     public static function flat(?Collection $all = null, ?Collection &$flat = null)
@@ -479,12 +513,14 @@ class SidebarItem implements Wireable, Arrayable
                 self::flat($items, $flat);
             }
         });
+
         return $flat;
     }
 
     /**
      * Search in items
-     * @param string|null $term
+     *
+     * @param  string|null  $term
      * @return Illuminate\Support\Collection
      */
     public static function search($term)
@@ -494,6 +530,7 @@ class SidebarItem implements Wireable, Arrayable
                 return $item->type === 'link' && Str::contains(Str::lower($item->label), Str::lower($term));
             })->values();
     }
+
     public static function make($value): self
     {
         $id = data_get($value, 'id');
@@ -520,6 +557,7 @@ class SidebarItem implements Wireable, Arrayable
         } else {
             $items = null;
         }
+
         return new self(
             $id,
             $type,
@@ -561,6 +599,7 @@ class SidebarItem implements Wireable, Arrayable
         if ($this->type === 'collapse') {
             $out['items'] = $this->items?->toArray();
         }
+
         return $out;
     }
 
@@ -570,14 +609,19 @@ class SidebarItem implements Wireable, Arrayable
             ...$this->atts,
             ...$atts,
         ];
+
         return view('components.sidebar-item', ['item' => $this]);
     }
+
     public static function sidebar()
     {
         $ret = '';
         self::all()->each(function (SidebarItem $item) use (&$ret) {
-            $ret .= $item->render();
+            if ($item->permission) {
+                $ret .= $item->render();
+            }
         });
+
         return $ret;
     }
 }

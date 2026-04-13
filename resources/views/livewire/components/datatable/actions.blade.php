@@ -1,5 +1,5 @@
 @props(['item', 'actions'])
-<div class="flex-space-2 md:flex-space-3">
+<div class="flex items-center gap-2 md:gap-3 justify-center-safe">
     @foreach ($actions as $action)
         @include(
             'livewire.components.datatable.action',

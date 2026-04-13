@@ -24,7 +24,7 @@ abstract class Datatable extends Component
     public $search = '';
     public $sortField = null;
     public $sortDirection = null;
-    public $perPage = 10;
+    public $perPage = 15;
     #[Computed]
     public $tableClass = '';
     #[Computed]
@@ -47,13 +47,13 @@ abstract class Datatable extends Component
     public $date_format = null;
     public function boot()
     {
+        $this->perPage = $this->getModel()->getPerPage();
         $this->restoreState();
         $this->date_format = get_option('date_format', 'j F Y');
     }
     abstract public function builder();
 
     abstract public function getColumns();
-    // abstract public function render();
     public function updatedPerPage()
     {
         $this->resetPage();

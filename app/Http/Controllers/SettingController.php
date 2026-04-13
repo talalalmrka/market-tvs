@@ -17,6 +17,7 @@ class SettingController extends Controller
     {
         $perPage = $request->get('per_page', 15);
         $settings = Setting::paginate($perPage);
+
         return SettingResource::collection($settings);
     }
 
@@ -29,22 +30,33 @@ class SettingController extends Controller
     {
         $search = $request->get('search');
         $settings = SettingSeeder::defaults();
-        if (!empty($search)) {
+        if (! empty($search)) {
             $settings = $settings->filter(function (Setting $setting) use ($search) {
                 return Str::contains($setting->key, $search, true) || Str::of($setting->type)->contains($search, true);
             })->values();
         }
+
         return SettingResource::collection($settings);
+
         return response()->json($settings);
     }
 
     public function defaultsItem(Request $request, string $key)
     {
         $setting = SettingSeeder::defaults()->where('key', '=', $key)->first();
-        if (!$setting) {
+        if (! $setting) {
             abort(404);
         }
+
         return response()->json($setting);
+    }
+
+    public function config(Request $request)
+    {
+        $config = Setting::toConfig();
+        dd($config);
+
+        return response()->json($config);
     }
 
     /**
@@ -89,17 +101,20 @@ class SettingController extends Controller
         $setting = setting($key);
         dd($setting);
     }
+
     public function type(Request $request, string $key)
     {
 
         $type = get_option_type($key);
         dd($type);
     }
+
     public function collections(Request $request, string $key)
     {
         $setting = Setting::withKey($key);
         dd($setting?->getRegisteredMediaCollections());
     }
+
     public function previews(Request $request, string $key)
     {
 

@@ -2,13 +2,25 @@
 
 use App\Models\User;
 
-if (!function_exists('instance_user')) {
+if (! function_exists('user')) {
+    /**
+     * Resolve a setting from various input types
+     *
+     * @param  int|string|Setting  $setting  Can be a Setting instance, ID, or key string
+     * @return Setting|null Returns the Setting instance or null if not found
+     */
+    function user(int|string|User $user)
+    {
+        return User::resolve($user);
+    }
+}
+if (! function_exists('instance_user')) {
     function instance_user($object)
     {
         return $object instanceof User;
     }
 }
-if (!function_exists('user_options')) {
+if (! function_exists('user_options')) {
     function user_options($options = [])
     {
         $default = [
@@ -77,32 +89,46 @@ if (!function_exists('user_options')) {
                 ]);
             }
         }
+
         // $items = $search ? $items->sortBy('label') : $items->sortByDesc('value');
         return $items->toArray();
     }
 }
 
-if (!function_exists('current_user')) {
-    function current_user(): User|null
+if (! function_exists('current_user')) {
+    function current_user(): ?User
     {
         return auth()->user();
     }
 }
+if (! function_exists('current_user_can')) {
+    /**
+     * Determine if the current user has the given abilities.
+     *
+     * @param  iterable|\UnitEnum|string  $abilities
+     * @param  mixed  $arguments
+     * @return bool
+     */
+    function current_user_can($abilities, $arguments = [])
+    {
+        return current_user()?->can($abilities, $arguments);
+    }
+}
 
-if (!function_exists('current_user_id')) {
+if (! function_exists('current_user_id')) {
     function current_user_id()
     {
         return current_user()?->id;
     }
 }
-if (!function_exists('logged_in')) {
+if (! function_exists('logged_in')) {
     function logged_in()
     {
         return auth()->check();
     }
 }
 
-if (!function_exists('is_user')) {
+if (! function_exists('is_user')) {
     function is_user($value)
     {
         return $value instanceof User;

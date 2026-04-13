@@ -35,4 +35,14 @@ new #[Title('Roles')] class extends DashboardDatatable
                 }),
         ];
     }
+
+    public function edit($id)
+    {
+        $this->authorize('manage_roles');
+        $role = Role::findById($id);
+        if (!$role) {
+            abort(404);
+        }
+        $this->dispatch('edit', 'role', $id);
+    }
 };

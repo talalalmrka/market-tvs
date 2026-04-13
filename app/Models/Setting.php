@@ -27,6 +27,7 @@ class Setting extends Model implements HasMedia
     protected $appends = [
         'srcset',
     ];
+
     public function registerMediaCollections(): void
     {
         $settings = SettingSeeder::all()->where('type', 'file');
@@ -145,6 +146,7 @@ class Setting extends Model implements HasMedia
 
     /**
      * get setting with key
+     *
      * @return App/Models/Setting|null
      */
     public static function withKey(string $key)
@@ -170,9 +172,11 @@ class Setting extends Model implements HasMedia
 
         return $setting instanceof Setting ? ($setting->value ?? $defaultValue) : $defaultValue;
     }
+
     /**
      * set the value
-     * @param mixed $value
+     *
+     * @param  mixed  $value
      * @return App/Models/Setting
      */
     public function setValuee($value)
@@ -211,9 +215,11 @@ class Setting extends Model implements HasMedia
 
         return $this->save();
     }
+
     /**
      * set the value
-     * @param mixed $value
+     *
+     * @param  mixed  $value
      * @return App/Models/Setting
      */
     public function setValue($value)
@@ -228,13 +234,14 @@ class Setting extends Model implements HasMedia
         } else {
             $this->value = $value;
         }
+
         return $this;
     }
+
     /**
      * update value
-     * @param string $key
-     * @param mixed $value
-     * @param string|null $type
+     *
+     * @param  string|null  $type
      * @return bool
      */
     public static function updateValue(string $key, mixed $value, $type = null)
@@ -242,7 +249,7 @@ class Setting extends Model implements HasMedia
         $data = [
             'key' => $key,
         ];
-        if (!empty($type)) {
+        if (! empty($type)) {
             $data['type'] = $type;
         }
         $setting = static::firstOrCreate($data);
@@ -266,6 +273,7 @@ class Setting extends Model implements HasMedia
                         $saved = false;
                     }
                 }
+
                 return $saved;
             }
         } else {
@@ -288,7 +296,7 @@ class Setting extends Model implements HasMedia
 
     public function multiple(): Attribute
     {
-        return Attribute::get(fn() => get_option_multiple($this->key));
+        return Attribute::get(fn () => get_option_multiple($this->key));
     }
 
     /**
@@ -409,14 +417,27 @@ class Setting extends Model implements HasMedia
             return Str::title(Str::replace(['.', '-', '_'], ' ', $this->key));
         });
     }
+
     public static function seedData()
     {
         return SettingSeeder::defaultSettings();
     }
+
     public function render($atts = [])
     {
         $setting = $this;
 
         return view('components.setting-field', compact('setting', 'atts'));
+    }
+
+    public static function toConfig()
+    {
+        $config = [];
+        $settings = Setting::all();
+        $settings->each(function (Setting $setting) use (&$config) {
+            data_set($config, $setting->key, $setting->value);
+        });
+
+        return $config;
     }
 }

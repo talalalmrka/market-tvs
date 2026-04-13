@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
-class Profile extends Component
+class Profile extends BasePage
 {
     use ProfileValidationRules;
 

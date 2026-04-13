@@ -3,10 +3,12 @@
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\MenuApiController;
+use App\Http\Controllers\ModelsController;
 use App\Http\Controllers\ScreenApiController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SidebarController;
 use App\Http\Controllers\TranslationController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +22,8 @@ Route::group(['prefix' => 'dashboard'], function () {
 });
 // screens
 Route::group(['prefix' => 'users'], function () {
+    Route::get('/', [UserController::class, 'index'])->name('api.users');
+    Route::get('/{user}', [UserController::class, 'show'])->name('api.users.show');
     // Route::get('/', [ScreenApiController::class, 'index'])->name('api.screens');
     // Route::get('/user/{user:slug}', [ScreenApiController::class, 'user'])->name('api.screens.user');
     // Route::get('/{screen:slug}', [ScreenApiController::class, 'show'])->name('api.screen');
@@ -27,20 +31,20 @@ Route::group(['prefix' => 'users'], function () {
 
 // config
 Route::group(['prefix' => 'config'], function () {
-    Route::get("/", [ConfigController::class, 'index'])->name('api.config');
-    Route::get("/all", [ConfigController::class, 'all'])->name('api.config.all');
-    Route::get("/sidebar-items", [ConfigController::class, 'sidebarItems'])->name('api.config.sidebar-items');
-    Route::get("/sidebar", [ConfigController::class, 'sidebar'])->name('api.config.sidebar');
-    Route::get("/files", [ConfigController::class, 'files'])->name('api.config.files');
-    Route::get("/paths", [ConfigController::class, 'paths'])->name('api.config.paths');
-    Route::get("/category-options", [ConfigController::class, 'categoryOptions'])->name('api.config.category-options');
-    Route::get("/file/{path}", [ConfigController::class, 'file'])->name('api.config.file');
-    Route::get("/items/{path}", [ConfigController::class, 'items'])->name('api.config.items');
-    Route::get("/raw/{path}", [ConfigController::class, 'raw'])->name('api.config.raw');
-    Route::get("/flat/{path}", [ConfigController::class, 'flat'])->name('api.config.flat');
-    Route::get("/rules/{path}", [ConfigController::class, 'rules'])->name('api.config.rules');
-    Route::get("/options/{path}", [ConfigController::class, 'options'])->name('api.config.options');
-    Route::get("/{path}", [ConfigController::class, 'path'])->name('api.config.path');
+    Route::get('/', [ConfigController::class, 'index'])->name('api.config');
+    Route::get('/all', [ConfigController::class, 'all'])->name('api.config.all');
+    Route::get('/sidebar-items', [ConfigController::class, 'sidebarItems'])->name('api.config.sidebar-items');
+    Route::get('/sidebar', [ConfigController::class, 'sidebar'])->name('api.config.sidebar');
+    Route::get('/files', [ConfigController::class, 'files'])->name('api.config.files');
+    Route::get('/paths', [ConfigController::class, 'paths'])->name('api.config.paths');
+    Route::get('/category-options', [ConfigController::class, 'categoryOptions'])->name('api.config.category-options');
+    Route::get('/file/{path}', [ConfigController::class, 'file'])->name('api.config.file');
+    Route::get('/items/{path}', [ConfigController::class, 'items'])->name('api.config.items');
+    Route::get('/raw/{path}', [ConfigController::class, 'raw'])->name('api.config.raw');
+    Route::get('/flat/{path}', [ConfigController::class, 'flat'])->name('api.config.flat');
+    Route::get('/rules/{path}', [ConfigController::class, 'rules'])->name('api.config.rules');
+    Route::get('/options/{path}', [ConfigController::class, 'options'])->name('api.config.options');
+    Route::get('/{path}', [ConfigController::class, 'path'])->name('api.config.path');
 });
 
 // screens
@@ -101,6 +105,7 @@ Route::group(['prefix' => 'settings'], function () {
     Route::get('/', [SettingController::class, 'index']);
     Route::get('/seed', [SettingController::class, 'seedData']);
     Route::get('/defaults', [SettingController::class, 'defaults']);
+    Route::get('/config', [SettingController::class, 'config']);
     Route::get('/defaults/{key}', [SettingController::class, 'defaultsItem']);
     Route::get('/{setting:key}', [SettingController::class, 'show'])->name('api.settings.show');
     Route::get('/{setting:key}/media', [SettingController::class, 'media']);
@@ -118,4 +123,16 @@ Route::group(['prefix' => 'routes'], function () {
 // translate
 Route::group(['prefix' => 'translate'], function () {
     Route::get('/{text}', [ApiController::class, 'translate']);
+});
+
+Route::group(['prefix' => 'models'], function () {
+    Route::get('/', [ModelsController::class, 'index']);
+    Route::get('/files', [ModelsController::class, 'files']);
+    Route::get('/objects', [ModelsController::class, 'objects']);
+    Route::get('/columns/{model:table}', [ModelsController::class, 'columns']);
+    Route::get('/{model:table}', [ModelsController::class, 'show']);
+});
+
+Route::group(['prefix' => 'timezone'], function () {
+    Route::get('/', [ApiController::class, 'timezone']);
 });

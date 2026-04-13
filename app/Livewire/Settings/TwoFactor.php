@@ -2,18 +2,20 @@
 
 namespace App\Livewire\Settings;
 
+use App\Livewire\Components\DashboardPage;
 use Exception;
 use Laravel\Fortify\Actions\ConfirmTwoFactorAuthentication;
 use Laravel\Fortify\Actions\DisableTwoFactorAuthentication;
 use Laravel\Fortify\Actions\EnableTwoFactorAuthentication;
 use Laravel\Fortify\Features;
 use Laravel\Fortify\Fortify;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Symfony\Component\HttpFoundation\Response;
 
-class TwoFactor extends Component
+class TwoFactor extends BasePage
 {
     #[Locked]
     public bool $twoFactorEnabled;

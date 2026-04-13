@@ -1,2 +1,6 @@
-@props(['item'])
-<fgx:checkbox wire:model.live="selected" value="{{ $item->getKey() }}" />
+@props([
+    'id' => 'selected',
+    'item',
+])
+<fgx:checkbox id="{{ $id }}.{{ $item->getKey() }}" wire:model.live="{{ $id }}"
+    value="{{ $item->getKey() }}" />

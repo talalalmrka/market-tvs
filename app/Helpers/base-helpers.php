@@ -4,16 +4,16 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 use Illuminate\View\ComponentAttributeBag;
 use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
 
-if (!function_exists('route_has')) {
+if (! function_exists('route_has')) {
     /**
      * Check if a route with the given name exists.
      *
-     * @param string|array $name Route name or array of names.
+     * @param  string|array  $name  Route name or array of names.
      * @return bool
      */
     function route_has(string|array $name)
@@ -22,25 +22,25 @@ if (!function_exists('route_has')) {
     }
 }
 
-if (!function_exists('home_url')) {
+if (! function_exists('home_url')) {
     /**
      * Get the home URL with an optional appended path.
      *
-     * @param string $path Optional path to append to the base URL.
+     * @param  string  $path  Optional path to append to the base URL.
      * @return string
      */
     function home_url($path = '')
     {
-        return config('app.url') . $path;
+        return config('app.url').$path;
     }
 }
 
-if (!function_exists('arr_map')) {
+if (! function_exists('arr_map')) {
     /**
      * Apply a callback to each item in the array and return the resulting array.
      *
-     * @param array $array The array to map over.
-     * @param callable $callback The callback to apply.
+     * @param  array  $array  The array to map over.
+     * @param  callable  $callback  The callback to apply.
      * @return array
      */
     function arr_map(array $array, callable $callback)
@@ -48,10 +48,11 @@ if (!function_exists('arr_map')) {
         return Arr::map($array, $callback);
     }
 }
-if (!function_exists('is_numeric_array')) {
+if (! function_exists('is_numeric_array')) {
     /**
      * setting is select
-     * @param mixed $value
+     *
+     * @param  mixed  $value
      * @return bool
      */
     function is_numeric_array($value)
@@ -63,33 +64,36 @@ if (!function_exists('is_numeric_array')) {
                     $ret = false;
                 }
             }
+
             return $ret;
         }
+
         return false;
     }
 }
-if (!function_exists('arr_options')) {
+if (! function_exists('arr_options')) {
     /**
      * setting is select
-     * @param array $array
+     *
+     * @param  array  $array
      * @return bool
      */
     function arr_options($array)
     {
-        return collect($array)->map(fn($val, $key) => [
+        return collect($array)->map(fn ($val, $key) => [
             'label' => ucfirst($val),
             'value' => $val,
         ]);
     }
 }
-if (!function_exists("arr_flat")) {
+if (! function_exists('arr_flat')) {
     /**
      * Flatten array to dot notation.
      *
-     * @param array|null $array
-     * @param string|null $path
-     * @param bool $ignoreNumeric
-     * @param array|null $flat
+     * @param  array|null  $array
+     * @param  string|null  $path
+     * @param  bool  $ignoreNumeric
+     * @param  array|null  $flat
      * @return Illuminate\Support\Collection
      */
     function arr_flat($array, $path = null, $ignoreNumeric = false, &$flat = null)
@@ -107,16 +111,17 @@ if (!function_exists("arr_flat")) {
                 $flat[$newPath] = $value;
             }
         }
+
         return $flat;
     }
 }
-if (!function_exists('arr_filter')) {
+if (! function_exists('arr_filter')) {
     /**
      * Filter elements of an array using a callback function.
      *
-     * @param array $array The array to filter.
-     * @param callable|null $callback The callback to use for filtering. If null, removes falsey values.
-     * @param int $mode Flag determining what arguments are sent to callback.
+     * @param  array  $array  The array to filter.
+     * @param  callable|null  $callback  The callback to use for filtering. If null, removes falsey values.
+     * @param  int  $mode  Flag determining what arguments are sent to callback.
      * @return array
      */
     function arr_filter(array $array, ?callable $callback, int $mode = 0)
@@ -125,13 +130,13 @@ if (!function_exists('arr_filter')) {
     }
 }
 
-if (!function_exists('arr_first')) {
+if (! function_exists('arr_first')) {
     /**
      * Get the first element in an array passing a given truth test.
      *
-     * @param array $array The array to search.
-     * @param callable|null $callback The callback to determine if the item is valid. If null, returns the first element.
-     * @param mixed $default The default value to return if no valid item is found.
+     * @param  array  $array  The array to search.
+     * @param  callable|null  $callback  The callback to determine if the item is valid. If null, returns the first element.
+     * @param  mixed  $default  The default value to return if no valid item is found.
      * @return mixed
      */
     function arr_first(array $array, ?callable $callback, $default = 0)
@@ -139,12 +144,12 @@ if (!function_exists('arr_first')) {
         return Arr::first($array, $callback, $default);
     }
 }
-if (!function_exists('arr_where')) {
+if (! function_exists('arr_where')) {
     /**
      * Filter the array using the given callback and return only the items that pass the test.
      *
-     * @param array $array The array to filter.
-     * @param callable $callback The callback to use for filtering.
+     * @param  array  $array  The array to filter.
+     * @param  callable  $callback  The callback to use for filtering.
      * @return array
      */
     function arr_where(array $array, callable $callback)
@@ -152,45 +157,45 @@ if (!function_exists('arr_where')) {
         return Arr::where($array, $callback);
     }
 }
-if (!function_exists('arr_only')) {
+if (! function_exists('arr_only')) {
     function arr_only($array, $keys)
     {
         return Arr::only($array, $keys);
     }
 }
 
-if (!function_exists('assets')) {
+if (! function_exists('assets')) {
     function assets($path, $secure = null)
     {
         return asset("assets/$path", $secure);
     }
 }
-if (!function_exists('images')) {
+if (! function_exists('images')) {
     function images($path, $secure = null)
     {
         return asset("assets/images/$path", $secure);
     }
 }
-if (!function_exists('fonts')) {
+if (! function_exists('fonts')) {
     function fonts($path, $secure = null)
     {
         return asset("assets/fonts/$path", $secure);
     }
 }
 
-if (!function_exists('singular')) {
+if (! function_exists('singular')) {
     function singular(string $string)
     {
         return Str::singular($string);
     }
 }
-if (!function_exists('plural')) {
+if (! function_exists('plural')) {
     function plural(string $string, $count = 2)
     {
         return Str::plural($string, $count);
     }
 }
-if (!function_exists('is_collection')) {
+if (! function_exists('is_collection')) {
     function is_collection($obj): bool
     {
         return match (true) {
@@ -201,39 +206,49 @@ if (!function_exists('is_collection')) {
         };
     }
 }
-if (!function_exists('container')) {
+if (! function_exists('container')) {
     function container($data = [])
     {
-        return view('components.container', $data);
+        return view('components.container', $data)->render();
     }
 }
 
-if (!function_exists('contents')) {
-    function contents($array)
+if (! function_exists('contents')) {
+    /**
+     * html contents
+     *
+     * @param  mixed  $contents
+     * @param  string  $seperator
+     * @return string
+     */
+    function contents($contents, $separator = '')
     {
-        $data = $array;
-        if (is_collection($array)) {
-            $data = $array->toArray();
+        if (is_string($contents) || is_numeric($contents) || is_bool($contents)) {
+            return $contents;
         }
-        return is_array($data) ? implode('', $data) : $data;
+        if (is_array($contents)) {
+            $contents = collect($contents);
+        }
+
+        return $contents->join($separator);
     }
 }
 
-if (!function_exists('a')) {
+if (! function_exists('a')) {
     function a($data = [])
     {
-        return view('components.link', $data);
+        return view('components.link', $data)->render();
     }
 }
-if (!function_exists('img')) {
+if (! function_exists('img')) {
     /**
      * Generate an image component
      *
-     * @param array $data Image data
-     *   - string|null $src Image source URL
-     *   - string|null $alt Alternative text
-     *   - string|null $class CSS class(es)
-     *   - array $atts Additional HTML attributes
+     * @param  array  $data  Image data
+     *                       - string|null $src Image source URL
+     *                       - string|null $alt Alternative text
+     *                       - string|null $class CSS class(es)
+     *                       - array $atts Additional HTML attributes
      * @return \Illuminate\Contracts\View\View
      */
     function img($data)
@@ -241,7 +256,7 @@ if (!function_exists('img')) {
         return view('components.image', $data);
     }
 }
-if (!function_exists('status_badge')) {
+if (! function_exists('status_badge')) {
     function status_badge($status)
     {
         $colors = [
@@ -257,6 +272,7 @@ if (!function_exists('status_badge')) {
         ];
         $icon = data_get($icons, $status);
         $label = ucfirst($status);
+
         return badge([
             'icon' => $icon,
             'label' => $label,
@@ -266,7 +282,7 @@ if (!function_exists('status_badge')) {
         ]);
     }
 }
-if (!function_exists('post_type_badge')) {
+if (! function_exists('post_type_badge')) {
     function post_type_badge($type)
     {
         $colors = [
@@ -284,6 +300,7 @@ if (!function_exists('post_type_badge')) {
         ];
         $icon = data_get($icons, $type);
         $label = ucfirst($type);
+
         return badge([
             'icon' => $icon,
             'label' => __($label),
@@ -293,7 +310,7 @@ if (!function_exists('post_type_badge')) {
         ]);
     }
 }
-if (!function_exists('template_badge')) {
+if (! function_exists('template_badge')) {
     function template_badge($template)
     {
         $colors = [
@@ -303,6 +320,7 @@ if (!function_exists('template_badge')) {
         ];
         $color = data_get($colors, $template);
         $label = ucfirst($template);
+
         return badge([
             'label' => __($label),
             'color' => $color,
@@ -311,80 +329,80 @@ if (!function_exists('template_badge')) {
         ]);
     }
 }
-if (!function_exists('rating')) {
+if (! function_exists('rating')) {
     function rating($data = [])
     {
         return view('components.rating', $data);
     }
 }
-if (!function_exists('is_home')) {
+if (! function_exists('is_home')) {
     function is_home()
     {
         return request()->routeIs('home');
     }
 }
-if (!function_exists('is_blog')) {
+if (! function_exists('is_blog')) {
     function is_blog()
     {
         return request()->routeIs('blog');
     }
 }
-if (!function_exists('is_post')) {
+if (! function_exists('is_post')) {
     function is_post()
     {
         return request()->routeIs('post');
     }
 }
-if (!function_exists('is_quotes')) {
+if (! function_exists('is_quotes')) {
     function is_quotes()
     {
         return request()->routeIs('quotes');
     }
 }
-if (!function_exists('is_quote')) {
+if (! function_exists('is_quote')) {
     function is_quote()
     {
         return request()->routeIs('quote');
     }
 }
-if (!function_exists('is_books')) {
+if (! function_exists('is_books')) {
     function is_books()
     {
         return request()->routeIs('books');
     }
 }
-if (!function_exists('is_book')) {
+if (! function_exists('is_book')) {
     function is_book()
     {
         return request()->routeIs('book');
     }
 }
-if (!function_exists('is_author')) {
+if (! function_exists('is_author')) {
     function is_author()
     {
         return request()->routeIs('author');
     }
 }
-if (!function_exists('is_user')) {
+if (! function_exists('is_user')) {
     function is_user()
     {
         return request()->routeIs('user');
     }
 }
-if (!function_exists('is_debug')) {
+if (! function_exists('is_debug')) {
     function is_debug(): bool
     {
         return config('app.debug', false);
     }
 }
-if (!function_exists('error_message')) {
+if (! function_exists('error_message')) {
     function error_message(\Exception $e, $message = '')
     {
         return is_debug() ? "$message: {$e->getMessage()}" : $message;
     }
 }
 
-if (!function_exists('human_number')) {
+if (! function_exists('human_number')) {
     function human_number($num)
     {
         $num = (int) $num;
@@ -394,33 +412,34 @@ if (!function_exists('human_number')) {
         $units = [
             '',
             'K',
-            'M'
+            'M',
         ];
         $i = 0;
         while ($num >= 1000 && $i < count($units) - 1) {
             $num /= 1000;
             $i++;
         }
+
         // Show one decimal if not integer, else no decimal
-        return $num == (int)$num
-            ? number_format($num, 0) . $units[$i]
-            : number_format($num, 1) . $units[$i];
+        return $num == (int) $num
+            ? number_format($num, 0).$units[$i]
+            : number_format($num, 1).$units[$i];
     }
 }
 
-if (!function_exists('str_slug')) {
+if (! function_exists('str_slug')) {
     function str_slug($title, $separator = '-', $language = 'en', $dictionary = ['@' => 'at'])
     {
         return Str::slug($title, $separator, $language, $dictionary);
     }
 }
-if (!function_exists('str_limit')) {
+if (! function_exists('str_limit')) {
     function str_limit($value, $limit = 100, $end = '...', $preserveWords = false)
     {
         return Str::limit($value, $limit, $end, $preserveWords);
     }
 }
-if (!function_exists('colored_title')) {
+if (! function_exists('colored_title')) {
     function colored_title($title)
     {
         $words = explode(' ', $title);
@@ -428,37 +447,39 @@ if (!function_exists('colored_title')) {
             $lastWord = array_pop($words); // Get and remove the last word
             $words[] = "<span class=\"text-primary\">$lastWord</span>"; // Add the last word with class
         }
+
         return implode(' ', $words);
     }
 }
 
-if (!function_exists('today')) {
+if (! function_exists('today')) {
     function today()
     {
         return Carbon::today();
     }
 }
 
-if (!function_exists('today_formatted')) {
+if (! function_exists('today_formatted')) {
     function today_formatted()
     {
         return date_format(today(), 'j F، Y');
     }
 }
 
-if (!function_exists('get_the_title')) {
+if (! function_exists('get_the_title')) {
     function get_the_title(?string $title = null, string $seperator = '-')
     {
         $ret = '';
-        if (!empty($title)) {
+        if (! empty($title)) {
             $ret .= "$title - ";
         }
         $ret .= config('app.name');
+
         return $ret;
     }
 }
 
-if (!function_exists('atts')) {
+if (! function_exists('atts')) {
     /**
      * Create a new ComponentAttributeBag instance.
      *
@@ -470,7 +491,7 @@ if (!function_exists('atts')) {
      */
     function atts(...$attributes)
     {
-        $atts = new ComponentAttributeBag();
+        $atts = new ComponentAttributeBag;
         foreach ($attributes as $attsItem) {
             if (empty($attsItem)) {
                 $attsItem = [];
@@ -479,18 +500,20 @@ if (!function_exists('atts')) {
             }
             $atts = $atts->merge($attsItem);
         }
+
         return $atts;
     }
 }
 
-if (!function_exists('pre_card')) {
+if (! function_exists('pre_card')) {
     /**
      * pre card
-     * @param mixed $obj
-     * @param string $title
-     * @param string|null $className
+     *
+     * @param  mixed  $obj
+     * @param  string  $title
+     * @param  string|null  $className
      */
-    function pre_card($obj, $title = '', $className = "mt-6")
+    function pre_card($obj, $title = '', $className = 'mt-6')
     {
         echo view('components.pre-card', [
             'object' => $obj,
@@ -499,11 +522,12 @@ if (!function_exists('pre_card')) {
         ])->render();
     }
 }
-if (!function_exists('pre100')) {
+if (! function_exists('pre100')) {
     /**
      * pre card
-     * @param mixed $obj
-     * @param string|null $className
+     *
+     * @param  mixed  $obj
+     * @param  string|null  $className
      */
     function pre100($obj, $className = '')
     {

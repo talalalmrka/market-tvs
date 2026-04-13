@@ -8,12 +8,12 @@ use App\SidebarItem;
 use Illuminate\Support\Facades\Route;
 
 // SidebarItem::registerRoutes();
-Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'verified']], function () {
+Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () {
 
     // dashboard home
     Route::livewire('/', 'dashboard::home.index')->name('dashboard');
 
-    //search
+    // search
     Route::get('/search', [SidebarController::class, 'search'])->name('dashboard.search');
 
     // users
@@ -58,12 +58,12 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'verified']], fu
         Route::livewire('/', 'dashboard::translations')->name('dashboard.translations');
     });
 
-    //config
+    // config
     Route::group(['prefix' => 'config', 'middleware' => ['can:manage_settings']], function () {
         Route::livewire('/{path}', 'dashboard::config.index')->name('dashboard.config');
     });
 
-    //terminal
+    // terminal
     Route::group(['prefix' => 'terminal', 'middleware' => ['can:manage_settings']], function () {
         Route::livewire('/', 'dashboard::terminal')->name('dashboard.terminal');
     });
@@ -88,5 +88,11 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'verified']], fu
         Route::livewire('/env', 'dashboard::settings.env')->name('dashboard.settings.env');
         Route::livewire('/import', 'dashboard::settings.import')->name('dashboard.settings.import'); */
         Route::livewire('/{path}', 'dashboard::settings.page')->name('dashboard.settings.page');
+    });
+
+    // crud
+    Route::group(['prefix' => 'crud', 'middleware' => ['role:admin']], function () {
+        Route::livewire('/', 'dashboard::crud.index')->name('dashboard.crud');
+        Route::livewire('/{table}', 'dashboard::crud.item')->name('dashboard.crud.item');
     });
 });

@@ -27,4 +27,14 @@ new #[Title('Permissions')] class extends DashboardDatatable
                 ->class('text-center'),
         ];
     }
+
+    public function edit($id)
+    {
+        $this->authorize('manage_permissions');
+        $permission = Permission::findById($id);
+        if (!$permission) {
+            abort(404);
+        }
+        $this->dispatch('edit', 'permission', $id);
+    }
 };

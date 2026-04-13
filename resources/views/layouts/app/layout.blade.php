@@ -28,6 +28,7 @@
     @isset($footer)
         {{ $footer }}
     @endisset
+    {{-- @fluxScripts --}}
 </body>
 
 </html>

@@ -1,1 +1,4 @@
-<fgx:checkbox wire:model.live="selectAll" />
+@props([
+    'id' => 'selectAll',
+])
+<fgx:checkbox id="{{ $id }}" wire:model.live="{{ $id }}" />

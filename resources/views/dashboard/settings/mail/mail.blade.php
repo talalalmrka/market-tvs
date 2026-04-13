@@ -40,7 +40,11 @@
             @foreach ($mailer as $name => $value)
                 @php
                     $itemKey = "mailers.{$key}.{$name}";
-                    $label = str_title(str_replace(['.', '-', '_'], ' ', "{$key}.{$name}"));
+                    $label = str("{$key}.{$name}")
+                        ->replace(['.', '-', '_'], ' ')
+                        ->title()
+                        ->value();
+                    // $label = str_title(str_replace(['.', '-', '_'], ' ', "{$key}.{$name}"));
                 @endphp
                 <x-settings-row
                     :for="$itemKey"

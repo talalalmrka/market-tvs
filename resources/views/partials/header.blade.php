@@ -44,6 +44,10 @@
                         <i class="icon bi-speedometer"></i>
                         <span>{{ __('Dashboard') }}</span>
                     </a>
+                    <a href="{{ route('profile') }}" class="dropdown-link">
+                        <i class="icon bi-person-gear"></i>
+                        <span>{{ __('Profile') }}</span>
+                    </a>
                     <a href="{{ route('profile.edit') }}" class="dropdown-link">
                         <i class="icon bi-person-gear"></i>
                         <span>{{ __('Profile') }}</span>

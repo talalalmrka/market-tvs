@@ -44,6 +44,7 @@ trait WithEditModelDialog
     #[On('edit')]
     public function onEdit(string $model_type, ?int $id = null)
     {
+        $this->toastInfo("edit {$model_type}: {$id}");
         if ($model_type === $this->model_type) {
             $model = $id ? $this->model()->findOrFail($id) : $this->model()->newInstance();
             $this->mount($model);

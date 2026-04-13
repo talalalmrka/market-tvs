@@ -8,6 +8,7 @@ import './edit-menu';
 import './my-sort';
 import './sort-group';
 import './dashboard-search';
+import './rich-select';
 // import './sort';
 import { NavbarTransparentTop } from './navbar-transparent-top';
 import { initFadgramUI } from "fadgram-ui";

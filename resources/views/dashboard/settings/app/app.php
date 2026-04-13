@@ -2,8 +2,10 @@
 
 use App\Livewire\Components\SettingsPage;
 use App\Rules\ValidDateFormat;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
 
 new #[Title('General Settings')] class extends SettingsPage
@@ -38,6 +40,8 @@ new #[Title('General Settings')] class extends SettingsPage
 
     public $date_format;
 
+    public $datatable_date_format;
+
     public $cipher;
 
     public $key;
@@ -48,12 +52,10 @@ new #[Title('General Settings')] class extends SettingsPage
 
     public $eruda_enabled;
 
-
     public array $maintenance = [
         'driver' => 'file',
         'store' => 'database',
     ];
-
 
     public function title()
     {
@@ -64,6 +66,7 @@ new #[Title('General Settings')] class extends SettingsPage
     {
         return 'app';
     }
+
     public function rules()
     {
         return [
@@ -82,6 +85,7 @@ new #[Title('General Settings')] class extends SettingsPage
             'faker_locale' => ['required', 'string', Rule::in(locales())],
             'timezone' => ['required', 'string', Rule::in(timezones())],
             'date_format' => ['required', new ValidDateFormat],
+            'datatable_date_format' => ['required', new ValidDateFormat],
             'cipher' => ['required', Rule::in(app_cipher_values())],
             'key' => [
                 'required',
@@ -105,5 +109,13 @@ new #[Title('General Settings')] class extends SettingsPage
             'maintenance.store' => ['required', Rule::in(app_maintenance_store_values())],
             'eruda_enabled' => ['boolean'],
         ];
+    }
+
+    #[Computed()]
+    public function currentDateFormatted($format = null)
+    {
+        $format ??= $this->date_format;
+
+        return Carbon::now($this->timezone ?? 'UTC')->format($format);
     }
 };

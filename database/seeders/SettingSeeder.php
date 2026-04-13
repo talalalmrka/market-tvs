@@ -167,6 +167,11 @@ class SettingSeeder extends Seeder
             ],
             [
                 'type' => 'string',
+                'key' => 'app.datatable_date_format',
+                'value' => 'j F Y - h:i a',
+            ],
+            [
+                'type' => 'string',
                 'key' => 'app.cipher',
                 'value' => config('app.cipher'),
             ],
@@ -396,6 +401,7 @@ class SettingSeeder extends Seeder
 
     /**
      * get all default settings
+     *
      * @return use Illuminate\Support\Collection<array>
      */
     public static function all()
@@ -405,6 +411,7 @@ class SettingSeeder extends Seeder
 
     /**
      * get all default settings
+     *
      * @return use Illuminate\Support\Collection<Setting>
      */
     public static function defaults()
@@ -417,13 +424,15 @@ class SettingSeeder extends Seeder
                 'type' => $type,
                 'key' => $key,
             ]);
+
             return $setting->setValue($value);
         });
     }
 
     /**
      * setting array with key
-     * @param string $key
+     *
+     * @param  string  $key
      * @return array|null
      */
     public static function withKey($key)
@@ -434,8 +443,10 @@ class SettingSeeder extends Seeder
     public static function getFiles($key)
     {
         $item = self::withKey($key);
+
         return data_get($item, 'value');
     }
+
     public static function getDefaultOption(string $key, $defaultValue = null)
     {
         $setting = arr_first(self::defaultSettings(), function ($data) use ($key) {
@@ -465,7 +476,7 @@ class SettingSeeder extends Seeder
                 $setting->save();
                 if ($setting->type === 'file') {
                     $files = self::getFiles($setting->key);
-                    if (!empty($files)) {
+                    if (! empty($files)) {
                         if (is_array($files)) {
                             foreach ($files as $file) {
                                 if (File::exists($file)) {
@@ -496,6 +507,7 @@ class SettingSeeder extends Seeder
             }
         });
     }
+
     public function runOld(): void
     {
         $defaultSettings = self::defaultSettings();

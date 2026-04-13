@@ -5,11 +5,9 @@ namespace Database\Seeders;
 use App\Models\Screen;
 use App\Models\Slide;
 use App\Models\TimeSlot;
-use DateTime;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
-
 
 class ScreenSeeder extends Seeder
 {
@@ -33,11 +31,23 @@ class ScreenSeeder extends Seeder
             ],
         ];
     }
-    public function run(): void
+
+    /**
+     * create screens for user
+     *
+     * @param  int|string|User  $user
+     * @param  int  $count  default 5
+     * @return void
+     */
+    public function creatScreensForUser($user, $count = 5)
     {
+        $user = user($user);
+        if (! $user) {
+            return;
+        }
         Screen::factory()
-            ->count(5)
-            ->user(1)
+            ->count($count)
+            ->user($user->id)
             ->create()
             ->each(function ($screen) {
                 foreach (self::defaultTimeSlots() as $slotIndex => $slotData) {
@@ -60,7 +70,7 @@ class ScreenSeeder extends Seeder
                         );
 
                         $videoPath = public_path(
-                            "assets/images/slides/video.mp4"
+                            'assets/images/slides/video.mp4'
                         );
                         $filePath = $s == 3 ? $videoPath : $imagePath;
 
@@ -73,5 +83,12 @@ class ScreenSeeder extends Seeder
                     }
                 }
             });
+        $this->command->info("Screens for user {$user->name} created.");
+    }
+
+    public function run(): void
+    {
+        $users = User::all();
+        $users->each(fn (User $user) => $this->creatScreensForUser($user));
     }
 }

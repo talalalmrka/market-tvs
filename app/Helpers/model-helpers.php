@@ -24,6 +24,25 @@ if (! function_exists('all_models')) {
             ->values();
     }
 }
+
+/**
+ * Retrieve all models collection
+ *
+ * @return Illuminate\Support\Collection<int, class-string<Model>>
+ */
+if (! function_exists('models_files')) {
+    function models_files()
+    {
+        return collect(File::files(app_path('Models')))
+            // ->map(fn($file) => 'App\\Models\\' . $file->getFilenameWithoutExtension())
+            ->filter(function (SplFileInfo $file) {
+                $class = 'App\\Models\\'.$file->getFilenameWithoutExtension();
+
+                return class_exists($class) && is_subclass_of($class, Model::class);
+            })
+            ->values();
+    }
+}
 /**
  * Retrieve all models meta collection
  *
